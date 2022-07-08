@@ -1803,5 +1803,43 @@ footer a {
     color: #3c97bf;
     text-decoration: none;
 }
+.login-form{
+    width: 50rem;
+    height: 644px;
+    margin-top: 50px;
+    margin-left: 35rem;
+    margin-top: 10rem;
+}
+.login-section {
+    width: 50rem;
+    height: 46rem;
+    margin-top: 108px;
+}
 
+.email {
+    width: 16rem;
+    margin-right: 60px;
+}
+
+.address {
+
+    width: 34.6rem;
+}
+
+.city {
+    margin-right: 11.5rem;
+    width: 16.8rem;
+}
+
+.state {
+    margin-top: 77px ;
+   margin-left: -513px;
+width: 161px;
+
+}
+
+.zip {
+    width: 16.9rem;
+    margin-left: -187px;
+}
 /*-- //Responsive design --*/

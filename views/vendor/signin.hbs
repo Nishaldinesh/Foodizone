@@ -1,0 +1,22 @@
+<section>
+<div class="form-container sign-in-container">
+		<form action="/signin" method="post" class="login-form">
+	
+			<h1>Sign in</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your account</span>
+				{{#if loginErr}}
+		<p class="text-danger">Invalid Email or password</p>
+		{{/if}}
+			<input type="email" placeholder="Email" name="Email"/>
+			<input type="password" placeholder="Password" name="Password" />
+			<a href="#">Forgot your password?</a>
+			<button type="submit">Sign In</button>
+            <a href="/vendor" class="text-primary">Don't have an account?</a>
+		</form>
+	</div>
+</section>
