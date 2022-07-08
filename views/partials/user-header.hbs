@@ -7,7 +7,7 @@
                             <h1> <a href="#"><span class="fa fa-align-center" aria-hidden="true"></span>Foodizone</a></h1>
                         </div>
                         <ul class="menu mt-2 ml-auto">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="/">Home</a></li>
                             <li ><a href="#" class="scroll">About</a></li>
                             <li>
                                
@@ -20,12 +20,21 @@
                             <li>
                                 <!-- First Tier Drop Down -->
                                 <label for="drop-2" class="toggle">Dropdown <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
-                                <a href="#">Account<span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                                <input type="checkbox" id="drop-2" />
+                                {{#if user}}
+                                <a href="#">Hi,{{user.Name}}<span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                                 <input type="checkbox" id="drop-2" />
                                 <ul class="inner-ul">
-                                    <li> <a class="scroll" href="/user-signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
-                                      <li> <a class="scroll" href="/user-signin"><i class="fa-solid fa-user-plus"></i> Sign up</a></li>
+                                    <li> <a class="scroll" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
                                 </ul>
+                                {{else}}
+                                 <a href="#">Account<span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                                 <input type="checkbox" id="drop-3" />
+                                <ul class="inner-ul">
+                                    <li> <a class="scroll" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
+                                      <li> <a class="scroll" href="/signin"><i class="fa-solid fa-user-plus"></i> Sign up</a></li>
+                                </ul>
+                                 {{/if}}
+                                
                             </li>
                             <li><a href="#" class="scroll">Contact</a></li>
                         </ul>
