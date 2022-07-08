@@ -1,5 +1,5 @@
-   
-    <header class="user-header">
+
+ <header class="user-header">
     <div class="container-fluid px-lg-5">
                     <!-- nav -->
                     <nav class="py-4 d-lg-flex">
@@ -24,6 +24,8 @@
                                 <a href="#">Hi,{{user.Name}}<span class="fa fa-angle-down" aria-hidden="true"></span></a>
                                  <input type="checkbox" id="drop-2" />
                                 <ul class="inner-ul">
+                                    <li> <a class="scroll" href="/"><i class="fa-solid fa-user"></i> Account</a></li>
+                                    <li> <a class="scroll" href="/"><i class="fa-solid fa-clock-rotate-left"></i> Order history</a></li>
                                     <li> <a class="scroll" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
                                 </ul>
                                 {{else}}
@@ -33,11 +35,16 @@
                                     <li> <a class="scroll" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
                                       <li> <a class="scroll" href="/signin"><i class="fa-solid fa-user-plus"></i> Sign up</a></li>
                                 </ul>
+                               
                                  {{/if}}
                                 
                             </li>
                             <li><a href="#" class="scroll">Contact</a></li>
+                           <li><a href="/cart" class="scroll"><i class="fa-solid fa-cart-shopping fa-3x"></i></a></li>
+                            
+                          
                         </ul>
+                       
                     </nav>
                     <!-- //nav -->
                 </div>
