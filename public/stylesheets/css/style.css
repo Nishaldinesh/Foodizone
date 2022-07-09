@@ -405,7 +405,7 @@ li > a:only-child:after {
 
 /*-- //header --*/
 
-.main-content {
+.main-body {
     background: url('/images/banner1.jpg') center no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -414,6 +414,9 @@ li > a:only-child:after {
     background-size: cover;
     position: relative;
     min-height: 50em;
+}
+.vendor-nav{
+    margin-top: 5rem;
 }
 
 .layer {
@@ -988,6 +991,12 @@ section#gallery {
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
 }
+.input-group{
+    padding-left: 50rem;
+}
+.pe-md-3{
+    padding-left: 42rem;
+}
 
 
 .contact-form button.btn {
@@ -1240,7 +1249,7 @@ a.move-top span {
 
 @media screen and (max-width: 1440px) {
 
-    .main-content,
+    .main-body,
     .layer {
         min-height: 45em;
     }
@@ -1264,7 +1273,7 @@ a.move-top span {
 
 @media screen and (max-width: 1080px) {
 
-    .main-content,
+    .main-body,
     .layer {
         min-height: 40em;
     }
@@ -1344,7 +1353,7 @@ a.move-top span {
         padding-top: 15em;
     }
 
-    .main-content,
+    .main-body,
     .layer {
         min-height: 38em;
     }
@@ -1421,7 +1430,7 @@ a.move-top span {
         padding-top: 13em;
     }
 
-    .main-content,
+    .main-body,
     .layer {
         min-height: 34em;
     }
@@ -1472,7 +1481,7 @@ a.move-top span {
         padding-top: 10em;
     }
 
-    .main-content,
+    .main-body,
     .layer {
         min-height: 30em;
     }
@@ -1519,7 +1528,7 @@ a.move-top span {
         font-size: 1.6em;
     }
 
-    .main-content,
+    .main-body,
     .layer {
         min-height: 25em;
     }
