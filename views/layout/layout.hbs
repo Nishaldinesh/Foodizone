@@ -37,10 +37,12 @@
 
     <title>Hello, world!</title>
   </head>
-  <body class="main-content">
-    {{#if admin}}
+  <body>
+    {{#if admin_status}}
     {{>admin-header}}
-    {{else}}
+    {{else if vendor_status}}
+    {{>vendor-header}}
+    {{else if user_status}}
     {{>user-header}}
     {{/if}}
    
