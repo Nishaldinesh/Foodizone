@@ -13,6 +13,18 @@ body {
     font-family: 'Raleway', sans-serif;
     scroll-behavior: smooth;
 }
+.vendor-nav{
+    position: absolute;
+     margin-bottom: 3rem; 
+     z-index:1;
+     height: 0px;
+}
+.collapse{
+    margin-bottom: 50rem;
+}
+.text-body{
+    margin-top: 8px ;
+}
 
 body a {
     text-decoration: none;
