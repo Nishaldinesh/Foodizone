@@ -56,6 +56,9 @@ router.get('/logout',(req,res, next)=>{
 });
 router.get('/view-products',(req,res, next)=>{
     res.render('vendor/view-products',{vendor_status:true})
+});
+router.get('/add-products',(req, res, next)=>{
+    res.render('vendor/add-products',{vendor:req.session.vendor})
 })
 
 module.exports =router;

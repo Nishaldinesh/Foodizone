@@ -1,0 +1,33 @@
+<body class="main-body">
+ 
+<section>
+                <div class="container add-products-container">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h2 class="text-center">Add Products</h2>
+                            <form action="/vendor/add-products" method="POST" enctype="multipart/form-data">
+                                <label for="">Name</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                                <input type="text" name="{{vendor._id}}" hidden>
+
+                                <label for="">Category</label>
+                                <input type="text" name="category" id="category" class="form-control">
+
+                                <label for="">Price</label>
+                                <input type="text" name="price" id="price" class="form-control">
+
+                                <label for="">Description</label>
+                                <input type="text" name="description" id="description" class="form-control">
+
+                                <label for="">Image</label>
+                                <input type="file" name="image"class="form-control">
+
+                                <button type="submit" class="btn btn-success mt-3">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+   
+</body>

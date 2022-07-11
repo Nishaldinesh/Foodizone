@@ -25,6 +25,9 @@ body {
 .text-body{
     margin-top: 8px ;
 }
+.add-products-container{
+    height: 37rem;
+}
 
 body a {
     text-decoration: none;
