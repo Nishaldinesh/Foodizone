@@ -35,5 +35,15 @@ module.exports={
             resolve({status:false})
            }
         })
+    },
+    getProducts:(vendorId)=>{
+        try{
+            return new Promise(async(resolve,reject)=>{
+             let products =await db.get().collection(collection.PRODUCT_COLLECTION).find({vendorId:(vendorId)}).toArray()
+                resolve(products)
+            })
+        }catch(err){
+            console.log(err);
+        }
     }
 }

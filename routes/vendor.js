@@ -2,11 +2,13 @@ var express = require('express');
 const { response } = require('../app');
 var router = express.Router();
 var vendorHelpers= require('../helpers/vendor-helpers')
+var productHelpers= require('../helpers/product-helpers');
+const { ConnectionPoolClosedEvent } = require('mongodb');
 const verifyVendorLogin=(req, res, next)=>{
     if(req.session.vendor){
         next()
     }else{
-        res.render('vendor/vendor-dashboard')
+        res.render('vendor/signin')
     }
 }
 
@@ -54,11 +56,31 @@ router.get('/logout',(req,res, next)=>{
     req.session.vendor= null
     res.redirect('/')
 });
-router.get('/view-products',(req,res, next)=>{
-    res.render('vendor/view-products',{vendor_status:true})
+router.get('/view-products',verifyVendorLogin,(req,res, next)=>{
+    let vendor=req.session.vendor._id
+    console.log(vendor);
+    vendorHelpers.getProducts(vendor).then((products)=>{
+        res.render('vendor/view-products',{vendor_status:true,products})
+    })
+   
 });
-router.get('/add-products',(req, res, next)=>{
-    res.render('vendor/add-products',{vendor:req.session.vendor})
+router.get('/add-products',verifyVendorLogin,(req, res, next)=>{
+    res.render('vendor/add-products',{vendor_status:true,vendor:req.session.vendor})
+});
+router.post('/add-products',(req,res,next)=>{
+    console.log(req.body);
+    console.log(req.files.Image);
+  productHelpers.addProduct(req.body).then((id)=>{
+    let image=req.files.Image
+    console.log(id);
+    image.mv('./public/product-images/' +id + '.jpg',(err,done)=>{
+        if(!err){
+            res.redirect('/vendor/add-products')
+        }else{
+            console.log(err);
+        }
+    })
+  })
 })
 
 module.exports =router;

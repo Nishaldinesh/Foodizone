@@ -8,37 +8,41 @@ var userRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 var vendorRouter = require('./routes/vendor');
 var hbs = require('express-handlebars');
+var fileUpload = require('express-fileupload')
 
 var app = express();
-var db= require('./config/connection');
-var session= require('express-session');
+var db = require('./config/connection');
+var session = require('express-session');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/',runtimeOptions:{allowedProtoPropertiesByDefault:true,allowProtoMethodsByDefault:true,},}));
+app.engine('hbs', hbs.engine({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layout/', partialsDir: __dirname + '/views/partials/', runtimeOptions: { allowedProtoPropertiesByDefault: true, allowProtoMethodsByDefault: true, }, }));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret:"Key",cookie:{maxAge:600000}}))
-db.connect((err)=>{
-  if(err) console.log("Failed to connect database"+err)
+app.use(fileUpload())
+
+app.use(session({ secret: "Key", cookie: { maxAge: 600000 } }))
+db.connect((err) => {
+  if (err) console.log("Failed to connect database" + err)
   else console.log("Database connected to port 27017")
-})
+});
+
 
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 app.use('/vendor', vendorRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
