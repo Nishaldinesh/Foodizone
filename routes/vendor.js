@@ -13,16 +13,16 @@ const verifyVendorLogin=(req, res, next)=>{
 }
 
 router.get('/',(req,res, next)=>{
-    res.render('vendor/signin')
+    res.render('vendor/signin',{user_status:true})
 });
 router.get('/signup',(req,res, next)=>{
-    res.render('vendor/signup');
+    res.render('vendor/signup',{user_status:true});
 });
 router.get('/signin',(req,res, next)=>{
     if(req.session.vendor){
         res.redirect('/vendor')
     }else{
-        res.render('vendor/signin',{"loginErr":req.session.vendorLoginErr})
+        res.render('vendor/signin',{"loginErr":req.session.vendorLoginErr,user_status:true})
         req.session.vendorLoginErr= false
     }
 });

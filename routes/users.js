@@ -20,7 +20,7 @@ router.get('/signin',(req,res, next)=>{
   if(req.session.user){
     res.redirect('/')
   }else{
-    res.render('user/signin',{"loginErr": req.session.userLoginErr})
+    res.render('user/signin',{"loginErr": req.session.userLoginErr,user_status:true})
     req.session.userLoginErr=false
   }
 });

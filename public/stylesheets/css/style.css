@@ -19,6 +19,9 @@ body {
      z-index:1;
      height: 0px;
 }
+.signup-form{
+    border-radius: 15px;
+}
 .collapse{
     margin-bottom: 50rem;
 }
@@ -421,7 +424,7 @@ li > a:only-child:after {
 /*-- //header --*/
 
 .main-body {
-    background: url('/images/banner1.jpg') center no-repeat;
+    background:url('/images/banner2.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -432,6 +435,11 @@ li > a:only-child:after {
 }
 .vendor-nav{
     margin-top: 5rem;
+}
+.search-bar{
+    width: 35rem;
+    margin-bottom: 7rem;
+    border-radius: 18px;
 }
 
 .layer {
@@ -1654,6 +1662,9 @@ form {
 	height: 100%;
 	text-align: center;
 }
+.login-form{
+    border-radius: 15px;
+}
 
 input {
 	background-color: #eee;
@@ -1688,7 +1699,8 @@ input {
 	z-index: 2;
 }
 .user-header{
-    margin-bottom: 730px;
+    margin-bottom: 791px;
+    background:linear-gradient(to right, #FF4B2B, #FF416C)
 }
 
 .container.right-panel-active .sign-in-container {
