@@ -2,7 +2,8 @@ var express = require('express');
 const { Db } = require('mongodb');
 const { response } = require('../app');
 var router = express.Router();
-var userHelpers = require('../helpers/user-helpers')
+var userHelpers = require('../helpers/user-helpers');
+const vendorHelpers = require('../helpers/vendor-helpers');
 
 const verifyUserLogin= (req,res, next) =>{
   if(req.session.user){
@@ -53,12 +54,18 @@ router.get('/logout',(req,res, next)=>{
   req.session.user= null
   res.redirect('/')
 });
-router.get('/add-to-cart',(req, res, next)=>{
+router.get('/add-to-cart/:id',verifyUserLogin,(req, res, next)=>{
+  console.log(req.params.id);
   console.log("api call");
+  userHelpers.addToCart(req.params.id,req.session.user._id).then((response)=>{
+    res.render('user/cart')
+  })
 
 })
 
-router.get('/cart',(req,res, next)=>{
+router.get('/cart',verifyUserLogin,async(req,res,next)=>{
+  let cartItems= await userHelpers.getCartItems(req.session.user._id)
+  console.log(cartItems);
   res.render('user/cart')
 })
 module.exports = router;

@@ -27,8 +27,8 @@
     <p> {{this.ShopName}},{{this.ShopLocation}}</p>
     <strong>₹{{this.Price}}</strong>
     <br>
-   <button onclick="addToCart('{{this._id}}')" class="btn btn-danger">Add to cart</button>
-    <button class="btn btn-success">Buy now</button>
+ <a href="/add-to-cart/{{this._id}}" class="btn btn-danger">Add to cart</a>
+    <a href="" class="btn btn-success">Buy now</a>
   </div>
 </div>
 {{/each}}
@@ -36,14 +36,3 @@
       
 </body>
 
-<script>
-    function addToCart(proId){
-        $.ajax({
-            url:'/add-to-cart' +proId,
-            method:'get',
-            success:(response)=>{
-                alert(response)
-            }
-        })
-    }
-</script>

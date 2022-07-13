@@ -34,13 +34,14 @@
                         <tr>
                             <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
                                 Product name</th>
-                            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            <th
+                                class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Category</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Price</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Image</th>
-                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Options</th>
                         </tr>
                     </thead>
@@ -48,25 +49,27 @@
                         {{#each products}}
                         <tr>
                             <td>
-                                   
-                             <h6 class="mb-0 text-sm text-center">{{this.ProductName}}</h6>
-                                    
-                             
+
+                                <h6 class="mb-0 text-sm text-center">{{this.ProductName}}</h6>
+
+
                             </td>
                             <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.Category}}</h6>
-                
-                              
+                                <h6 class="mb-0 text-sm text-center">{{this.Category}}</h6>
+
+
                             </td>
                             <td>
                                 <h6 class="mb-0 text-sm text-center">{{this.Price}}</h6>
                             </td>
                             <td class="text-center">
-                               <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}.jpg" alt="">
+                                <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}.jpg" alt="">
                             </td>
                             <td class="text-center">
                                 <a href="/vendor/edit-product/{{this._id}}" class="btn btn-success">Edit product</a>
-                                <a href="/vendor/remove-product/{{this._id}}" class="btn btn-danger" onclick=" return confirm('Do you really want to delete {{this.ProductName}}?')">Remove product</a>
+                                <a href="/vendor/remove-product/{{this._id}}" class="btn btn-danger"
+                                    onclick=" return confirm('Do you really want to delete {{this.ProductName}}?')">Remove
+                                    product</a>
                             </td>
                         </tr>
                         {{/each}}

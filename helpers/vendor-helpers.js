@@ -45,49 +45,5 @@ module.exports={
         }catch(err){
             console.log(err);
         }
-    },
-    getProductDetails:(proId)=>{
-        try{
-            return new Promise((resolve,reject)=>{
-                db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)}).then((product)=>{
-                    resolve(product)
-                })
-            })
-        }catch(err){
-            console.log(err)
-        }
-    },
-    editProduct:(proId, proDetails)=>{
-        try{
-            return new Promise((resolve,reject)=>{
-                db.get().collection(collection.PRODUCT_COLLECTION)
-                .updateOne({_id:objectId(proId)},{
-                    $set:{
-                        ProductName: proDetails.ProductName,
-                        Category: proDetails.Category,
-                        Price: proDetails.Price,
-                        Description: proDetails.Description,
-                        vendorId: proDetails.vendorId,
-                        ShopLocation: proDetails.ShopLocation,
-                        ShopName: proDetails.ShopName
-                    }
-                }).then((response)=>{
-                    resolve(response)
-                })
-            })
-        }catch(err){
-            console.log(err);
-        }
-    },
-    removeProduct:(proId)=>{
-        try{
-            return new Promise((resolve,reject)=>{
-                db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(proId)}).then((resposne)=>{
-                    resolve(resposne)
-                })
-            })
-        }catch(err){
-            console.log(err);
-        }
     }
 }

@@ -90,7 +90,7 @@ router.post('/add-products', (req, res, next) => {
     })
 });
 router.get('/edit-product/:id', async (req, res, next) => {
-    let product = await vendorHelpers.getProductDetails(req.params.id)
+    let product = await productHelpers.getProductDetails(req.params.id)
     console.log(product);
     res.render('vendor/edit-products', { product,vendor:req.session.vendor }
     )
@@ -98,7 +98,7 @@ router.get('/edit-product/:id', async (req, res, next) => {
 router.post('/edit-product/:id',(req,res, next)=>{
     console.log(req.body);
     let id= req.params.id
-   vendorHelpers.editProduct(req.params.id, req.body).then((response)=>{
+   productHelpers.editProduct(req.params.id, req.body).then((response)=>{
     console.log(response);
     res.redirect('/vendor/add-products')
     if(req.files.Image){
@@ -110,7 +110,7 @@ router.post('/edit-product/:id',(req,res, next)=>{
    })
 });
 router.get('/remove-product/:id',(req ,res, next)=>{
-    vendorHelpers.removeProduct(req.params.id).then((response)=>{
+    productHelpers.removeProduct(req.params.id).then((response)=>{
         res.redirect('/vendor/view-products')
     })
 })
