@@ -1,4 +1,4 @@
-<body class="main-body">
+<body class="main-body ">
     <div class="top-content">
         <div class="mb-3">
             <h2 class="text-white">Discover the best food and drinks in your area</h2>
@@ -7,4 +7,31 @@
         <input class="search-bar" type="search" placeholder="Search here...">
     </div>
     </div>
+      <div class="container" style="overflow-x:hidden; overflow-y:auto; width:100%; margin-top:31rem;">
+        <div class="category-button">
+         <a href="" class="btn btn-light">All</a>
+         <a href="" class="btn btn-light">Burgers</a>
+          <a href="" class="btn btn-light">Pizza</a>
+           <a href="" class="btn btn-light">Paratha</a>
+            <a href="" class="btn btn-light">Fries</a>
+             <a href="" class="btn btn-light">Shakes</a>
+             <a href="" class="btn btn-light">Biriyani</a>
+        </div>
+        {{#each products}}
+           <div class="card mt-5 float-left ml-5" style="width: 18rem;">
+ <a href="/product-images/{{this._id}}.jpg">
+ <img class="card-img-top" style="height:17rem;" src="/product-images/{{this._id}}.jpg" alt="Card image cap">
+ </a>
+  <div class="card-body">
+    <h5 class="card-title">{{this.ProductName}}</h5>
+    <p> {{this.ShopName}},{{this.ShopLocation}}</p>
+    <strong>₹{{this.Price}}</strong>
+    <br>
+    <a href="#" class="btn btn-danger" onclick="addToCart('{{this._id}}')">Add to cart</a>
+    <a href="#" class="btn btn-success">Buy now</a>
+  </div>
+</div>
+{{/each}}
+        </div>
+      
 </body>

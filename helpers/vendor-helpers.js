@@ -8,9 +8,8 @@ module.exports={
     doSignup:(vendorDetails)=>{
         return new Promise(async(resolve,reject)=>{
             vendorDetails.Password=await bcrypt.hash(vendorDetails.Password, 10)
-            db.get().collection(collection.VENDOR_COLLECTION).insertOne(vendorDetails).then((response)=>{
-                console.log(response)
-                resolve(response)
+            db.get().collection(collection.VENDOR_COLLECTION).insertOne(vendorDetails).then((data)=>{
+                resolve(data.insertedId)
             })
         })
     },

@@ -28,8 +28,16 @@ router.get('/signin',(req,res, next)=>{
 });
 router.post('/signup',(req,res, next)=>{
     console.log(req.body);
-    vendorHelpers.doSignup(req.body).then((response)=>{
-        res.redirect('/vendor')
+    vendorHelpers.doSignup(req.body).then((id)=>{
+        console.log(id);
+        let image= req.files.Image
+        image.mv('./public/shop-images/' +id + '.jpg',(err,done)=>{
+            if(!err){
+                res.redirect('/vendor')
+            }else{
+                console.log(err);
+            }
+        })
     })
     
 });
@@ -69,7 +77,6 @@ router.get('/add-products',verifyVendorLogin,(req, res, next)=>{
 });
 router.post('/add-products',(req,res,next)=>{
     console.log(req.body);
-    console.log(req.files.Image);
   productHelpers.addProduct(req.body).then((id)=>{
     let image=req.files.Image
     console.log(id);

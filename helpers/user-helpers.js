@@ -3,6 +3,7 @@ var collection = require('../config/collection');
 var bcrypt = require('bcrypt');
 const { USER_COLLECTION } = require('../config/collection');
 const { response } = require('../app');
+const { resolve, reject } = require('promise');
 var objectId=require('mongodb').ObjectId
 
 module.exports ={
@@ -36,5 +37,16 @@ module.exports ={
             resolve({status: false})
           }
         })
+    },
+    getAllProducts:(user)=>{
+        try{
+            return new Promise (async(resolve,reject)=>{
+              let products=await  db.get().collection(collection.PRODUCT_COLLECTION).find({}).toArray()
+              console.log(products);
+              resolve(products)
+            })
+        }catch(err){
+            console.log(err);
+    }
     }
 }

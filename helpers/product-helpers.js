@@ -7,7 +7,7 @@ module.exports={
     addProduct:(productDetails)=>{
         try{
         return new Promise((resolve,reject)=>{
-            console.log(productDetails.vendorId);
+            console.log(productDetails);
             productDetails.Price= parseFloat(productDetails.Price)
             db.get().collection(collection.PRODUCT_COLLECTION).insertOne(productDetails).then((data)=>{
                 console.log(data.insertedId);

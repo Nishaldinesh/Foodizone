@@ -31,6 +31,9 @@ body {
 .add-products-container{
     height: 37rem;
 }
+.top-content{
+    position: absolute;
+}
 
 body a {
     text-decoration: none;
@@ -1699,7 +1702,7 @@ input {
 	z-index: 2;
 }
 .user-header{
-    margin-bottom: 791px;
+    margin-bottom: 745px;
     background:linear-gradient(to right, #FF4B2B, #FF416C)
 }
 
