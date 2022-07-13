@@ -53,7 +53,12 @@ router.get('/logout',(req,res, next)=>{
   req.session.user= null
   res.redirect('/')
 });
+router.get('/add-to-cart',(req, res, next)=>{
+  console.log("api call");
+
+})
+
 router.get('/cart',(req,res, next)=>{
-  userHelpers.getCartProducts()
+  res.render('user/cart')
 })
 module.exports = router;
