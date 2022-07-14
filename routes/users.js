@@ -62,8 +62,8 @@ router.get('/logout',(req,res, next)=>{
 router.get('/add-to-cart/:id',verifyUserLogin,(req, res, next)=>{
   console.log(req.params.id);
   console.log("api call");
-  userHelpers.addToCart(req.params.id,req.session.user._id).then((response)=>{
-    res.redirect('/')
+  userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
+    res.json({status:true})
   })
 
 })
