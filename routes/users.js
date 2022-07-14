@@ -14,10 +14,15 @@ const verifyUserLogin= (req,res, next) =>{
 }
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   let user=req.session.user
+  let cartCount=null
+  if(req.session.user){
+    cartCount=await userHelpers.getCartCount(req.session.user._id)
+  }
+
    userHelpers.getAllProducts(user).then((products)=>{
-    res.render('user/home-page',{user, user_status:true,products});
+    res.render('user/home-page',{user, user_status:true,products,cartCount});
    })
   
 });
@@ -58,14 +63,14 @@ router.get('/add-to-cart/:id',verifyUserLogin,(req, res, next)=>{
   console.log(req.params.id);
   console.log("api call");
   userHelpers.addToCart(req.params.id,req.session.user._id).then((response)=>{
-    res.render('user/cart')
+    res.redirect('/')
   })
 
 })
 
 router.get('/cart',verifyUserLogin,async(req,res,next)=>{
-  let cartItems= await userHelpers.getCartItems(req.session.user._id)
-  console.log(cartItems);
-  res.render('user/cart')
+  let products= await userHelpers.getCartItems(req.session.user._id)
+  console.log(products);
+  res.render('user/cart',{user_status:true,products})
 })
 module.exports = router;

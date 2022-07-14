@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 const { USER_COLLECTION } = require('../config/collection');
 const { response } = require('../app');
 const { resolve, reject } = require('promise');
+const { ObjectID, ObjectId } = require('bson');
 var objectId=require('mongodb').ObjectId
 
 module.exports ={
@@ -59,7 +60,9 @@ module.exports ={
                     {
                         $push: {products:objectId(proId)}
                     }
-                    )
+                    ).then((response)=>{
+                        resolve(response)
+                    })
 
                 }else{
                     let cartObj={
@@ -103,6 +106,20 @@ module.exports ={
             })
         }catch(err){
             console.log(err)
+        }
+    },
+    getCartCount:(userId)=>{
+        try{
+            return new Promise(async(resolve,reject)=>{
+                let count=0
+                let cart= await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+                if(cart){
+                    count=cart.products.length
+                }
+                resolve(count)
+            })
+        }catch(err){
+            console.log(err);
         }
     }
 }
