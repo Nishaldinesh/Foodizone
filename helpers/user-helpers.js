@@ -39,17 +39,6 @@ module.exports ={
           }
         })
     },
-    getAllProducts:(user)=>{
-        try{
-            return new Promise (async(resolve,reject)=>{
-              let products=await  db.get().collection(collection.PRODUCT_COLLECTION).find({}).toArray()
-              console.log(products);
-              resolve(products)
-            })
-        }catch(err){
-            console.log(err);
-    }
-    },
     addToCart:(proId,userId)=>{
         try{
             let proObj={
@@ -99,23 +88,24 @@ module.exports ={
                         $match:{user:objectId(userId)}
                     },
                     {
+                        $unwind:'$products'
+                    },
+                    {
+                        $project:{
+                            item:'$products.item',
+                            quantity:'$products.quantity'
+                        }
+                    },
+                    {
                         $lookup:{
-                            from: collection.PRODUCT_COLLECTION,
-                            let:{proList:'$products'},
-                            pipeline:[
-                                {
-                                    $match:{
-                                        $expr:{
-                                            $in:['$_id',"$$proList"]
-                                        }
-                                    }
-                                }
-                            ],
-                            as:'cartItems'
+                            from:collection.PRODUCT_COLLECTION,
+                            localField:'item',
+                            foreignField:'_id',
+                            as:'product'
                         }
                     }
                 ]).toArray()
-                resolve(cartItems[0].cartItems)
+                resolve(cartItems)
             })
         }catch(err){
             console.log(err)
@@ -131,6 +121,37 @@ module.exports ={
                 }
                 resolve(count)
             })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getAllVendors:(user)=>{
+        try{
+            return new Promise((resolve,reject)=>{
+               let vendors= db.get().collection(collection.VENDOR_COLLECTION).find({}).toArray()
+               resolve(vendors)
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getVendorDetails:(vendorId)=>{
+        try{
+            return new Promise((resolve,reject)=>{
+                db.get().collection(collection.VENDOR_COLLECTION).findOne({_id:objectId(vendorId)}).then((vendor)=>{
+                    resolve(vendor)
+                })
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getVendorProducts:(vendorId)=>{
+        try{
+            return new Promise(async(resolve,reject)=>{
+                let products=await db.get().collection(collection.PRODUCT_COLLECTION).find({vendorId:vendorId}).toArray()
+                resolve(products)
+                })
         }catch(err){
             console.log(err);
         }

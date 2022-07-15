@@ -1,0 +1,32 @@
+<header class="ven-header">
+   <div class="img-div">
+      <img src="/shop-images/{{vendorDetails._id}}.jpg" alt="" class="shop-img">
+   </div>
+   <div class="contents float-right">
+      <h2 class="text-white">{{vendorDetails.ShopName}}</h2>
+      <p class="text-white text-sm">{{vendorDetails.FoodCategory}}</p>
+      <p class="text-white text-sm">{{vendorDetails.City}}</p>
+   </div>
+</header>
+<style>
+   .ven-header{
+      background-color: #282c3f;
+      height: 254px;
+      margin-bottom: 27rem;   
+   }
+   .text-lg{
+      font-family: ProximaNova,arial,Helvetica Neue,sans-serif;
+   }
+   .contents{
+      padding-left: 42rem;
+    margin-top: -12rem;
+    position:absolute;
+   }
+   .shop-img{
+    padding-left: 25rem;
+    padding-top: 5rem;
+    height: 17rem;
+    margin-top: -3rem;
+    width: 40rem;
+   }
+</style>

@@ -4,6 +4,7 @@ const { response } = require('../app');
 var router = express.Router();
 var userHelpers = require('../helpers/user-helpers');
 const vendorHelpers = require('../helpers/vendor-helpers');
+var productHelpers = require('../helpers/product-helpers');
 
 const verifyUserLogin= (req,res, next) =>{
   if(req.session.user){
@@ -20,9 +21,8 @@ router.get('/', async function(req, res, next) {
   if(req.session.user){
     cartCount=await userHelpers.getCartCount(req.session.user._id)
   }
-
-   userHelpers.getAllProducts(user).then((products)=>{
-    res.render('user/home-page',{user, user_status:true,products,cartCount});
+   userHelpers.getAllVendors(user).then((vendors)=>{
+    res.render('user/home-page',{user, user_status:true,vendors,cartCount});
    })
   
 });
@@ -72,5 +72,13 @@ router.get('/cart',verifyUserLogin,async(req,res,next)=>{
   let products= await userHelpers.getCartItems(req.session.user._id)
   console.log(products);
   res.render('user/cart',{user_status:true,products})
+});
+router.get('/get-vendor-details/:id',async(req,res, next)=>{
+  let vendorId= req.params.id
+  let vendorDetails= await userHelpers.getVendorDetails(vendorId)
+  console.log(vendorDetails);
+  let vendorProducts= await userHelpers.getVendorProducts(vendorId)
+  console.log(vendorProducts);
+  res.render('user/vendor-details',{user_status:true,vendorDetails,vendorProducts})
 })
 module.exports = router;

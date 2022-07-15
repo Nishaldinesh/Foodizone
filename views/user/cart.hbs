@@ -1,4 +1,4 @@
-<div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+<div class="col-lg-8 col-md-6 mb-md-0 mb-4 mt-5">
 
     <div class="card">
         <div class="card-header pb-0">
@@ -26,8 +26,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-body px-0 pb-2">
-            <div class="table-responsive">
+        <div class="card-body px-0 pb-2" >
+            <div class="table-responsive" >
                 <table class="table align-items-center mb-0">
                     <thead>
                         <tr>
@@ -42,15 +42,16 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Price</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Quantity</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Image</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{#each products}}
                         <tr>
-                            <td>
+                            {{#each product}}
+                         <td>
                                    
                              <h6 class="mb-0 text-sm text-center">{{this.ProductName}}</h6>
                                     
@@ -74,12 +75,14 @@
                             <td>
                                 <h6 class="mb-0 text-sm text-center">{{this.Price}}</h6>
                             </td>
-                             <td class="text-sm text-center mb-0">
-                                <button class="btn btn-danger">-</button>  Quantity  <button class="btn btn-success">+</button>
-                            </td>
-                            <td class="text-center">
+                             <td class="text-center">
                                <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}.jpg" alt="">
                             </td>
+                            {{/each}}
+                             <td class="text-sm text-center mb-0">
+                                <button class="btn btn-danger">-</button>  {{this.quantity}}  <button class="btn btn-success">+</button>
+                            </td>
+                           
                         </tr>
                         {{/each}}
                     </tbody>
@@ -88,3 +91,4 @@
         </div>
     </div>
 </div>
+

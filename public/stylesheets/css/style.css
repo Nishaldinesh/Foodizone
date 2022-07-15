@@ -1702,7 +1702,7 @@ input {
 	z-index: 2;
 }
 .user-header{
-    margin-bottom: 745px;
+    margin-bottom: 793px;
     background:linear-gradient(to right, #FF4B2B, #FF416C)
 }
 
@@ -1851,7 +1851,7 @@ footer a {
 }
 .login-section {
     width: 50rem;
-    height: 46rem;
+    height: 50rem;
     margin-top: 108px;
 }
 
