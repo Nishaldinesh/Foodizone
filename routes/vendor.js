@@ -77,7 +77,8 @@ router.get('/add-products', verifyVendorLogin, (req, res, next) => {
 });
 router.post('/add-products', (req, res, next) => {
     console.log(req.body);
-    productHelpers.storeCategory()
+    console.log(req.body.Category)
+    productHelpers.storeCategory(req.body.vendorId,req.body.Category)
     productHelpers.addProduct(req.body).then((id) => {
         let image = req.files.Image
         console.log(id);

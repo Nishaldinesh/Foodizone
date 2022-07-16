@@ -1,6 +1,7 @@
 var db = require('../config/connection');
 var collection= require('../config/collection');
 const { resolve, reject } = require('promise');
+const cookieParser = require('cookie-parser');
 var objectId=require('mongodb').ObjectId
 
 module.exports={
@@ -63,5 +64,42 @@ module.exports={
         }catch(err){
             console.log(err);
         }
+    },
+    storeCategory:(vendorId,Productcategory)=>{
+        try{
+            return new Promise(async(resolve,reject)=>{
+                let catObj={
+                    category: Productcategory
+                }
+                let catCollection=await db.get().collection(collection.CATEGORY_COLLECTION).findOne({vendorId:objectId(vendorId)})
+                if(catCollection){
+                    let catExist=catCollection.category.findIndex(category=> category.category==Productcategory)
+                    console.log(catExist);
+                    if(catExist!=-1){
+                        console.log("Category already exist");
+                    }else{
+                    console.log('working')
+                    db.get().collection(collection.CATEGORY_COLLECTION)
+                    .updateOne({vendorId:objectId(vendorId)},
+                    {
+                        $push:{category:catObj}
+                    })
+                }
+                }else{
+                    let catObject={
+                        vendorId:objectId(vendorId),
+                        category:[catObj]
+                    }
+                    db.get().collection(collection.CATEGORY_COLLECTION).insertOne(catObject).then((response)=>{
+                        console.log(response);
+                        resolve(response)
+                    })
+                }
+            })
+
+        }catch(err){
+            console.log(err);
+        }
     }
+    
 }
