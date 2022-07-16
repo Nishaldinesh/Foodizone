@@ -76,7 +76,6 @@ router.get('/cart',verifyUserLogin,async(req,res,next)=>{
 router.get('/get-vendor-details/:id',async(req,res, next)=>{
   let vendorId= req.params.id
   let vendorDetails= await userHelpers.getVendorDetails(vendorId)
-  console.log(vendorDetails);
   let vendorProducts= await userHelpers.getVendorProducts(vendorId)
   console.log(vendorProducts);
   res.render('user/vendor-details',{user_status:true,vendorDetails,vendorProducts})

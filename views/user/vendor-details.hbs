@@ -8,25 +8,105 @@
       <p class="text-white text-sm">{{vendorDetails.City}}</p>
    </div>
 </header>
+<section class="h-200 h-custom">
+   <div class="container py-5 product-container h-200">
+      <div class="row d-flex justify-content-center align-items-center h-200">
+         <div class="col">
+            <div class="card">
+               <div class="card-body p-4">
+
+                  <div class="row">
+
+                     <div class="col-lg-7">
+                        <h5 class="mb-3"><a href="#!" class="text-body"><i
+                                 class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                        <hr>
+
+                        {{#each vendorProducts}}
+                        <div class="card mb-3 products-card">
+                           <div class="card-body">
+                              <div class="d-flex justify-content-between">
+                                 <div class="d-flex flex-row align-items-center">
+                                    <div>
+                                       <img src="/product-images/{{this._id}}.jpg" class="img-fluid rounded-3"
+                                          alt="Shopping item" style="width: 65px;">
+                                    </div>
+                                    <div class="ms-3">
+                                       <h5>{{this.ProductName}}</h5>
+                                       <p class="small mb-0">256GB, Navy Blue</p>
+                                    </div>
+                                 </div>
+                                 <div class="d-flex flex-row align-items-center">
+                                    <div class="mr-3">
+                                      <button class="btn btn-white text-secondary">-</button> 1 <button class="btn btn-white text-success">+ </button>
+                                    </div>
+                                    <div style="width: 80px;">
+                                       <h5 class="mb-0">₹ {{this.Price}}</h5>
+                                    </div>
+                                    <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        {{/each}}
+                     </div>
+
+
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 <style>
-   .ven-header{
+   .ven-header {
       background-color: #282c3f;
-      height: 254px;
-      margin-bottom: 27rem;   
+      height: 230px;
+      margin-bottom: 27rem;
    }
-   .text-lg{
-      font-family: ProximaNova,arial,Helvetica Neue,sans-serif;
+
+   .text-lg {
+      font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
    }
-   .contents{
-      padding-left: 42rem;
-    margin-top: -12rem;
-    position:absolute;
+
+   .contents {
+      padding-left: 44rem;
+      margin-top: -11rem;
+      position: absolute;
    }
-   .shop-img{
-    padding-left: 25rem;
-    padding-top: 5rem;
-    height: 17rem;
-    margin-top: -3rem;
-    width: 40rem;
+
+   .shop-img {
+      padding-left: 25rem;
+      padding-top: 5rem;
+      height: 15rem;
+      margin-top: -3rem;
+      width: 41rem;
+   }
+
+   .product-container {
+      margin-top: 23rem;
+   }
+
+   .products-card {
+      width: 42rem;
+   }
+
+   .h-200 {
+      background-color: #ffff;
+      height: auto;
+   }
+
+   .container {
+      box-shadow: none;
+   }
+
+   .card {
+      box-shadow: none;
+   }
+   .btn{
+      font-size: xx-large;
+      box-shadow: none;
    }
 </style>
