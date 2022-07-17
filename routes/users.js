@@ -59,11 +59,14 @@ router.get('/logout',(req,res, next)=>{
   req.session.user= null
   res.redirect('/')
 });
-router.get('/add-to-cart/:id',verifyUserLogin,(req, res, next)=>{
-  console.log(req.params.id);
+router.post('/add-to-cart',verifyUserLogin,(req, res, next)=>{
+  console.log(req.body);
   console.log("api call");
-  userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
+  let productId=req.body.proId
+  let vendorId=req.body.vendorId
+  userHelpers.addToCart(productId,vendorId,req.session.user._id).then(()=>{
     res.json({status:true})
+
   })
 
 })
@@ -73,11 +76,17 @@ router.get('/cart',verifyUserLogin,async(req,res,next)=>{
   console.log(products);
   res.render('user/cart',{user_status:true,products})
 });
-router.get('/get-vendor-details/:id',async(req,res, next)=>{
+router.get('/get-vendor-details/:id',verifyUserLogin ,async(req,res, next)=>{
   let vendorId= req.params.id
+  cartCount=null
+  if(req.session.user){
+  cartCount=await userHelpers.getCartCount(req.session.user._id)
+  }
+  let cartItems=await userHelpers.getCartItems(req.session.user._id)
   let vendorDetails= await userHelpers.getVendorDetails(vendorId)
   let vendorProducts= await userHelpers.getVendorProducts(vendorId)
   console.log(vendorProducts);
-  res.render('user/vendor-details',{user_status:true,vendorDetails,vendorProducts})
+  console.log(cartItems);
+  res.render('user/vendor-details',{user_status:true,vendorDetails,vendorProducts,cartCount,cartItems})
 })
 module.exports = router;

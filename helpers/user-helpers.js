@@ -39,33 +39,42 @@ module.exports ={
           }
         })
     },
-    addToCart:(proId,userId)=>{
+    addToCart:(proId,vendorId,userId)=>{
         try{
             let proObj={
                 item:objectId(proId),
+                vendor:objectId(vendorId),
                 quantity:1
             }
             return new Promise(async(resolve,reject)=>{
                 let userCart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
                 if(userCart){
-                    let proExist=userCart.products.findIndex(product=> product.item==proId)
-                    console.log(proExist);
-                    if(proExist!=-1){
-                        db.get().collection(collection.CART_COLLECTION)
-                        .updateOne({'products.item':objectId(proId)},
-                        {
-                            $inc:{'products.$.quantity':1}
-                        }).then(()=>{
-                            resolve()
-                        })
+                    let vendorExist= userCart.products.findIndex(vendor=> vendor.vendor==vendorId)
+                    if(vendorExist!=-1){
+                        console.log("vendor already exist");
+                        let proExist=userCart.products.findIndex(product=> product.item==proId)
+                        if(proExist!=-1){
+                            db.get().collection(collection.CART_COLLECTION)
+                            .updateOne({'products.item':objectId(proId)},
+                            {
+                                $inc:{'products.$.quantity':1}
+                            }).then(()=>{
+                                resolve()
+                            })
+                        } else{
+                            db.get().collection(collection.CART_COLLECTION)
+                            .updateOne({user:objectId(userId)},
+                            {
+                                $push:{products:proObj}                           
+                            })
+                        }
+                       
                     }else{
-                        db.get().collection(collection.CART_COLLECTION)
-                        .updateOne({user:objectId(userId)},
-                        {
-                            $push:{products:proObj}                           
-                        })
+                        console.log("new vendor coming");
+                    
+                        resolve({status:true})
+                      
                     }
-                   
                 }else{
                     let cartObj={
                         user:objectId(userId),
