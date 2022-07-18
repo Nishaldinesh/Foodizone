@@ -102,7 +102,8 @@ module.exports ={
                     {
                         $project:{
                             item:'$products.item',
-                            quantity:'$products.quantity'
+                            quantity:'$products.quantity',
+                            vendor:'$products.vendor'
                         }
                     },
                     {
@@ -112,8 +113,15 @@ module.exports ={
                             foreignField:'_id',
                             as:'product'
                         }
+                    },
+                    {
+                        $project: {
+                            item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+    
+                        }
                     }
                 ]).toArray()
+                console.log(cartItems);
                 resolve(cartItems)
             })
         }catch(err){
@@ -161,6 +169,32 @@ module.exports ={
                 let products=await db.get().collection(collection.PRODUCT_COLLECTION).find({vendorId:vendorId}).toArray()
                 resolve(products)
                 })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    changeProductQuantity:(details)=>{
+        try{
+             details.quantity= parseInt(details.quantity)
+             details.count= parseInt(details.count)
+            return new Promise((resolve, reject) => {
+                if(details.count == -1 && details.quantity == 1){
+                    db.get().collection(collection.CART_COLLECTION).findOne({_id:objectId(details.cart)},
+                    {
+                        $pull: {products:{item: objectId(details.product)}}
+                    }).then((response)=>{
+                        resolve({removeProduct:true})
+                    })
+                }else{
+                    db.get().collection(collection.CART_COLLECTION)
+                    .updateOne({_id:objectId(details.cart), 'products.item':objectId(details.product)},
+                    {
+                        $inc: {'products.$.quantity':details.count}
+                    }).then((response)=>{
+                        resolve({status:true})
+                    })
+                }
+            })
         }catch(err){
             console.log(err);
         }

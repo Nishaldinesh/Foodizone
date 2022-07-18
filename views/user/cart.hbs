@@ -50,35 +50,33 @@
                     <tbody>
                         {{#each products}}
                         <tr>
-                            {{#each product}}
                          <td>
                                    
-                             <h6 class="mb-0 text-sm text-center">{{this.ProductName}}</h6>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.ProductName}}</h6>
                                     
                              
                             </td>
                             <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.Category}}</h6>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.Category}}</h6>
                 
                               
                             </td>
                              <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.ShopName}}</h6>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.ShopName}}</h6>
                 
                               
                             </td>
                              <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.ShopLocation}}</h6>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.ShopLocation}}</h6>
                 
                               
                             </td>
                             <td>
-                                <h6 class="mb-0 text-sm text-center">{{this.Price}}</h6>
+                                <h6 class="mb-0 text-sm text-center">{{this.product.Price}}</h6>
                             </td>
                              <td class="text-center">
-                               <img style="width: 50px; height: 50px;" src="/product-images/{{this._id}}.jpg" alt="">
+                               <img style="width: 50px; height: 50px;" src="/product-images/{{this.product._id}}.jpg" alt="">
                             </td>
-                            {{/each}}
                              <td class="text-sm text-center mb-0">
                                 <button class="btn btn-danger">-</button>  {{this.quantity}}  <button class="btn btn-success">+</button>
                             </td>

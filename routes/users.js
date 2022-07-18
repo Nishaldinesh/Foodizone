@@ -74,7 +74,8 @@ router.post('/add-to-cart',verifyUserLogin,(req, res, next)=>{
 router.get('/cart',verifyUserLogin,async(req,res,next)=>{
   let products= await userHelpers.getCartItems(req.session.user._id)
   console.log(products);
-  res.render('user/cart',{user_status:true,products})
+  let user= req.session.user._id
+  res.render('user/cart',{user_status:true,products, user})
 });
 router.get('/get-vendor-details/:id',verifyUserLogin ,async(req,res, next)=>{
   let vendorId= req.params.id
@@ -82,11 +83,18 @@ router.get('/get-vendor-details/:id',verifyUserLogin ,async(req,res, next)=>{
   if(req.session.user){
   cartCount=await userHelpers.getCartCount(req.session.user._id)
   }
-  let cartItems=await userHelpers.getCartItems(req.session.user._id)
+  let cartItems= await userHelpers.getCartItems(req.session.user._id)
   let vendorDetails= await userHelpers.getVendorDetails(vendorId)
   let vendorProducts= await userHelpers.getVendorProducts(vendorId)
-  console.log(vendorProducts);
-  console.log(cartItems);
-  res.render('user/vendor-details',{user_status:true,vendorDetails,vendorProducts,cartCount,cartItems})
+  let user= req.session.user._id
+  res.render('user/vendor-details',{user_status:true, vendorDetails, vendorProducts, cartCount, cartItems, user})
+});
+router.post('/change-product-quantity',(req,res, next)=>{
+  console.log("call")
+  console.log(req.body);
+  userHelpers.changeProductQuantity(req.body).then((response)=>{
+    res.json(response)
+  })
 })
+
 module.exports = router;
