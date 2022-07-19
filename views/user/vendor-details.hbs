@@ -68,26 +68,37 @@
          </div>
          <div class="card-body scroll-card">
             <ul class="list-group list-group-flush">
-               {{#each cartItems}}
+              {{#each cartItems}}
                <div class="pb-3">
+                   
                   <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                      <div class="ms-3 name">
                         <h5 class="text-sm">{{this.product.ProductName}}</h5>
 
                      </div>
+                     
 
                      <div class="btn-div align-items-center text-center">
                             <button class="btn btn-white text-secondary fnt-btn"
-                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
                 <span id="{{this.product._id}}">{{this.quantity}}</span>
                 <button class="btn btn-white text-success fnt-btn"
-                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
                      </div>
-                     <span>$53.98</span>
+                  
                   </li>
+               
+                  
+                 
+                  
+                 
+               
+                  
+                
+                
                </div>
-               {{/each}}
-
+                  {{/each}}
+              
             </ul>
             <li class="list-group-item d-flex justify-content-between align-items-center px-0 mt-3">
                Shipping
@@ -103,9 +114,7 @@
                <span><strong>$53.98</strong></span>
             </li>
 
-            <button type="button" class="btn btn-success checkout-btn">
-               Go to checkout
-            </button>
+            <a href="/checkout" class="btn btn-success checkout-btn">Go to checkout</a>
          </div>
 
       </div>
@@ -253,13 +262,12 @@
 </script>
 
 <script>
-    function changeQuantity(cartId, proId,userId,count) {
+    function changeQuantity(cartId, proId,count) {
       let quantity = parseInt(document.getElementById(proId).innerHTML)
       count = parseInt(count)
       $.ajax({
         url: '/change-product-quantity',
         data: {
-          user:userId,
           cart: cartId,
           product: proId,
           count: count,
@@ -273,6 +281,7 @@
           } else {
             console.log(response);
             document.getElementById(proId).innerHTML = quantity + count
+
             
           }
         }
