@@ -1,575 +1,889 @@
-<section class="wizard-section">
-		<div class="row no-gutters">
-			
-			<div class="col-lg-12 col-md-12">
-				<div class="form-wizard">
-					<form action="" method="post" role="form">
-						<div class="form-wizard-header">
-							<p >Fill all form field to go next step</p>
-							<ul class="list-unstyled form-wizard-steps clearfix">
-								<li class="active"><span>1</span></li>
-								<li><span>2</span></li>
-								<li><span>3</span></li>
-								<li><span>4</span></li>
-							</ul>
-						</div>
-						<fieldset class="wizard-fieldset show">
-							<h5>Personal Information</h5>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="fname">
-								<label for="fname" class="wizard-form-text-label">First Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="lname">
-								<label for="lname" class="wizard-form-text-label">Last Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								Gender
-								<div class="wizard-form-radio">
-									<input name="radio-name" id="radio1" type="radio">
-									<label for="radio1">Male</label>
-								</div>
-								<div class="wizard-form-radio">
-									<input name="radio-name" id="radio2" type="radio">
-									<label for="radio2">Female</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="zcode">
-								<label for="zcode" class="wizard-form-text-label">Zip Code*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group clearfix">
-								<a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
-							</div>
-						</fieldset>	
-						<fieldset class="wizard-fieldset">
-							<h5>Account Information</h5>
-							<div class="form-group">
-								<input type="email" class="form-control wizard-required" id="email">
-								<label for="email" class="wizard-form-text-label">Email*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="username">
-								<label for="username" class="wizard-form-text-label">User Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control wizard-required" id="pwd">
-								<label for="pwd" class="wizard-form-text-label">Password*</label>
-								<div class="wizard-form-error"></div>
-								<span class="wizard-password-eye"><i class="far fa-eye"></i></span>
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control wizard-required" id="cpwd">
-								<label for="cpwd" class="wizard-form-text-label">Confirm Password*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group clearfix">
-								<a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-								<a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
-							</div>
-						</fieldset>	
-						<fieldset class="wizard-fieldset">
-							<h5>Bank Information</h5>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="bname">
-								<label for="bname" class="wizard-form-text-label">Bank Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="brname">
-								<label for="brname" class="wizard-form-text-label">Branch Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="acname">
-								<label for="acname" class="wizard-form-text-label">Account Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="acon">
-								<label for="acon" class="wizard-form-text-label">Account Number*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="form-group clearfix">
-								<a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-								<a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
-							</div>
-						</fieldset>	
-						<fieldset class="wizard-fieldset">
-							<h5>Payment Information</h5>
-							<div class="form-group">
-								Payment Type
-								<div class="wizard-form-radio">
-									<input name="radio-name" id="mastercard" type="radio">
-									<label for="mastercard">Master Card</label>
-								</div>
-								<div class="wizard-form-radio">
-									<input name="radio-name" id="visacard" type="radio">
-									<label for="visacard">Visa Card</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="honame">
-								<label for="honame" class="wizard-form-text-label">Holder Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<div class="form-group">
-										<input type="text" class="form-control wizard-required" id="cardname">
-										<label for="cardname" class="wizard-form-text-label">Card Number*</label>
-										<div class="wizard-form-error"></div>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6">
-									<div class="form-group">
-										<input type="text" class="form-control wizard-required" id="cvc">
-										<label for="cvc" class="wizard-form-text-label">CVC*</label>
-										<div class="wizard-form-error"></div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-12">Expiry Date</div>
-								<div class="col-lg-4 col-md-4 col-sm-4">
-									<div class="form-group">
-										<select class="form-control">
-											<option value="">Date</option>
-											<option value="">1</option>
-											<option value="">2</option>
-											<option value="">3</option>
-											<option value="">4</option>
-											<option value="">5</option>
-											<option value="">6</option>
-											<option value="">7</option>
-											<option value="">8</option>
-											<option value="">9</option>
-											<option value="">10</option>
-											<option value="">11</option>
-											<option value="">12</option>
-											<option value="">13</option>
-											<option value="">14</option>
-											<option value="">15</option>
-											<option value="">16</option>
-											<option value="">17</option>
-											<option value="">18</option>
-											<option value="">19</option>
-											<option value="">20</option>
-											<option value="">21</option>
-											<option value="">22</option>
-											<option value="">23</option>
-											<option value="">24</option>
-											<option value="">25</option>
-											<option value="">26</option>
-											<option value="">27</option>
-											<option value="">28</option>
-											<option value="">29</option>
-											<option value="">30</option>
-											<option value="">31</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-4 col-sm-4">
-									<div class="form-group">
-										<select class="form-control">
-											<option value="">Month</option>
-											<option value="">jan</option>
-											<option value="">Feb</option>
-											<option value="">March</option>
-											<option value="">April</option>
-											<option value="">May</option>
-											<option value="">June</option>
-											<option value="">Jully</option>
-											<option value="">August</option>
-											<option value="">Sept</option>
-											<option value="">Oct</option>
-											<option value="">Nov</option>
-											<option value="">Dec</option>	
-										</select>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-4 col-sm-4">
-									<div class="form-group">
-										<select class="form-control">
-											<option value="">Years</option>
-											<option value="">2019</option>
-											<option value="">2020</option>
-											<option value="">2021</option>
-											<option value="">2022</option>
-											<option value="">2023</option>
-											<option value="">2024</option>
-											<option value="">2025</option>
-											<option value="">2026</option>
-											<option value="">2027</option>
-											<option value="">2028</option>
-											<option value="">2029</option>
-											<option value="">2030</option>
-											<option value="">2031</option>
-											<option value="">2032</option>
-											<option value="">2033</option>
-											<option value="">2034</option>
-											<option value="">2035</option>
-											<option value="">2036</option>
-											<option value="">2037</option>
-											<option value="">2038</option>
-											<option value="">2039</option>
-											<option value="">2040</option>	
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="form-group clearfix">
-								<a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-								<a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
-							</div>
-						</fieldset>	
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
-    <style>
-        body {
-  background-color: #ffffff;
-  color: #444444;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  margin: 0;
-  padding: 0;
-}
-.form-wizard-header{
-    
-    width: 27rem;
+<section class="wizard-section pt-5" style="margin-right: 46rem; width: 57rem;">
+    <div class="row no-gutters">
 
-}
-.wizard-content-left {
-  background-blend-mode: darken;
-  background-color: rgba(0, 0, 0, 0.45);
+        <div class="col-lg-12 col-md-12">
+            <div class="form-wizard">
+                <form action="" method="post" role="form">
+                    <div class="form-wizard-header">
+                        <p>Fill all form field to go next step</p>
+                        <ul class="list-unstyled form-wizard-steps clearfix steps" style="margin-left: 6rem; width: 28rem;">
+                            <li class="active"><span><i class="fa-solid fa-location-dot bg-color"></i></span></li>
+                            <li><span class=" bg-color">2</span></li>
 
-  background-position: center center;
-  background-size: cover;
-  height: 100vh;
-  padding: 30px;
-}
-.wizard-content-left h1 {
-  color: #ffffff;
-  font-size: 38px;
-  font-weight: 600;
-  padding: 12px 20px;
-  text-align: center;
-}
+                        </ul>
+                    </div>
 
-.form-wizard {
-  color: #888888;
-  padding: 30px;
-}
-.form-wizard .wizard-form-radio {
-  display: inline-block;
-  margin-left: 5px;
-  position: relative;
-}
-.form-wizard .wizard-form-radio input[type="radio"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  background-color: #dddddd;
-  height: 25px;
-  width: 25px;
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 50%;
-  position: relative;
-  cursor: pointer;
-}
-.form-wizard .wizard-form-radio input[type="radio"]:focus {
-  outline: 0;
-}
-.form-wizard .wizard-form-radio input[type="radio"]:checked {
-  background-color: #fb1647;
-}
-.form-wizard .wizard-form-radio input[type="radio"]:checked::before {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  background-color: #ffffff;
-  border-radius: 50%;
-  left: 1px;
-  right: 0;
-  margin: 0 auto;
-  top: 8px;
-}
-.form-wizard .wizard-form-radio input[type="radio"]:checked::after {
-  content: "";
-  display: inline-block;
-  webkit-animation: click-radio-wave 0.65s;
-  -moz-animation: click-radio-wave 0.65s;
-  animation: click-radio-wave 0.65s;
-  background: #000000;
-  content: '';
-  display: block;
-  position: relative;
-  z-index: 100;
-  border-radius: 50%;
-}
-.form-wizard .wizard-form-radio input[type="radio"] ~ label {
-  padding-left: 10px;
-  cursor: pointer;
-}
-.form-wizard .form-wizard-header {
-  text-align: center;
-}
-.form-wizard .form-wizard-next-btn, .form-wizard .form-wizard-previous-btn, .form-wizard .form-wizard-submit {
-  background-color: #d65470;
-  color: #ffffff;
-  display: inline-block;
-  min-width: 100px;
-  min-width: 120px;
-  padding: 10px;
-  text-align: center;
-}
-.form-wizard .form-wizard-next-btn:hover, .form-wizard .form-wizard-next-btn:focus, .form-wizard .form-wizard-previous-btn:hover, .form-wizard .form-wizard-previous-btn:focus, .form-wizard .form-wizard-submit:hover, .form-wizard .form-wizard-submit:focus {
-  color: #ffffff;
-  opacity: 0.6;
-  text-decoration: none;
-}
-.form-wizard .wizard-fieldset {
-  display: none;
-}
-.form-wizard .wizard-fieldset.show {
-  display: block;
-}
-.wizard-fieldset {
-    width: 30rem;
-}
-.form-wizard .wizard-form-error {
-  display: none;
-  background-color: #d70b0b;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  width: 100%;
-}
-.form-wizard .form-wizard-previous-btn {
-  background-color: #fb1647;
-}
-.form-wizard .form-control {
-  font-weight: 300;
-  height: auto !important;
-  padding: 15px;
-  color: #888888;
-  background-color: #f1f1f1;
-  border: none;
-}
-.form-wizard .form-control:focus {
-  box-shadow: none;
-}
-.form-wizard .form-group {
-  position: relative;
-  margin: 25px 0;
-}
-.form-wizard .wizard-form-text-label {
-  position: absolute;
-  left: 10px;
-  top: 16px;
-  transition: 0.2s linear all;
-}
-.form-wizard .focus-input .wizard-form-text-label {
-  color: #d65470;
-  top: -18px;
-  transition: 0.2s linear all;
-  font-size: 12px;
-}
-.form-wizard .form-wizard-steps {
-  margin: 30px 0;
-}
-.form-wizard .form-wizard-steps li {
-  width: 25%;
-  float: left;
-  position: relative;
-}
-.form-wizard .form-wizard-steps li::after {
-  background-color: #f3f3f3;
-  content: "";
-  height: 5px;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  border-bottom: 1px solid #dddddd;
-  border-top: 1px solid #dddddd;
-}
-.form-wizard .form-wizard-steps li span {
-  background-color: #dddddd;
-  border-radius: 50%;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  position: relative;
-  text-align: center;
-  width: 40px;
-  z-index: 1;
-}
-.form-wizard .form-wizard-steps li:last-child::after {
-  width: 50%;
-}
-.form-wizard .form-wizard-steps li.active span, .form-wizard .form-wizard-steps li.activated span {
-  background-color: #d65470;
-  color: #ffffff;
-}
-.form-wizard .form-wizard-steps li.active::after, .form-wizard .form-wizard-steps li.activated::after {
-  background-color: #d65470;
-  left: 50%;
-  width: 50%;
-  border-color: #d65470;
-}
-.form-wizard .form-wizard-steps li.activated::after {
-  width: 100%;
-  border-color: #d65470;
-}
-.form-wizard .form-wizard-steps li:last-child::after {
-  left: 0;
-}
-.form-wizard .wizard-password-eye {
-  position: absolute;
-  right: 32px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-@keyframes click-radio-wave {
-  0% {
-    width: 25px;
-    height: 25px;
-    opacity: 0.35;
-    position: relative;
-  }
-  100% {
-    width: 60px;
-    height: 60px;
-    margin-left: -15px;
-    margin-top: -15px;
-    opacity: 0.0;
-  }
-}
-@media screen and (max-width: 767px) {
-  .wizard-content-left {
-    height: auto;
-  }
-}
+                    <fieldset class="wizard-fieldset show">
+                        <h5>Account Information</h5>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" name="Name" class="form-control wizard-required" id="email">
+                                <label for="name" class="wizard-form-text-label">Full name</label>
+                                <div class="wizard-form-error"></div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="tel" name="Mob" class="form-control wizard-required" id="email">
+                                <label for="email" class="wizard-form-text-label">10-digit mobile number</label>
+                                <div class="wizard-form-error"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Address" class="form-control wizard-required" id="email">
+                            <label for="address" class="wizard-form-text-label">Address</label>
+                            <div class="wizard-form-error"></div>
+                        </div>
 
-    </style>
-    <script>
-        jQuery(document).ready(function() {
-	// click on next button
-	jQuery('.form-wizard-next-btn').click(function() {
-		var parentFieldset = jQuery(this).parents('.wizard-fieldset');
-		var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-		var next = jQuery(this);
-		var nextWizardStep = true;
-		parentFieldset.find('.wizard-required').each(function(){
-			var thisValue = jQuery(this).val();
+                        <div>
+                            <div class="form-group">
+                                <input type="text" name="Pincode" class="form-control wizard-required" id="username">
+                                <label for="pin" class="wizard-form-text-label">Pincode</label>
+                                <div class="wizard-form-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="City" class="form-control wizard-required">
+                                <label for="city" class="wizard-form-text-label">City/District/Town</label>
+                                <div class="wizard-form-error"></div>
 
-			if( thisValue == "") {
-				jQuery(this).siblings(".wizard-form-error").slideDown();
-				nextWizardStep = false;
-			}
-			else {
-				jQuery(this).siblings(".wizard-form-error").slideUp();
-			}
-		});
-		if( nextWizardStep) {
-			next.parents('.wizard-fieldset').removeClass("show","400");
-			currentActiveStep.removeClass('active').addClass('activated').next().addClass('active',"400");
-			next.parents('.wizard-fieldset').next('.wizard-fieldset').addClass("show","400");
-			jQuery(document).find('.wizard-fieldset').each(function(){
-				if(jQuery(this).hasClass('show')){
-					var formAtrr = jQuery(this).attr('data-tab-content');
-					jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function(){
-						if(jQuery(this).attr('data-attr') == formAtrr){
-							jQuery(this).addClass('active');
-							var innerWidth = jQuery(this).innerWidth();
-							var position = jQuery(this).position();
-							jQuery(document).find('.form-wizard-step-move').css({"left": position.left, "width": innerWidth});
-						}else{
-							jQuery(this).removeClass('active');
-						}
-					});
-				}
-			});
-		}
-	});
-	//click on previous button
-	jQuery('.form-wizard-previous-btn').click(function() {
-		var counter = parseInt(jQuery(".wizard-counter").text());;
-		var prev =jQuery(this);
-		var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-		prev.parents('.wizard-fieldset').removeClass("show","400");
-		prev.parents('.wizard-fieldset').prev('.wizard-fieldset').addClass("show","400");
-		currentActiveStep.removeClass('active').prev().removeClass('activated').addClass('active',"400");
-		jQuery(document).find('.wizard-fieldset').each(function(){
-			if(jQuery(this).hasClass('show')){
-				var formAtrr = jQuery(this).attr('data-tab-content');
-				jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function(){
-					if(jQuery(this).attr('data-attr') == formAtrr){
-						jQuery(this).addClass('active');
-						var innerWidth = jQuery(this).innerWidth();
-						var position = jQuery(this).position();
-						jQuery(document).find('.form-wizard-step-move').css({"left": position.left, "width": innerWidth});
-					}else{
-						jQuery(this).removeClass('active');
-					}
-				});
-			}
-		});
-	});
-	//click on form submit button
-	jQuery(document).on("click",".form-wizard .form-wizard-submit" , function(){
-		var parentFieldset = jQuery(this).parents('.wizard-fieldset');
-		var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
-		parentFieldset.find('.wizard-required').each(function() {
-			var thisValue = jQuery(this).val();
-			if( thisValue == "" ) {
-				jQuery(this).siblings(".wizard-form-error").slideDown();
-			}
-			else {
-				jQuery(this).siblings(".wizard-form-error").slideUp();
-			}
-		});
-	});
-	// focus on input field check empty or not
-	jQuery(".form-control").on('focus', function(){
-		var tmpThis = jQuery(this).val();
-		if(tmpThis == '' ) {
-			jQuery(this).parent().addClass("focus-input");
-		}
-		else if(tmpThis !='' ){
-			jQuery(this).parent().addClass("focus-input");
-		}
-	}).on('blur', function(){
-		var tmpThis = jQuery(this).val();
-		if(tmpThis == '' ) {
-			jQuery(this).parent().removeClass("focus-input");
-			jQuery(this).siblings('.wizard-form-error').slideDown("3000");
-		}
-		else if(tmpThis !='' ){
-			jQuery(this).parent().addClass("focus-input");
-			jQuery(this).siblings('.wizard-form-error').slideUp("3000");
-		}
-	});
-});
+                            </div>
+                            <div class="form-group">
+                                <select class="state" id="inputState" name="State">
+                                    <option selected>State</option>
+                                    <option value="">State</option>
+                                    <option value="Andaman and nicobar islands">Andaman and nicobar islands</option>
+                                    <option value="Andra Pradesh">Andra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chattisgarh">Chhattisgarh</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Paradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Ladakh">Ladakh</option>
+                                    <option value="Lakshadeep">Lakshadeep</option>
+                                    <option value="Madya Pradesh">Madya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Pudhucheery">Pudhucheery</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+                            </div>
+                            <div class="form-group clearfix">
+                                <a href="javascript:;" class="form-wizard-previous-btn float-left  bg-color">Previous</a>
+                                <a href="javascript:;" class="form-wizard-next-btn float-right bg-color">Next</a>
+                            </div>
+                    </fieldset>
+                    <fieldset class="wizard-fieldset">
 
-    </script>
+                        <div class="iphone" style="width: 30rem;">
+                            <header class="header" style="margin-left: -7rem;">
+                                <h1>Checkout</h1>
+                            </header>
+
+                            <form action="https://httpbin.org/post" class="form" method="POST">
+
+
+                                <fieldset class="payment-fieldset" style="margin-top: 4rem;">
+                                    <legend>Payment Method</legend>
+
+                                    <div class="form__radios">
+                                        <div class="form__radio">
+                                            <label for="COD"> <i class="fa-solid fa-truck-fast"></i>
+                                                Cash on delivery</label>
+                                            <input checked id="visa" name="payment-method" type="radio" />
+                                        </div>
+
+                                        <div class="form__radio">
+                                            <label for="paypal"><span> <img style="width: 2rem;    margin-left: -10px;" 
+                                            src="https://yt3.ggpht.com/ytc/AKedOLQ-aTGurGsuBF-YJRirqv0A6RxY1knT7dCcY1FGnA=s900-c-k-c0x00ffffff-no-rj"
+                                                        alt=""></span> Razorpay</label>
+                                            <input id="paypal" name="payment-method" type="radio" />
+                                        </div>
+
+                                        <div class="form__radio">
+                                            <label for="mastercard"><svg class="icon">
+                                                    <use xlink:href="#icon-mastercard" />
+                                                </svg>Master Card</label>
+                                            <input id="mastercard" name="payment-method" type="radio" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="mt-5">
+                                    <button class="button button--full" type="submit"><svg class="icon">
+                                            <use xlink:href="#icon-shopping-bag" />
+                                        </svg>Buy Now</button>
+                                </div> 
+                                <a href="javascript:;" class="form-wizard-previous-btn float-left mt-5  bg-color">Previous</a>
+                            </form>
+                        </div>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+
+                            <symbol id="icon-shopping-bag" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 7h-4v-3c0-2.209-1.791-4-4-4s-4 1.791-4 4v3h-4l-2 17h20l-2-17zm-11-3c0-1.654 1.346-3 3-3s3 1.346 3 3v3h-6v-3zm-4.751 18l1.529-13h2.222v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h6v1.5c0 .276.224.5.5.5s.5-.224.5-.5v-1.5h2.222l1.529 13h-15.502z" />
+                            </symbol>
+
+                            <symbol id="icon-mastercard" viewBox="0 0 504 504">
+                                <path
+                                    d="m504 252c0 83.2-67.2 151.2-151.2 151.2-83.2 0-151.2-68-151.2-151.2 0-83.2 67.2-151.2 150.4-151.2 84.8 0 152 68 152 151.2z"
+                                    fill="#ffb600" />
+                                <path
+                                    d="m352.8 100.8c83.2 0 151.2 68 151.2 151.2 0 83.2-67.2 151.2-151.2 151.2-83.2 0-151.2-68-151.2-151.2"
+                                    fill="#f7981d" />
+                                <path d="m352.8 100.8c83.2 0 151.2 68 151.2 151.2 0 83.2-67.2 151.2-151.2 151.2"
+                                    fill="#ff8500" />
+                                <path
+                                    d="m149.6 100.8c-82.4.8-149.6 68-149.6 151.2s67.2 151.2 151.2 151.2c39.2 0 74.4-15.2 101.6-39.2 5.6-4.8 10.4-10.4 15.2-16h-31.2c-4-4.8-8-10.4-11.2-15.2h53.6c3.2-4.8 6.4-10.4 8.8-16h-71.2c-2.4-4.8-4.8-10.4-6.4-16h83.2c4.8-15.2 8-31.2 8-48 0-11.2-1.6-21.6-3.2-32h-92.8c.8-5.6 2.4-10.4 4-16h83.2c-1.6-5.6-4-11.2-6.4-16h-70.4c2.4-5.6 5.6-10.4 8.8-16h53.6c-3.2-5.6-7.2-11.2-12-16h-29.6c4.8-5.6 9.6-10.4 15.2-15.2-26.4-24.8-62.4-39.2-101.6-39.2 0-1.6 0-1.6-.8-1.6z"
+                                    fill="#ff5050" />
+                                <path
+                                    d="m0 252c0 83.2 67.2 151.2 151.2 151.2 39.2 0 74.4-15.2 101.6-39.2 5.6-4.8 10.4-10.4 15.2-16h-31.2c-4-4.8-8-10.4-11.2-15.2h53.6c3.2-4.8 6.4-10.4 8.8-16h-71.2c-2.4-4.8-4.8-10.4-6.4-16h83.2c4.8-15.2 8-31.2 8-48 0-11.2-1.6-21.6-3.2-32h-92.8c.8-5.6 2.4-10.4 4-16h83.2c-1.6-5.6-4-11.2-6.4-16h-70.4c2.4-5.6 5.6-10.4 8.8-16h53.6c-3.2-5.6-7.2-11.2-12-16h-29.6c4.8-5.6 9.6-10.4 15.2-15.2-26.4-24.8-62.4-39.2-101.6-39.2h-.8"
+                                    fill="#e52836" />
+                                <path
+                                    d="m151.2 403.2c39.2 0 74.4-15.2 101.6-39.2 5.6-4.8 10.4-10.4 15.2-16h-31.2c-4-4.8-8-10.4-11.2-15.2h53.6c3.2-4.8 6.4-10.4 8.8-16h-71.2c-2.4-4.8-4.8-10.4-6.4-16h83.2c4.8-15.2 8-31.2 8-48 0-11.2-1.6-21.6-3.2-32h-92.8c.8-5.6 2.4-10.4 4-16h83.2c-1.6-5.6-4-11.2-6.4-16h-70.4c2.4-5.6 5.6-10.4 8.8-16h53.6c-3.2-5.6-7.2-11.2-12-16h-29.6c4.8-5.6 9.6-10.4 15.2-15.2-26.4-24.8-62.4-39.2-101.6-39.2h-.8"
+                                    fill="#cb2026" />
+                                <g fill="#fff">
+                                    <path
+                                        d="m204.8 290.4 2.4-13.6c-.8 0-2.4.8-4 .8-5.6 0-6.4-3.2-5.6-4.8l4.8-28h8.8l2.4-15.2h-8l1.6-9.6h-16s-9.6 52.8-9.6 59.2c0 9.6 5.6 13.6 12.8 13.6 4.8 0 8.8-1.6 10.4-2.4z" />
+                                    <path
+                                        d="m210.4 264.8c0 22.4 15.2 28 28 28 12 0 16.8-2.4 16.8-2.4l3.2-15.2s-8.8 4-16.8 4c-17.6 0-14.4-12.8-14.4-12.8h32.8s2.4-10.4 2.4-14.4c0-10.4-5.6-23.2-23.2-23.2-16.8-1.6-28.8 16-28.8 36zm28-23.2c8.8 0 7.2 10.4 7.2 11.2h-17.6c0-.8 1.6-11.2 10.4-11.2z" />
+                                    <path
+                                        d="m340 290.4 3.2-17.6s-8 4-13.6 4c-11.2 0-16-8.8-16-18.4 0-19.2 9.6-29.6 20.8-29.6 8 0 14.4 4.8 14.4 4.8l2.4-16.8s-9.6-4-18.4-4c-18.4 0-36.8 16-36.8 46.4 0 20 9.6 33.6 28.8 33.6 6.4 0 15.2-2.4 15.2-2.4z" />
+                                    <path
+                                        d="m116.8 227.2c-11.2 0-19.2 3.2-19.2 3.2l-2.4 13.6s7.2-3.2 17.6-3.2c5.6 0 10.4.8 10.4 5.6 0 3.2-.8 4-.8 4s-4.8 0-7.2 0c-13.6 0-28.8 5.6-28.8 24 0 14.4 9.6 17.6 15.2 17.6 11.2 0 16-7.2 16.8-7.2l-.8 6.4h14.4l6.4-44c0-19.2-16-20-21.6-20zm3.2 36c0 2.4-1.6 15.2-11.2 15.2-4.8 0-6.4-4-6.4-6.4 0-4 2.4-9.6 14.4-9.6 2.4.8 3.2.8 3.2.8z" />
+                                    <path
+                                        d="m153.6 292c4 0 24 .8 24-20.8 0-20-19.2-16-19.2-24 0-4 3.2-5.6 8.8-5.6 2.4 0 11.2.8 11.2.8l2.4-14.4s-5.6-1.6-15.2-1.6c-12 0-24 4.8-24 20.8 0 18.4 20 16.8 20 24 0 4.8-5.6 5.6-9.6 5.6-7.2 0-14.4-2.4-14.4-2.4l-2.4 14.4c.8 1.6 4.8 3.2 18.4 3.2z" />
+                                    <path
+                                        d="m472.8 214.4-3.2 21.6s-6.4-8-15.2-8c-14.4 0-27.2 17.6-27.2 38.4 0 12.8 6.4 26.4 20 26.4 9.6 0 15.2-6.4 15.2-6.4l-.8 5.6h16l12-76.8zm-7.2 42.4c0 8.8-4 20-12.8 20-5.6 0-8.8-4.8-8.8-12.8 0-12.8 5.6-20.8 12.8-20.8 5.6 0 8.8 4 8.8 13.6z" />
+                                    <path
+                                        d="m29.6 291.2 9.6-57.6 1.6 57.6h11.2l20.8-57.6-8.8 57.6h16.8l12.8-76.8h-26.4l-16 47.2-.8-47.2h-23.2l-12.8 76.8z" />
+                                    <path
+                                        d="m277.6 291.2c4.8-26.4 5.6-48 16.8-44 1.6-10.4 4-14.4 5.6-18.4 0 0-.8 0-3.2 0-7.2 0-12.8 9.6-12.8 9.6l1.6-8.8h-15.2l-10.4 62.4h17.6z" />
+                                    <path
+                                        d="m376.8 227.2c-11.2 0-19.2 3.2-19.2 3.2l-2.4 13.6s7.2-3.2 17.6-3.2c5.6 0 10.4.8 10.4 5.6 0 3.2-.8 4-.8 4s-4.8 0-7.2 0c-13.6 0-28.8 5.6-28.8 24 0 14.4 9.6 17.6 15.2 17.6 11.2 0 16-7.2 16.8-7.2l-.8 6.4h14.4l6.4-44c.8-19.2-16-20-21.6-20zm4 36c0 2.4-1.6 15.2-11.2 15.2-4.8 0-6.4-4-6.4-6.4 0-4 2.4-9.6 14.4-9.6 2.4.8 2.4.8 3.2.8z" />
+                                    <path
+                                        d="m412 291.2c4.8-26.4 5.6-48 16.8-44 1.6-10.4 4-14.4 5.6-18.4 0 0-.8 0-3.2 0-7.2 0-12.8 9.6-12.8 9.6l1.6-8.8h-15.2l-10.4 62.4h17.6z" />
+                                </g>
+                                <path
+                                    d="m180 279.2c0 9.6 5.6 13.6 12.8 13.6 5.6 0 10.4-1.6 12-2.4l2.4-13.6c-.8 0-2.4.8-4 .8-5.6 0-6.4-3.2-5.6-4.8l4.8-28h8.8l2.4-15.2h-8l1.6-9.6"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m218.4 264.8c0 22.4 7.2 28 20 28 12 0 16.8-2.4 16.8-2.4l3.2-15.2s-8.8 4-16.8 4c-17.6 0-14.4-12.8-14.4-12.8h32.8s2.4-10.4 2.4-14.4c0-10.4-5.6-23.2-23.2-23.2-16.8-1.6-20.8 16-20.8 36zm20-23.2c8.8 0 10.4 10.4 10.4 11.2h-20.8c0-.8 1.6-11.2 10.4-11.2z"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m340 290.4 3.2-17.6s-8 4-13.6 4c-11.2 0-16-8.8-16-18.4 0-19.2 9.6-29.6 20.8-29.6 8 0 14.4 4.8 14.4 4.8l2.4-16.8s-9.6-4-18.4-4c-18.4 0-28.8 16-28.8 46.4 0 20 1.6 33.6 20.8 33.6 6.4 0 15.2-2.4 15.2-2.4z"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m95.2 244.8s7.2-3.2 17.6-3.2c5.6 0 10.4.8 10.4 5.6 0 3.2-.8 4-.8 4s-4.8 0-7.2 0c-13.6 0-28.8 5.6-28.8 24 0 14.4 9.6 17.6 15.2 17.6 11.2 0 16-7.2 16.8-7.2l-.8 6.4h14.4l6.4-44c0-18.4-16-19.2-22.4-19.2m12 34.4c0 2.4-9.6 15.2-19.2 15.2-4.8 0-6.4-4-6.4-6.4 0-4 2.4-9.6 14.4-9.6 2.4.8 11.2.8 11.2.8z"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m136 290.4s4.8 1.6 18.4 1.6c4 0 24 .8 24-20.8 0-20-19.2-16-19.2-24 0-4 3.2-5.6 8.8-5.6 2.4 0 11.2.8 11.2.8l2.4-14.4s-5.6-1.6-15.2-1.6c-12 0-16 4.8-16 20.8 0 18.4 12 16.8 12 24 0 4.8-5.6 5.6-9.6 5.6"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m469.6 236s-6.4-8-15.2-8c-14.4 0-19.2 17.6-19.2 38.4 0 12.8-1.6 26.4 12 26.4 9.6 0 15.2-6.4 15.2-6.4l-.8 5.6h16l12-76.8m-20.8 41.6c0 8.8-7.2 20-16 20-5.6 0-8.8-4.8-8.8-12.8 0-12.8 5.6-20.8 12.8-20.8 5.6 0 12 4 12 13.6z"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m29.6 291.2 9.6-57.6 1.6 57.6h11.2l20.8-57.6-8.8 57.6h16.8l12.8-76.8h-20l-22.4 47.2-.8-47.2h-8.8l-27.2 76.8z"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m260.8 291.2h16.8c4.8-26.4 5.6-48 16.8-44 1.6-10.4 4-14.4 5.6-18.4 0 0-.8 0-3.2 0-7.2 0-12.8 9.6-12.8 9.6l1.6-8.8"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m355.2 244.8s7.2-3.2 17.6-3.2c5.6 0 10.4.8 10.4 5.6 0 3.2-.8 4-.8 4s-4.8 0-7.2 0c-13.6 0-28.8 5.6-28.8 24 0 14.4 9.6 17.6 15.2 17.6 11.2 0 16-7.2 16.8-7.2l-.8 6.4h14.4l6.4-44c0-18.4-16-19.2-22.4-19.2m12 34.4c0 2.4-9.6 15.2-19.2 15.2-4.8 0-6.4-4-6.4-6.4 0-4 2.4-9.6 14.4-9.6 3.2.8 11.2.8 11.2.8z"
+                                    fill="#dce5e5" />
+                                <path
+                                    d="m395.2 291.2h16.8c4.8-26.4 5.6-48 16.8-44 1.6-10.4 4-14.4 5.6-18.4 0 0-.8 0-3.2 0-7.2 0-12.8 9.6-12.8 9.6l1.6-8.8"
+                                    fill="#dce5e5" />
+                            </symbol>
+
+                            <symbol id="icon-paypal" viewBox="0 0 491.2 491.2">
+                                <path
+                                    d="m392.049 36.8c-22.4-25.6-64-36.8-116-36.8h-152.8c-10.4 0-20 8-21.6 18.4l-64 403.2c-1.6 8 4.8 15.2 12.8 15.2h94.4l24-150.4-.8 4.8c1.6-10.4 10.4-18.4 21.6-18.4h44.8c88 0 156.8-36 176.8-139.2.8-3.2.8-6.4 1.6-8.8-2.4-1.6-2.4-1.6 0 0 5.6-38.4 0-64-20.8-88"
+                                    fill="#263b80" />
+                                <path
+                                    d="m412.849 124.8c-.8 3.2-.8 5.6-1.6 8.8-20 103.2-88.8 139.2-176.8 139.2h-44.8c-10.4 0-20 8-21.6 18.4l-29.6 186.4c-.8 7.2 4 13.6 11.2 13.6h79.2c9.6 0 17.6-7.2 19.2-16l.8-4 15.2-94.4.8-5.6c1.6-9.6 9.6-16 19.2-16h12c76.8 0 136.8-31.2 154.4-121.6 7.2-37.6 3.2-69.6-16-91.2-6.4-7.2-13.6-12.8-21.6-17.6"
+                                    fill="#139ad6" />
+                                <path
+                                    d="m391.249 116.8c-3.2-.8-6.4-1.6-9.6-2.4s-6.4-1.6-10.4-1.6c-12-2.4-25.6-3.2-39.2-3.2h-119.2c-3.2 0-5.6.8-8 1.6-5.6 2.4-9.6 8-10.4 14.4l-25.6 160.8-.8 4.8c1.6-10.4 10.4-18.4 21.6-18.4h44.8c88 0 156.8-36 176.8-139.2.8-3.2.8-6.4 1.6-8.8-4.8-2.4-10.4-4.8-16.8-7.2-1.6 0-3.2-.8-4.8-.8"
+                                    fill="#232c65" />
+                                <path
+                                    d="m275.249 0h-152c-10.4 0-20 8-21.6 18.4l-36.8 230.4 246.4-246.4c-11.2-1.6-23.2-2.4-36-2.4z"
+                                    fill="#2a4dad" />
+                                <path
+                                    d="m441.649 153.6c-2.4-4-4-8-7.2-12-5.6-6.4-13.6-12-21.6-16.8-.8 3.2-.8 5.6-1.6 8.8-20 103.2-88.8 139.2-176.8 139.2h-44.8c-10.4 0-20 8-21.6 18.4l-25.6 161.6z"
+                                    fill="#0d7dbc" />
+                                <path
+                                    d="m50.449 436.8h94.4l23.2-145.6c0-2.4.8-4 1.6-5.6l-131.2 131.2-.8 4.8c-.8 8 4.8 15.2 12.8 15.2z"
+                                    fill="#232c65" />
+                                <path d="m246.449 0h-123.2c-3.2 0-5.6.8-8 1.6l-12 12c-.8 1.6-1.6 3.2-1.6 4.8l-24 150.4z"
+                                    fill="#436bc4" />
+                                <path d="m450.449 232.8c2.4-12 3.2-23.2 3.2-34.4l-156 156c76-.8 135.2-32 152.8-121.6z"
+                                    fill="#0cb2ed" />
+                                <path d="m248.849 471.2 12.8-80-100 100h68c9.6 0 17.6-7.2 19.2-16z" fill="#0cb2ed" />
+                                <g fill="#33e2ff" opacity=".6">
+                                    <path
+                                        d="m408.049 146.4 45.6 45.6c0-5.6-1.6-11.2-2.4-16.8l-40-40c-1.6 4-2.4 7.2-3.2 11.2z" />
+                                    <path d="m396.849 180c-1.6 3.2-3.2 6.4-4.8 9.6l55.2 55.2c.8-4 1.6-8 2.4-12z" />
+                                    <path d="m431.249 287.2c1.6-3.2 3.2-6.4 4.8-9.6l-60.8-60.8c-2.4 2.4-4 5.6-6.4 8z" />
+                                    <path d="m335.249 250.4 69.6 69.6 7.2-7.2-68-68c-3.2 1.6-5.6 3.2-8.8 5.6z" />
+                                    <path
+                                        d="m292.849 266.4 76 76c3.2-1.6 6.4-3.2 9.6-4.8l-74.4-74.4c-4 .8-7.2 2.4-11.2 3.2z" />
+                                    <path d="m320.849 353.6c4-.8 8.8-.8 12.8-1.6l-80-80c-4.8 0-8.8.8-13.6.8z" />
+                                    <path
+                                        d="m196.049 272.8h-6.4c-2.4 0-4.8.8-6.4.8l86.4 87.2c2.4-2.4 5.6-4.8 8.8-5.6z" />
+                                    <path d="m164.049 314.4 94.4 94.4 2.4-12.8-94.4-94.4z" />
+                                    <path d="m156.049 364.8 94.4 94.4 2.4-12-94.4-94.4z" />
+                                    <path d="m150.449 403.2-1.6 12.8 75.2 75.2h5.6c2.4 0 4.8-.8 7.2-1.6z" />
+                                    <path d="m140.049 466.4 24.8 24.8h14.4l-36.8-36.8z" />
+                                </g>
+                            </symbol>
+
+                            <symbol id="icon-visa" viewBox="0 0 504 504">
+                                <path d="m184.8 324.4 25.6-144h40l-24.8 144z" fill="#3c58bf" />
+                                <path d="m184.8 324.4 32.8-144h32.8l-24.8 144z" fill="#293688" />
+                                <path
+                                    d="m370.4 182c-8-3.2-20.8-6.4-36.8-6.4-40 0-68.8 20-68.8 48.8 0 21.6 20 32.8 36 40s20.8 12 20.8 18.4c0 9.6-12.8 14.4-24 14.4-16 0-24.8-2.4-38.4-8l-5.6-2.4-5.6 32.8c9.6 4 27.2 8 45.6 8 42.4 0 70.4-20 70.4-50.4 0-16.8-10.4-29.6-34.4-40-14.4-7.2-23.2-11.2-23.2-18.4 0-6.4 7.2-12.8 23.2-12.8 13.6 0 23.2 2.4 30.4 5.6l4 1.6z"
+                                    fill="#3c58bf" />
+                                <path
+                                    d="m370.4 182c-8-3.2-20.8-6.4-36.8-6.4-40 0-61.6 20-61.6 48.8 0 21.6 12.8 32.8 28.8 40s20.8 12 20.8 18.4c0 9.6-12.8 14.4-24 14.4-16 0-24.8-2.4-38.4-8l-5.6-2.4-5.6 32.8c9.6 4 27.2 8 45.6 8 42.4 0 70.4-20 70.4-50.4 0-16.8-10.4-29.6-34.4-40-14.4-7.2-23.2-11.2-23.2-18.4 0-6.4 7.2-12.8 23.2-12.8 13.6 0 23.2 2.4 30.4 5.6l4 1.6z"
+                                    fill="#293688" />
+                                <path
+                                    d="m439.2 180.4c-9.6 0-16.8.8-20.8 10.4l-60 133.6h43.2l8-24h51.2l4.8 24h38.4l-33.6-144zm-18.4 96c2.4-7.2 16-42.4 16-42.4s3.2-8.8 5.6-14.4l2.4 13.6s8 36 9.6 44h-33.6z"
+                                    fill="#3c58bf" />
+                                <path
+                                    d="m448.8 180.4c-9.6 0-16.8.8-20.8 10.4l-69.6 133.6h43.2l8-24h51.2l4.8 24h38.4l-33.6-144zm-28 96c3.2-8 16-42.4 16-42.4s3.2-8.8 5.6-14.4l2.4 13.6s8 36 9.6 44h-33.6z"
+                                    fill="#293688" />
+                                <path d="m111.2 281.2-4-20.8c-7.2-24-30.4-50.4-56-63.2l36 128h43.2l64.8-144h-43.2z"
+                                    fill="#3c58bf" />
+                                <path d="m111.2 281.2-4-20.8c-7.2-24-30.4-50.4-56-63.2l36 128h43.2l64.8-144h-35.2z"
+                                    fill="#293688" />
+                                <path d="m0 180.4 7.2 1.6c51.2 12 86.4 42.4 100 78.4l-14.4-68c-2.4-9.6-9.6-12-18.4-12z"
+                                    fill="#ffbc00" />
+                                <path d="m0 180.4c51.2 12 93.6 43.2 107.2 79.2l-13.6-56.8c-2.4-9.6-10.4-15.2-19.2-15.2z"
+                                    fill="#f7981d" />
+                                <path d="m0 180.4c51.2 12 93.6 43.2 107.2 79.2l-9.6-31.2c-2.4-9.6-5.6-19.2-16.8-23.2z"
+                                    fill="#ed7c00" />
+                                <g fill="#051244">
+                                    <path
+                                        d="m151.2 276.4-27.2-27.2-12.8 30.4-3.2-20c-7.2-24-30.4-50.4-56-63.2l36 128h43.2z" />
+                                    <path d="m225.6 324.4-34.4-35.2-6.4 35.2z" />
+                                    <path
+                                        d="m317.6 274.8c3.2 3.2 4.8 5.6 4 8.8 0 9.6-12.8 14.4-24 14.4-16 0-24.8-2.4-38.4-8l-5.6-2.4-5.6 32.8c9.6 4 27.2 8 45.6 8 25.6 0 46.4-7.2 58.4-20z" />
+                                    <path
+                                        d="m364 324.4h37.6l8-24h51.2l4.8 24h38.4l-13.6-58.4-48-46.4 2.4 12.8s8 36 9.6 44h-33.6c3.2-8 16-42.4 16-42.4s3.2-8.8 5.6-14.4" />
+                                </g>
+                            </symbol>
+                        </svg>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    body {
+      background: #e9ecee;
+        color: #444444;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+       
+    }
+    .bg-color{
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
+    }
+
+    .form-wizard-header {
+
+        width: 27rem;
+
+    }
+
+    .wizard-content-left {
+        background-blend-mode: darken;
+        background-color: rgba(0, 0, 0, 0.45);
+
+        background-position: center center;
+        background-size: cover;
+        height: 100vh;
+        padding: 30px;
+    }
+
+    .state {
+        margin-top: 0;
+        margin-left: 0;
+        width: 8rem;
+        border-radius: 5px;
+        background-color: #f1f1f1;
+    }
+
+    .wizard-content-left h1 {
+        color: #ffffff;
+        font-size: 38px;
+        font-weight: 600;
+        padding: 12px 20px;
+        text-align: center;
+    }
+
+    .form-wizard {
+        color: #888888;
+        padding: 30px;
+    }
+
+    .form-wizard .wizard-form-radio {
+        display: inline-block;
+        margin-left: 5px;
+        position: relative;
+    }
+
+    .form-wizard .wizard-form-radio input[type="radio"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        background-color: #dddddd;
+        height: 25px;
+        width: 25px;
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .form-wizard .wizard-form-radio input[type="radio"]:focus {
+        outline: 0;
+    }
+
+    .form-wizard .wizard-form-radio input[type="radio"]:checked {
+        background-color: #fb1647;
+    }
+
+    .form-wizard .wizard-form-radio input[type="radio"]:checked::before {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        background-color: #ffffff;
+        border-radius: 50%;
+        left: 1px;
+        right: 0;
+        margin: 0 auto;
+        top: 8px;
+    }
+    .fa-solid{
+        width: 2rem;
+    }
+
+    .form-wizard .wizard-form-radio input[type="radio"]:checked::after {
+        content: "";
+        display: inline-block;
+        webkit-animation: click-radio-wave 0.65s;
+        -moz-animation: click-radio-wave 0.65s;
+        animation: click-radio-wave 0.65s;
+        background: #000000;
+        content: '';
+        display: block;
+        position: relative;
+        z-index: 100;
+        border-radius: 50%;
+    }
+
+    .form-wizard .wizard-form-radio input[type="radio"]~label {
+        padding-left: 10px;
+        cursor: pointer;
+    }
+
+    .form-wizard .form-wizard-header {
+        text-align: center;
+    }
+
+    .form-wizard .form-wizard-next-btn,
+    .form-wizard .form-wizard-previous-btn,
+    .form-wizard .form-wizard-submit {
+        background-color: #d65470;
+        color: #ffffff;
+        display: inline-block;
+        min-width: 100px;
+        min-width: 120px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .form-wizard .form-wizard-next-btn:hover,
+    .form-wizard .form-wizard-next-btn:focus,
+    .form-wizard .form-wizard-previous-btn:hover,
+    .form-wizard .form-wizard-previous-btn:focus,
+    .form-wizard .form-wizard-submit:hover,
+    .form-wizard .form-wizard-submit:focus {
+        color: #ffffff;
+        opacity: 0.6;
+        text-decoration: none;
+    }
+
+    .form-wizard .wizard-fieldset {
+        display: none;
+    }
+
+    .form-wizard .wizard-fieldset.show {
+        display: block;
+    }
+
+    .wizard-fieldset {
+        width: 30rem;
+    }
+
+    .form-wizard .wizard-form-error {
+        display: none;
+        background-color: #d70b0b;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
+    }
+
+    .form-wizard .form-wizard-previous-btn {
+        background-color: #fb1647;
+    }
+
+    .form-wizard .form-control {
+        font-weight: 300;
+        height: auto !important;
+        padding: 15px;
+        color: #888888;
+        background-color: #f1f1f1;
+        border: none;
+    }
+
+    .form-wizard .form-control:focus {
+        box-shadow: none;
+    }
+
+    .form-wizard .form-group {
+        position: relative;
+        margin: 25px 0;
+    }
+
+    .form-wizard .wizard-form-text-label {
+        position: absolute;
+        left: 10px;
+        top: 16px;
+        transition: 0.2s linear all;
+    }
+
+    .form-wizard .focus-input .wizard-form-text-label {
+        color: #d65470;
+        top: -18px;
+        transition: 0.2s linear all;
+        font-size: 12px;
+    }
+
+    .form-wizard .form-wizard-steps {
+        margin: 30px 0;
+    }
+
+    .form-wizard .form-wizard-steps li {
+        width: 25%;
+        float: left;
+        position: relative;
+    }
+
+    .form-wizard .form-wizard-steps li::after {
+        background-color: #f3f3f3;
+        content: "";
+        height: 5px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        border-bottom: 1px solid #dddddd;
+        border-top: 1px solid #dddddd;
+    }
+
+    .form-wizard .form-wizard-steps li span {
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
+        border-radius: 50%;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        position: relative;
+        text-align: center;
+        width: 40px;
+        z-index: 1;
+    }
+
+    .form-wizard .form-wizard-steps li:last-child::after {
+        width: 50%;
+    }
+
+    .form-wizard .form-wizard-steps li.active span,
+    .form-wizard .form-wizard-steps li.activated span {
+       background: linear-gradient(to right, #FF4B2B, #FF416C);
+        color: #ffffff;
+    }
+
+    .form-wizard .form-wizard-steps li.active::after,
+    .form-wizard .form-wizard-steps li.activated::after {
+      background: linear-gradient(to right, #FF4B2B, #FF416C);
+        left: 50%;
+        width: 50%;
+        border-color:linear-gradient(to right, #FF4B2B, #FF416C);
+    }
+
+    .form-wizard .form-wizard-steps li.activated::after {
+        width: 100%;
+        border-color:linear-gradient(to right, #FF4B2B, #FF416C);
+    }
+
+    .form-wizard .form-wizard-steps li:last-child::after {
+        left: 0;
+    }
+
+    .form-wizard .wizard-password-eye {
+        position: absolute;
+        right: 32px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    @keyframes click-radio-wave {
+        0% {
+            width: 25px;
+            height: 25px;
+            opacity: 0.35;
+            position: relative;
+        }
+
+        100% {
+            width: 60px;
+            height: 60px;
+            margin-left: -15px;
+            margin-top: -15px;
+            opacity: 0.0;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .wizard-content-left {
+            height: auto;
+        }
+    }
+
+    @use postcss-preset-env {
+        stage: 0;
+    }
+
+    :root {
+        --color-background: #fae3ea;
+        --color-primary: #fc8080;
+        --font-family-base: Poppin, sans-serif;
+        --font-size-h1: 1.25rem;
+        --font-size-h2: 1rem;
+    }
+
+
+    * {
+        box-sizing: inherit;
+    }
+
+    html {
+        box-sizing: border-box;
+    }
+
+    body {
+       background: #e9ecee;
+        display: grid;
+        font-family: var(--font-family-base);
+        line-height: 1.5;
+        margin: 0;
+        min-block-size: 100vh;
+        padding: 5vmin;
+        place-items: center;
+    }
+    address {
+        font-style: normal;
+    }
+
+    button {
+        border: 0;
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+    }
+
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: var(--font-size-h1);
+        line-height: 1.2;
+        margin-block: 0 1.5em;
+    }
+
+    h2 {
+        font-size: var(--font-size-h2);
+        line-height: 1.2;
+        margin-block: 0 0.5em;
+    }
+
+    legend {
+        font-weight: 600;
+        margin-block-end: 0.5em;
+        padding: 0;
+    }
+
+    body {
+        height: auto;
+    }
+
+    input {
+        border: 0;
+        color: inherit;
+        font: inherit;
+    }
+
+    input[type="radio"] {
+        accent-color: var(--color-primary);
+    }
+
+    table {
+        border-collapse: collapse;
+        inline-size: 100%;
+    }
+
+    tbody {
+        color: #b4b4b4;
+    }
+
+    td {
+        padding-block: 0.125em;
+    }
+
+    tfoot {
+        border-top: 1px solid #b4b4b4;
+        font-weight: 600;
+    }
+
+    .align {
+        display: grid;
+        place-items: center;
+    }
+
+    .button {
+        align-items: center;
+        background-color: var(--color-primary);
+        border-radius: 999em;
+        color: #fff;
+        display: flex;
+        gap: 0.5em;
+        justify-content: center;
+        padding-block: 0.75em;
+        padding-inline: 1em;
+        transition: 0.3s;
+    }
+
+    .button:focus,
+    .button:hover {
+        background-color: linear-gradient(to right, #FF4B2B, #FF416C);
+    }
+
+    .button--full {
+        inline-size: 100%;
+    }
+
+    .card {
+        border-radius: 1em;
+        background-color: var(--color-primary);
+        color: #fff;
+        padding: 1em;
+    }
+
+    .form {
+        display: grid;
+        gap: 2em;
+    }
+
+    .form__radios {
+        display: grid;
+        gap: 1em;
+    }
+
+    .form__radio {
+        align-items: center;
+        background-color: #fefdfe;
+        border-radius: 1em;
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.0625);
+        display: flex;
+        padding: 1em;
+    }
+
+    .form__radio label {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        gap: 1em;
+    }
+
+    .header {
+        display: flex;
+        justify-content: center;
+        padding-block: 0.5em;
+        padding-inline: 1em;
+    }
+
+    .icon {
+        block-size: 1em;
+        display: inline-block;
+        fill: currentColor;
+        inline-size: 1em;
+        vertical-align: middle;
+    }
+
+    .iphone {
+
+        background-color: #fbf6f7;
+        background-image: linear-gradient(to bottom, #fbf6f7, #fff);
+        border-radius: 2em;
+        block-size: 812px;
+        box-shadow: 0 0 1em rgba(0, 0, 0, 0.0625);
+        inline-size: 375px;
+        overflow: auto;
+        padding: 2em;
+    }
+
+    .payment-filedset {
+        margin-top: 3rem;
+        margin-left: 5rem;
+        width: 16rem;
+    }
+</style>
+<script>
+    jQuery(document).ready(function () {
+        // click on next button
+        jQuery('.form-wizard-next-btn').click(function () {
+            var parentFieldset = jQuery(this).parents('.wizard-fieldset');
+            var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+            var next = jQuery(this);
+            var nextWizardStep = true;
+            parentFieldset.find('.wizard-required').each(function () {
+                var thisValue = jQuery(this).val();
+
+                if (thisValue == "") {
+                    jQuery(this).siblings(".wizard-form-error").slideDown();
+                    nextWizardStep = false;
+                }
+                else {
+                    jQuery(this).siblings(".wizard-form-error").slideUp();
+                }
+            });
+            if (nextWizardStep) {
+                next.parents('.wizard-fieldset').removeClass("show", "400");
+                currentActiveStep.removeClass('active').addClass('activated').next().addClass('active', "400");
+                next.parents('.wizard-fieldset').next('.wizard-fieldset').addClass("show", "400");
+                jQuery(document).find('.wizard-fieldset').each(function () {
+                    if (jQuery(this).hasClass('show')) {
+                        var formAtrr = jQuery(this).attr('data-tab-content');
+                        jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
+                            if (jQuery(this).attr('data-attr') == formAtrr) {
+                                jQuery(this).addClass('active');
+                                var innerWidth = jQuery(this).innerWidth();
+                                var position = jQuery(this).position();
+                                jQuery(document).find('.form-wizard-step-move').css({ "left": position.left, "width": innerWidth });
+                            } else {
+                                jQuery(this).removeClass('active');
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        //click on previous button
+        jQuery('.form-wizard-previous-btn').click(function () {
+            var counter = parseInt(jQuery(".wizard-counter").text());;
+            var prev = jQuery(this);
+            var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+            prev.parents('.wizard-fieldset').removeClass("show", "400");
+            prev.parents('.wizard-fieldset').prev('.wizard-fieldset').addClass("show", "400");
+            currentActiveStep.removeClass('active').prev().removeClass('activated').addClass('active', "400");
+            jQuery(document).find('.wizard-fieldset').each(function () {
+                if (jQuery(this).hasClass('show')) {
+                    var formAtrr = jQuery(this).attr('data-tab-content');
+                    jQuery(document).find('.form-wizard-steps .form-wizard-step-item').each(function () {
+                        if (jQuery(this).attr('data-attr') == formAtrr) {
+                            jQuery(this).addClass('active');
+                            var innerWidth = jQuery(this).innerWidth();
+                            var position = jQuery(this).position();
+                            jQuery(document).find('.form-wizard-step-move').css({ "left": position.left, "width": innerWidth });
+                        } else {
+                            jQuery(this).removeClass('active');
+                        }
+                    });
+                }
+            });
+        });
+        //click on form submit button
+        jQuery(document).on("click", ".form-wizard .form-wizard-submit", function () {
+            var parentFieldset = jQuery(this).parents('.wizard-fieldset');
+            var currentActiveStep = jQuery(this).parents('.form-wizard').find('.form-wizard-steps .active');
+            parentFieldset.find('.wizard-required').each(function () {
+                var thisValue = jQuery(this).val();
+                if (thisValue == "") {
+                    jQuery(this).siblings(".wizard-form-error").slideDown();
+                }
+                else {
+                    jQuery(this).siblings(".wizard-form-error").slideUp();
+                }
+            });
+        });
+        // focus on input field check empty or not
+        jQuery(".form-control").on('focus', function () {
+            var tmpThis = jQuery(this).val();
+            if (tmpThis == '') {
+                jQuery(this).parent().addClass("focus-input");
+            }
+            else if (tmpThis != '') {
+                jQuery(this).parent().addClass("focus-input");
+            }
+        }).on('blur', function () {
+            var tmpThis = jQuery(this).val();
+            if (tmpThis == '') {
+                jQuery(this).parent().removeClass("focus-input");
+                jQuery(this).siblings('.wizard-form-error').slideDown("3000");
+            }
+            else if (tmpThis != '') {
+                jQuery(this).parent().addClass("focus-input");
+                jQuery(this).siblings('.wizard-form-error').slideUp("3000");
+            }
+        });
+    });
+
+</script>

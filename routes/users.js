@@ -84,14 +84,14 @@ router.get('/get-vendor-details/:id',verifyUserLogin ,async(req,res, next)=>{
   if(req.session.user){
   cartCount=await userHelpers.getCartCount(req.session.user._id)
   }
-  //  let total=await userHelpers.getProductTotal(req.session.user._id) 
+    let total=await userHelpers.getProductTotal(req.session.user._id) 
   let cartItems= await userHelpers.getCartItems(req.session.user._id)
   let vendorDetails= await userHelpers.getVendorDetails(vendorId)
   let vendorProducts= await userHelpers.getVendorProducts(vendorId)
   console.log(cartItems);
 
   let user= req.session.user._id
-  res.render('user/vendor-details',{user_status:true, vendorDetails, vendorProducts, cartCount,cartItems, user})
+  res.render('user/vendor-details',{user_status:true, vendorDetails, vendorProducts, cartCount,cartItems, user,total})
 });
 router.post('/change-product-quantity',(req,res, next)=>{
   console.log("call")

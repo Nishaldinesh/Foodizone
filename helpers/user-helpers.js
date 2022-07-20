@@ -199,52 +199,52 @@ module.exports ={
         }
     },
     getProductTotal:(userId)=>{
-        // try{
-        //     return new Promise(async(resolve,reject)=>{
-        //        let total=await db.get().collection(collection.CART_COLLECTION).aggregate([
-        //             {
-        //                 $match:{user:objectId(userId)}
-        //             },
-        //             {
-        //                 $unwind:'$products'
-        //             },
-        //             {
-        //                 $project:{
-        //                     item:'$products.item',
-        //                     quantity:'$products.quantity',
-        //                     vendor:'$products.vendor'
-        //                 }
-        //             },
-        //             {
-        //                 $lookup:{
-        //                     from:collection.PRODUCT_COLLECTION,
-        //                     localField:'item',
-        //                     foreignField:'_id',
-        //                     as:'product'
-        //                 }
-        //             },
-        //             {
-        //                 $project: {
-        //                     item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+        try{
+            return new Promise(async(resolve,reject)=>{
+               let total=await db.get().collection(collection.CART_COLLECTION).aggregate([
+                    {
+                        $match:{user:objectId(userId)}
+                    },
+                    {
+                        $unwind:'$products'
+                    },
+                    {
+                        $project:{
+                            item:'$products.item',
+                            quantity:'$products.quantity',
+                            vendor:'$products.vendor'
+                        }
+                    },
+                    {
+                        $lookup:{
+                            from:collection.PRODUCT_COLLECTION,
+                            localField:'item',
+                            foreignField:'_id',
+                            as:'product'
+                        }
+                    },
+                    {
+                        $project: {
+                            item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
     
-        //                 }
-        //             },
-        //             {
-        //                 $project:{
-        //                     total:{$sum:{$multiply:['$quantity','$product.Price']}}
-        //                 }
-        //             },
-        //             {
-        //                 $project: {
-        //                     item: 1, quantity: 1,total:1, product: { $arrayElemAt: ['$product', 0] }
+                        }
+                    },
+                    {
+                        $project:{
+                            total:{$sum:{$multiply:['$quantity','$product.Price']}}
+                        }
+                    },
+                    {
+                        $project: {
+                            item: 1, quantity: 1,total:1, product: { $arrayElemAt: ['$product', 0] }
     
-        //                 }
-        //             },
-        //         ]).toArray()
-        //         resolve(total)
-        //     })
-        // }catch(err){
-        //     console.log(err);
-        // }
+                        }
+                    },
+                ]).toArray()
+                resolve(total)
+            })
+        }catch(err){
+            console.log(err);
+        }
     }
 }

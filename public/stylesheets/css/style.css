@@ -1702,6 +1702,7 @@ input {
 	z-index: 2;
 }
 .user-header{
+    position: fixed;
     margin-bottom: 769px;
     background:linear-gradient(to right, #FF4B2B, #FF416C)
 }
