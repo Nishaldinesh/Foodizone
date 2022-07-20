@@ -43,15 +43,14 @@ module.exports ={
         try{
             let proObj={
                 item:objectId(proId),
-                vendor:objectId(vendorId),
                 quantity:1
             }
             return new Promise(async(resolve,reject)=>{
                 let userCart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
                 if(userCart){
-                    let vendorExist= userCart.products.findIndex(vendor=> vendor.vendor==vendorId)
-                    if(vendorExist!=-1){
-                        console.log("vendor already exist");
+                    let vendorExist=await db.get().collection(collection.CART_COLLECTION).findOne({vendor:objectId(vendorId)})
+                    if(vendorExist){
+                        console.log("Existing vendor");
                         let proExist=userCart.products.findIndex(product=> product.item==proId)
                         if(proExist!=-1){
                             db.get().collection(collection.CART_COLLECTION)
@@ -77,6 +76,7 @@ module.exports ={
                     }
                 }else{
                     let cartObj={
+                        vendor:objectId(vendorId),
                         user:objectId(userId),
                         products:[proObj]
                     }
@@ -242,6 +242,50 @@ module.exports ={
                     },
                 ]).toArray()
                 resolve(total)
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getTotalAmount:(userId)=>{
+        try{
+            return new Promise(async (resolve, reject) => {
+                let total = await db.get().collection(collection.CART_COLLECTION).aggregate([
+                    {
+                        $match: { user: objectId(userId) }
+                    },
+                    {
+                        $unwind: '$products'
+                    }, {
+                        $project: {
+                            item: '$products.item',
+                            quantity: '$products.quantity',
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: collection.PRODUCT_COLLECTION,
+                            localField: 'item',
+                            foreignField: '_id',
+                            as: 'product'
+                        }
+                    },
+                    {
+                        $project: {
+                            item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+    
+                        }
+                    },
+                    {
+                        $group: {
+                            _id: null,
+                            total: { $sum: { $multiply: ['$quantity', { $convert: { input: '$product.Price', to: 'int' } }] } }
+                        }
+                    }
+                ]).toArray()
+    
+    console.log(total[0].total);
+                resolve(total[0].total)
             })
         }catch(err){
             console.log(err);
