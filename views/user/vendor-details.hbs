@@ -82,10 +82,10 @@
 
                      <div class="btn-div align-items-center text-center">
                         <button class="btn btn-white text-secondary fnt-btn"
-                           onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                           onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
                         <button class="btn btn-white text-success fnt-btn"
-                           onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
+                           onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
                      </div>
                      <span>{{this.total}}</span>
                   </li>
@@ -99,10 +99,11 @@
                   <strong>Total amount</strong>
                 
                </div>
-               <span class="pt-5"><strong>$53.98</strong></span>
+               <span class="pt-5">₹ <strong id="total"> {{totalAmount}}</strong></span>
             </li>
-
-            <a href="/checkout/{{vendorDetails._id}}" class="btn btn-success checkout-btn">Go to checkout</a>
+{{#if cartVendorId}}
+            <a href="/checkout/{{cartVendorId}}" class="btn btn-success checkout-btn">Go to checkout</a>
+            {{/if}}
          </div>
 
       </div>
@@ -116,6 +117,9 @@
       background-color: #282c3f;
       height: 230px;
       margin-bottom: 27rem;
+   }
+   .user-header{
+      margin-bottom: 48.063rem;
    }
 
    .text-lg {
@@ -235,27 +239,32 @@
          },
          method: 'post',
          success: (response) => {
+           
             if (response.status) {
+                location.reload()
                let count = $('#cart-count').html()
                count = parseInt(count) + 1
                $("#cart-count").html(count)
-            } else if (response.venExist) {
-               alert("Hello working");
+            } else if (response.VendorExist_status) {
+               alert("Cart contains items from another restaurant!! Please remove current cart items");
+            }else{
+               location.reload()
             }
          }
       })
    }
-
+ 
 
 </script>
 
 <script>
-   function changeQuantity(cartId, proId, count) {
+   function changeQuantity(cartId, proId,userId, count) {
       let quantity = parseInt(document.getElementById(proId).innerHTML)
       count = parseInt(count)
       $.ajax({
          url: '/change-product-quantity',
          data: {
+            user:userId,
             cart: cartId,
             product: proId,
             count: count,
@@ -269,7 +278,7 @@
             } else {
                console.log(response);
                document.getElementById(proId).innerHTML = quantity + count
-
+               document.getElementById('total').innerHTML=response.total
 
             }
          }

@@ -1,204 +1,219 @@
-<section class="h-100 gradient-custom">
-    <div class="container py-5">
-      <div class="row d-flex justify-content-center my-4">
-        <div class="col-md-8">
-          <div class="card mb-4">
-            <div class="card-header py-3">
-              <h5 class="mb-0">Cart - 2 items</h5>
-            </div>
-            <div class="card-body">
-              <!-- Single item -->
-              <div class="row">
-                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                  <!-- Image -->
-                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                      class="w-100" alt="Blue Jeans Jacket" />
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                    </a>
-                  </div>
-                  <!-- Image -->
-                </div>
-  
-                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                  <!-- Data -->
-                  <p><strong>Blue denim shirt</strong></p>
-                  <p>Color: blue</p>
-                  <p>Size: M</p>
-                  <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                    title="Remove item">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                    title="Move to the wish list">
-                    <i class="fas fa-heart"></i>
-                  </button>
-                  <!-- Data -->
-                </div>
-  
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                  <!-- Quantity -->
-                  <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3 me-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      <i class="fas fa-minus"></i>
-                    </button>
-  
-                    <div class="form-outline">
-                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                      <label class="form-label" for="form1">Quantity</label>
-                    </div>
-  
-                    <button class="btn btn-primary px-3 ms-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                  <!-- Quantity -->
-  
-                  <!-- Price -->
-                  <p class="text-start text-md-center">
-                    <strong>$17.99</strong>
-                  </p>
-                  <!-- Price -->
-                </div>
-              </div>
-              <!-- Single item -->
-  
-              <hr class="my-4" />
-  
-              <!-- Single item -->
-              <div class="row">
-                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                  <!-- Image -->
-                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-                      class="w-100" />
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                    </a>
-                  </div>
-                  <!-- Image -->
-                </div>
-  
-                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                  <!-- Data -->
-                  <p><strong>Red hoodie</strong></p>
-                  <p>Color: red</p>
-                  <p>Size: M</p>
-  
-                  <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                    title="Remove item">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                    title="Move to the wish list">
-                    <i class="fas fa-heart"></i>
-                  </button>
-                  <!-- Data -->
-                </div>
-  
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                  <!-- Quantity -->
-                  <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3 me-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      <i class="fas fa-minus"></i>
-                    </button>
-  
-                    <div class="form-outline">
-                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                      <label class="form-label" for="form1">Quantity</label>
-                    </div>
-  
-                    <button class="btn btn-primary px-3 ms-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                  <!-- Quantity -->
-  
-                  <!-- Price -->
-                  <p class="text-start text-md-center">
-                    <strong>$17.99</strong>
-                  </p>
-                  <!-- Price -->
-                </div>
-              </div>
-              <!-- Single item -->
-            </div>
-          </div>
-          <div class="card mb-4">
-            <div class="card-body">
-              <p><strong>Expected shipping delivery</strong></p>
-              <p class="mb-0">12.10.2020 - 14.10.2020</p>
-            </div>
-          </div>
-          <div class="card mb-4 mb-lg-0">
-            <div class="card-body">
-              <p><strong>We accept</strong></p>
-              <img class="me-2" width="45px"
-                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                alt="Visa" />
-              <img class="me-2" width="45px"
-                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                alt="American Express" />
-              <img class="me-2" width="45px"
-                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                alt="Mastercard" />
-              <img class="me-2" width="45px"
-                src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-                alt="PayPal acceptance mark" />
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4">
-            <div class="card-header py-3">
-              <h5 class="mb-0">Summary</h5>
-            </div>
-            <div class="card-body">
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                  Products
-                  <span>$53.98</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                  Shipping
-                  <span>Gratis</span>
-                </li>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                  <div>
-                    <strong>Total amount</strong>
-                    <strong>
-                      <p class="mb-0">(including VAT)</p>
-                    </strong>
-                  </div>
-                  <span><strong>$53.98</strong></span>
-                </li>
-              </ul>
-  
-              <button type="button" class="btn btn-primary btn-lg btn-block">
-                Go to checkout
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <style>
-    .gradient-custom {
-/* fallback for old browsers */
-background: #6a11cb;
+<style type="text/css">
 
-/* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-}
+  body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+  img { -ms-interpolation-mode: bicubic; }
+  
+  img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+  table { border-collapse: collapse !important; }
+  body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+  
+  
+  a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+  }
+  
+  @media screen and (max-width: 480px) {
+      .mobile-hide {
+          display: none !important;
+      }
+      .mobile-center {
+          text-align: center !important;
+      }
+  }
+  div[style*="margin: 16px 0;"] { margin: 0 !important; }
   </style>
+  <body style="margin: 0 !important; padding: 0 !important; background-color: #eeeeee;" bgcolor="#eeeeee">
+  
+  
+  <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Open Sans, Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+  For what reason would it be advisable for me to think about business content? That might be little bit risky to have crew member like them. 
+  </div>
+  
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+          <td align="center" style="background-color: #eeeeee;" bgcolor="#eeeeee">
+          
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+              <tr>
+                  <td align="center" valign="top" style="font-size:0; padding: 35px;" bgcolor="#F44336">
+                 
+                  <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;">
+                      <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                          <tr>
+                              <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;" class="mobile-center">
+                                  <h1 style="font-size: 36px; font-weight: 800; margin: 0; color: #ffffff;"><span class="fa fa-align-center text-warning" aria-hidden="true"></span> Foodizone</h1>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+                  
+                  <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;" class="mobile-hide">
+                      <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                          <tr>
+                              <td align="right" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; line-height: 48px;">
+                                  <table cellspacing="0" cellpadding="0" border="0" align="right">
+                                      <tr>
+                                          <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400;">
+                                              <p style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;"><a href="#" target="_blank" style="color: #ffffff; text-decoration: none;">Shop &nbsp;</a></p>
+                                          </td>
+                                          <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;">
+                                              <a href="#" target="_blank" style="color: #ffffff; text-decoration: none;"><img src="https://img.icons8.com/color/48/000000/small-business.png" width="27" height="23" style="display: block; border: 0px;"/></a>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+                
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center" style="padding: 35px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                      <tr>
+                          <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
+                              <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;" /><br>
+                              <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
+                                  Thank You For Your Order!
+                              </h2>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">
+                              <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
+                                Your details have been saved. Someone from our team will reach out to you soon
+                              </p>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td align="left" style="padding-top: 20px;">
+                              <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                  <tr>
+                                      <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
+                                          Order Confirmation #
+                                      </td>
+                                      <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
+                                          2345678
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                          Purchased Item (1)
+                                      </td>
+                                      <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
+                                          $100.00
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
+                                          Shipping + Handling
+                                      </td>
+                                      <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
+                                          $10.00
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
+                                          Sales Tax
+                                      </td>
+                                      <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;">
+                                          $5.00
+                                      </td>
+                                  </tr>
+                              </table>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td align="left" style="padding-top: 20px;">
+                              <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                  <tr>
+                                      <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
+                                          TOTAL
+                                      </td>
+                                      <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
+                                          $115.00
+                                      </td>
+                                  </tr>
+                              </table>
+                          </td>
+                      </tr>
+                  </table>
+                  
+                  </td>
+              </tr>
+               <tr>
+                  <td align="center" height="100%" valign="top" width="100%" style="padding: 0 35px 35px 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:660px;">
+                      <tr>
+                          <td align="center" valign="top" style="font-size:0;">
+                              <div style="display:inline-block; max-width:50%; min-width:240px; vertical-align:top; width:100%;">
+  
+                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                                      <tr>
+                                          <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
+                                              <p style="font-weight: 800;">Delivery Address</p>
+                                              <p>675 Massachusetts Avenue<br>11th Floor<br>Cambridge, MA 02139</p>
+  
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div style="display:inline-block; max-width:50%; min-width:240px; vertical-align:top; width:100%;">
+                                  <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                                      <tr>
+                                          <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
+                                              <p style="font-weight: 800;">Estimated Delivery Date</p>
+                                              <p>January 1st, 2016</p>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                          </td>
+                      </tr>
+                  </table>
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center" style=" padding: 35px; background-color: #ff7361;" bgcolor="#1b9ba3">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                      <tr>
+                          <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
+                              <h2 style="font-size: 24px; font-weight: 800; line-height: 30px; color: #ffffff; margin: 0;">
+                                  Get 30% off your next order.
+                              </h2>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td align="center" style="padding: 25px 0 15px 0;">
+                              <table border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                      <td align="center" style="border-radius: 5px;" bgcolor="#66b3b7">
+                                        <a href="#" target="_blank" style="font-size: 18px; font-family: Open Sans, Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; border-radius: 5px; background-color: #F44336; padding: 15px 30px; border: 1px solid #F44336; display: block;">Shop Again</a>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </td>
+                      </tr>
+                  </table>
+                  </td>
+              </tr>
+              <tr>
+                  <td align="center" style="padding: 35px; background-color: #ffffff;" bgcolor="#ffffff">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                  </table>
+                  </td>
+              </tr>
+          </table>
+          </td>
+      </tr>
+  </table>
+      
+  </body>
+  </html>

@@ -434,7 +434,7 @@ li > a:only-child:after {
     -ms-background-size: cover;
     background-size: cover;
     position: relative;
-    min-height: 50em;
+    height: 50rem;
 }
 .vendor-nav{
     margin-top: 5rem;
@@ -1703,7 +1703,7 @@ input {
 }
 .user-header{
     position: fixed;
-    margin-bottom: 769px;
+    margin-bottom: 42.063rem;
     background:linear-gradient(to right, #FF4B2B, #FF416C)
 }
 

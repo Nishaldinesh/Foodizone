@@ -48,7 +48,7 @@ module.exports ={
             return new Promise(async(resolve,reject)=>{
                 let userCart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
                 if(userCart){
-                    let vendorExist=await db.get().collection(collection.CART_COLLECTION).findOne({vendor:objectId(vendorId)})
+                    let vendorExist=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId),vendor:objectId(vendorId)})
                     if(vendorExist){
                         console.log("Existing vendor");
                         let proExist=userCart.products.findIndex(product=> product.item==proId)
@@ -58,20 +58,38 @@ module.exports ={
                             {
                                 $inc:{'products.$.quantity':1}
                             }).then(()=>{
-                                resolve()
+                                resolve({VendorExist_status:false})
                             })
                         } else{
                             db.get().collection(collection.CART_COLLECTION)
                             .updateOne({user:objectId(userId)},
                             {
                                 $push:{products:proObj}                           
+                            }).then(()=>{
+                                resolve({VendorExist_status:false})
                             })
                         }
                        
                     }else{
-                        console.log("new vendor coming");
-                    
-                        resolve({status:true})
+                       
+                        if(userCart.products.length==0){
+                            console.log("Cart has to be deleted");
+                            db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(userId)}).then((response)=>{
+                                let cartObj={
+                                    vendor:objectId(vendorId),
+                                    user:objectId(userId),
+                                    products:[proObj]
+                                }
+                                db.get().collection(collection.CART_COLLECTION).insertOne(cartObj).then((response)=>{
+                                    resolve(response)
+                                    resolve(response)
+                                })
+                            })
+                        }else{
+                            console.log("New vendor coming");
+                            resolve({VendorExist_status:true})
+                        }
+
                       
                     }
                 }else{
@@ -103,7 +121,7 @@ module.exports ={
                         $project:{
                             item:'$products.item',
                             quantity:'$products.quantity',
-                            vendor:'$products.vendor'
+                            vendor: '$vendor'
                         }
                     },
                     {
@@ -116,11 +134,12 @@ module.exports ={
                     },
                     {
                         $project: {
-                            item: 1, quantity: 1, product: { $arrayElemAt: ['$product', 0] }
+                            item: 1, quantity: 1,vendor:1, product: { $arrayElemAt: ['$product', 0] }
     
                         }
                     }
                 ]).toArray()
+                console.log(cartItems);
                 resolve(cartItems)
             })
         }catch(err){
@@ -185,6 +204,7 @@ module.exports ={
                         resolve({removeProduct:true})
                     })
                 }else{
+                    console.log("Worked")
                     db.get().collection(collection.CART_COLLECTION)
                     .updateOne({_id:objectId(details.cart), 'products.item':objectId(details.product)},
                     {
@@ -283,9 +303,66 @@ module.exports ={
                         }
                     }
                 ]).toArray()
-    
-    console.log(total[0].total);
-                resolve(total[0].total)
+                console.log(total);
+                if(total.length>0){
+                    resolve(total[0].total)
+                }else{
+                    resolve({status:false})
+                }
+                
+                
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getCartProductList:(userId)=>{
+        try{
+            return new Promise(async(resolve,reject)=>{
+               let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+               resolve(cart.products)
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    placeOrder:(order,products,total)=>{
+        try{
+            return new Promise((resolve, reject) => {
+                console.log(order,products,total);
+                let status=order['payment-method']==='COD'?'placed' :'pending'
+                let orderObj={
+                    deliveryDetails:{
+                        name: order.Name,
+                        mobile: order.Mob,
+                        address: order.Address,
+                        pincode :order.Pincode,
+                        city: order.City,
+                        state: order.State
+                    },
+                    userId: objectId(order.userId),
+                    paymentMethod: order['payment-method'],
+                    products: products,
+                    totalAmount: total,
+                    status: status,
+                    date: new Date()
+                }
+                db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+                    db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
+                    console.log(response.insertedId);
+                    resolve(response.insertedId)
+                })
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getUserOrders:(userId)=>{
+        try{
+            return new Promise(async(resolve, reject) => {
+              let orders=await  db.get().collection(collection.ORDER_COLLECTION).find({userId:objectId(userId)}).toArray()
+              resolve(orders)
+              
             })
         }catch(err){
             console.log(err);

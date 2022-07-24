@@ -1,12 +1,13 @@
-<section class="wizard-section pt-5" style="width: 99rem; padding-right: 46rem">
+<section class="wizard-section col-md-10 pt-5" style="width: 91rem; padding-right: 34rem;">
     <div class="row no-gutters">
 
         <div class="col-lg-12 col-md-12">
             <div class="form-wizard">
-                <form action="" method="post" role="form">
+                <form role="form" encty id="checkout-form">
                     <div class="form-wizard-header">
                         <p>Fill all form field to go next step</p>
-                        <ul class="list-unstyled form-wizard-steps clearfix steps" style="margin-left: 6rem; width: 28rem;">
+                        <ul class="list-unstyled form-wizard-steps clearfix steps"
+                            style="margin-left: 6rem; width: 28rem;">
                             <li class="active"><span><i class="fa-solid fa-location-dot bg-color"></i></span></li>
                             <li><span class=" bg-color"><i class="fa-solid fa-wallet text-white"></i></i></span></li>
 
@@ -87,16 +88,14 @@
                                 </select>
                             </div>
                             <div class="form-group clearfix">
-                               
+
                                 <a href="javascript:;" class="form-wizard-next-btn float-right bg-color">Next</a>
                             </div>
                     </fieldset>
                     <fieldset class="wizard-fieldset">
 
-                        <div class="iphone" style="width: 30rem;">
-                            <header class="header" style="margin-left: -7rem;">
-                                <h1>Checkout</h1>
-                            </header>
+                        <div class="iphone" style="width: 30rem; height:37rem;">
+
 
                             <form action="https://httpbin.org/post" class="form" method="POST">
 
@@ -108,21 +107,22 @@
                                         <div class="form__radio">
                                             <label for="COD"> <i class="fa-solid fa-truck-fast"></i>
                                                 Cash on delivery</label>
-                                            <input checked id="visa" name="payment-method" type="radio" />
+                                            <input checked id="visa" name="payment-method" value="COD" type="radio" />
                                         </div>
 
                                         <div class="form__radio">
-                                            <label for="paypal"><span> <img style="width: 2rem;    margin-left: -10px;" 
-                                            src="https://yt3.ggpht.com/ytc/AKedOLQ-aTGurGsuBF-YJRirqv0A6RxY1knT7dCcY1FGnA=s900-c-k-c0x00ffffff-no-rj"
+                                            <label for="paypal"><span> <img style="width: 2rem;    margin-left: -10px;"
+                                                        src="https://yt3.ggpht.com/ytc/AKedOLQ-aTGurGsuBF-YJRirqv0A6RxY1knT7dCcY1FGnA=s900-c-k-c0x00ffffff-no-rj"
                                                         alt=""></span> Razorpay</label>
-                                            <input id="paypal" name="payment-method" type="radio" />
+                                            <input id="paypal" name="payment-method" value="Razorpay" type="radio" />
                                         </div>
 
                                         <div class="form__radio">
                                             <label for="mastercard"><svg class="icon">
                                                     <use xlink:href="#icon-mastercard" />
                                                 </svg>Master Card</label>
-                                            <input id="mastercard" name="payment-method" type="radio" />
+                                            <input id="mastercard" name="payment-method" value="Mastecard" type="radio" />
+                                            <input type="text" name="userId" value="{{user}}" hidden>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -130,9 +130,10 @@
                                 <div class="mt-5">
                                     <button class="button button--full" type="submit"><svg class="icon">
                                             <use xlink:href="#icon-shopping-bag" />
-                                        </svg>Buy Now</button>
-                                </div> 
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left mt-5  bg-color">Previous</a>
+                                        </svg>Pay ₹<span id="pay-total">{{totalAmount}}</span></button>
+                                </div>
+                                <a href="javascript:;"
+                                    class="form-wizard-previous-btn float-left mt-5  bg-color">Previous</a>
                             </form>
                         </div>
 
@@ -298,106 +299,114 @@
             </div>
         </div>
     </div>
-   
+
 </section>
- <div class="col-md-4 float-right cart-sec">
-      <div class=" mb-4 cart-card rem-card">
-         <div class="card-header py-3">
+<div class="col-md-4 float-right cart-sec">
+    <div class=" mb-4 cart-card rem-card">
+        <div class="card-header py-3">
             <h5 class="mb-0">Cart</h5>
-         </div>
-         <div>
-            <img src="/shop-images/{{vendorDetails._id}}.jpg" alt="" style="height: 5rem; margin-bottom: 2rem;">
+        </div>
+        <div>
+            <img src="/shop-images/{{vendorDetails._id}}.jpg" alt=""
+                style="height: 5rem; margin-bottom: 2rem; width:5rem">
             <div class="float-right shop-name">
                 <p class="text-bold">{{vendorDetails.ShopName}}</p>
             </div>
             <div class="float-right shop-city">
-                 <p>{{vendorDetails.City}}</p>
+                <p>{{vendorDetails.City}}</p>
             </div>
-         </div>
-         <div class="card-body scroll-card">
+        </div>
+        <div class="card-body scroll-card">
             <ul class="list-group list-group-flush mt-3">
                 {{#each cartItems}}
-              
-               <div class="pb-3">
 
-                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                     
-                     <div class="ms-3 name">
-                        <h5 class="text-sm">{{this.product.ProductName}}</h5>
+                <div class="pb-3">
 
-                     </div>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+
+                        <div class="ms-3 name">
+                            <h5 class="text-sm">{{this.product.ProductName}}</h5>
+
+                        </div>
 
 
-                     <div class="btn-div align-items-center text-center">
-                        <button class="btn btn-white text-secondary fnt-btn"
-                           onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
-                        <span id="{{this.product._id}}">{{this.quantity}}</span>
-                        <button class="btn btn-white text-success fnt-btn"
-                           onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
-                     </div>
-                     <span>{{this.total}}</span>
-                  </li>
-               </div>
-              
+                        <div class="btn-div align-items-center text-center">
+                            <button class="btn btn-white text-secondary fnt-btn"
+                                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                            <span id="{{this.product._id}}">{{this.quantity}}</span>
+                            <button class="btn btn-white text-success fnt-btn"
+                                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                        </div>
+                        <span>{{this.total}}</span>
+                    </li>
+                </div>
+
                 {{/each}}
 
             </ul>
             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-               <div>
-                  <strong>To pay</strong>
-               </div>
-               <span class="mr-5"><strong>$53.98</strong></span>
+                <div>
+                    <strong>To pay</strong>
+                </div>
+                <span class="mr-5">₹<strong id="total">{{totalAmount}}</strong></span>
             </li>
-         </div>
+        </div>
 
-      </div>
-   </div>
+    </div>
+</div>
 <style>
     body {
-    background: #f6f5f7;
+        background: #f6f5f7;
         color: #444444;
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
         font-weight: 300;
-       
+
     }
-    .btn-div{
+
+    .btn-div {
         margin-right: 4px;
-    height: 3rem;
-    position: absolute;
-    /* margin-top: 3px; */
-    margin-left: 9rem;
-    margin-bottom: 29px;
-    height: 3rem;
+        height: 3rem;
+        position: absolute;
+        /* margin-top: 3px; */
+        margin-left: 9rem;
+        margin-bottom: 29px;
+        height: 3rem;
     }
-    .btn{
+
+    .btn {
         box-shadow: none;
     }
-    .shop-name{
+
+    .shop-name {
         padding-right: 183px;
-    margin-top: -1rem;
+        margin-top: -1rem;
     }
-    .shop-city{
+
+    .shop-city {
         padding-right: 229px;
-    margin-top: -100px;
+        margin-top: -100px;
     }
-    
-    .cart-sec{
+
+    .cart-sec {
         margin-right: -38rem;
-    margin-top: -63rem;
-    background-color: #fff;
-    width: 25rem;
-    border-radius: 15px;
-    
+        margin-top: -63rem;
+        background-color: #fff;
+        width: 25rem;
+        border-radius: 15px;
+
     }
-    .scroll-card{
+
+    .scroll-card {
         overflow-y: scroll;
-    height: 13rem;
+        height: 13rem;
     }
-    .name{
+
+    .name {
         max-width: 6rem;
     }
-    .bg-color{
+
+    .bg-color {
         background: linear-gradient(to right, #FF4B2B, #FF416C);
     }
 
@@ -481,7 +490,8 @@
         margin: 0 auto;
         top: 8px;
     }
-    .fa-solid{
+
+    .fa-solid {
         width: 2rem;
     }
 
@@ -632,21 +642,21 @@
 
     .form-wizard .form-wizard-steps li.active span,
     .form-wizard .form-wizard-steps li.activated span {
-       background: linear-gradient(to right, #FF4B2B, #FF416C);
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
         color: #ffffff;
     }
 
     .form-wizard .form-wizard-steps li.active::after,
     .form-wizard .form-wizard-steps li.activated::after {
-      background: linear-gradient(to right, #FF4B2B, #FF416C);
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
         left: 50%;
         width: 50%;
-        border-color:linear-gradient(to right, #FF4B2B, #FF416C);
+        border-color: linear-gradient(to right, #FF4B2B, #FF416C);
     }
 
     .form-wizard .form-wizard-steps li.activated::after {
         width: 100%;
-        border-color:linear-gradient(to right, #FF4B2B, #FF416C);
+        border-color: linear-gradient(to right, #FF4B2B, #FF416C);
     }
 
     .form-wizard .form-wizard-steps li:last-child::after {
@@ -706,7 +716,7 @@
     }
 
     body {
-       background: #e9ecee;
+        background: #e9ecee;
         display: grid;
         font-family: var(--font-family-base);
         line-height: 1.5;
@@ -715,6 +725,7 @@
         padding: 5vmin;
         place-items: center;
     }
+
     address {
         font-style: normal;
     }
@@ -875,6 +886,63 @@
         width: 16rem;
     }
 </style>
+
+<script>
+    function changeQuantity(cartId, proId, userId, count) {
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
+        count = parseInt(count)
+        $.ajax({
+            url: '/change-product-quantity',
+            data: {
+                user: userId,
+                cart: cartId,
+                product: proId,
+                count: count,
+                quantity: quantity
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert("Item removed from cart")
+                    location.reload()
+                } else {
+                    console.log(response);
+                    document.getElementById(proId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
+                    document.getElementById('pay-total').innerHTML = response.total
+
+                }
+            }
+        })
+    }
+    $("#checkout-form").submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/place-order',
+            method:'post',
+            data:$("#checkout-form").serialize(),
+            success:(response)=>{
+                alert(response)
+                if(response.codSuccess){
+                    location.href='/order-success'
+                }else{
+                    alert("Razorpay")
+                }
+            }
+        })
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
 <script>
     jQuery(document).ready(function () {
         // click on next button
