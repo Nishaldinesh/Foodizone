@@ -332,20 +332,25 @@ module.exports ={
                 console.log(order,products,total);
                 let status=order['payment-method']==='COD'?'placed' :'pending'
                 let orderObj={
+                    userId: objectId(order.userId),
+                    products: products,
                     deliveryDetails:{
                         name: order.Name,
                         mobile: order.Mob,
                         address: order.Address,
                         pincode :order.Pincode,
                         city: order.City,
-                        state: order.State
-                    },
-                    userId: objectId(order.userId),
-                    paymentMethod: order['payment-method'],
-                    products: products,
-                    totalAmount: total,
-                    status: status,
-                    date: new Date()
+                        state: order.State,
+                    }, 
+                    orderDetails:{
+                        paymentMethod: order['payment-method'],
+                        totalAmount: total,
+                        status: status,
+                        date: new Date(),
+                    }
+                   
+                   
+        
                 }
                 db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
                     db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
@@ -359,11 +364,42 @@ module.exports ={
     },
     getUserOrders:(userId)=>{
         try{
-            return new Promise(async(resolve, reject) => {
-              let orders=await  db.get().collection(collection.ORDER_COLLECTION).find({userId:objectId(userId)}).toArray()
-              resolve(orders)
-              
+            return new Promise(async(resolve,reject)=>{
+                console.log(userId);
+                let orders=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                    {
+                        $match:{userId:objectId(userId)}
+                    },
+                    {
+                        $unwind:'$products'
+                    },
+                    {
+                        $project:{
+                            item:'$products.item',
+                            quantity:'$products.quantity',
+                            deliveryDetails: '$deliveryDetails',
+                            orderDetails:'$orderDetails'
+                        }
+                    },
+                    {
+                        $lookup:{
+                            from:collection.PRODUCT_COLLECTION,
+                            localField:'item',
+                            foreignField:'_id',
+                            as:'product'
+                        }
+                    },
+                    {
+                        $project: {
+                            item: 1, quantity: 1,vendor:1,deliveryDetails:1,orderDetails:1,product: { $arrayElemAt: ['$product', 0] }
+    
+                        }
+                    }
+                ]).toArray()
+                console.log(orders);
+                resolve(orders)
             })
+              
         }catch(err){
             console.log(err);
         }

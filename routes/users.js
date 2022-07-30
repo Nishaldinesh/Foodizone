@@ -23,7 +23,7 @@ router.get('/', async function (req, res, next) {
     cartCount = await userHelpers.getCartCount(req.session.user._id)
   }
   userHelpers.getAllVendors(user).then((vendors) => {
-    res.render('user/home-page', { user, user_status: true, vendors, cartCount });
+    res.render('user/home-page', { user,user_status:true, vendors, cartCount });
   })
 
 });
@@ -160,7 +160,6 @@ router.get('/order-success',(req,res,next)=>{
 router.get('/orders',verifyUserLogin,async(req,res, next)=>{
   let orders=await userHelpers.getUserOrders(req.session.user._id)
   console.log(orders);
-  console.log(orders[0].products)
   res.render('user/view-orders',{user_status:true,orders})
 })
 

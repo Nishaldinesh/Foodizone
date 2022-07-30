@@ -1,64 +1,429 @@
-<header class="user-header">
-    <div class="container-fluid px-lg-5">
-        <!-- nav -->
-        <nav class="py-4 d-lg-flex">
-            <div id="logo">
-                <h1> <a href="#"><span class="fa fa-align-center" aria-hidden="true"></span>Foodizone</a></h1>
-            </div>
-            <ul class="menu mt-2 ml-auto">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="#" class="scroll">About</a></li>
-                <li>
 
-                    <a href="#" class="scroll">Add restaurant <span class="fa fa-angle-down"></span></a>
-                    <input type="checbox" id="drop" />
-                    {{#if vendor}}
-                    <ul class="inner-ul">
-                        <li> <a class="scroll" href="/vendor/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
-
-                    </ul>
-                    {{else}}
-                    <ul class="inner-ul">
-                        <li> <a class="scroll" href="/vendor"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
-                        <li> <a class="scroll" href="/vendor/signup"><i class="fa-solid fa-user-plus"></i> Register</a></li>
-
-                    </ul>
-                    {{/if}}
-                </li>
-
-                <li>
-                    <!-- First Tier Drop Down -->
-                    <label for="drop-2" class="toggle">Dropdown <span class="fa fa-angle-down"
-                            aria-hidden="true"></span> </label>
-                    {{#if user}}
-                    <a href="#">Hi,{{user.Name}}<span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                    <input type="checkbox" id="drop-2" />
-                    <ul class="inner-ul">
-                        <li> <a class="scroll" href="/"><i class="fa-solid fa-user"></i> Account</a></li>
-                        <li> <a class="scroll" href="/orders"><i class="fa-solid fa-clock-rotate-left"></i> Order history</a>
-                        </li>
-                        <li> <a class="scroll" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-                        </li>
-                    </ul>
-                    {{else}}
-                    <a href="#">Account<span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                    <input type="checkbox" id="drop-3" />
-                    <ul class="inner-ul">
-                        <li> <a class="scroll" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a>
-                        </li>
-                        <li> <a class="scroll" href="/signin"><i class="fa-solid fa-user-plus"></i> Sign up</a></li>
-                    </ul>
-
-                    {{/if}}
-
-                </li>
-                <li><a href="#" class="scroll">Contact</a></li>
-                <li><a href="/cart" class="scroll"><i class="fa-solid fa-cart-shopping fa-2x"></i><span id="cart-count" class="badge badge-success">{{cartCount}}</span></a></li>
-
-
-            </ul>
-
-        </nav>
-        <!-- //nav -->
+  <header>
+        <div class="container-fluid px-lg-5">
+            <!-- nav -->
+            <nav class="py-4 d-lg-flex">
+                <div id="logo">
+                    <h1> <a href="/"><span class="fa fa-align-center text-warning"></span><span class="logo-span"> Foodizone</span></a></h1>
+                </div>
+                <label for="drop" class="toggle bg-warning"><i class="fa-solid fa-bars"></i></label>
+                <input type="checkbox" id="drop" />
+                <ul class="menu mt-2 ml-auto">
+                    <li class="active"><a href="/">Home</a></li>
+    
+                    <li>
+                        <label for="drop-1" class="toggle">Add restaurant <span class="fa fa-angle-down" aria-hidden="true"></span></label>
+                        <a href="#">Add restaurant  <span class="fa fa-angle-down"></span></a>
+                        <input type="checkbox" id="drop-1">
+                        {{#if vendor}}
+                        <ul class="inner-ul">
+                            <li><a href="/vendor/logout" class="scroll"><i class="fa-solid fa-right-from-bracket"></i>Log out</a></li>
+                        </ul>
+                        {{else}}
+                        <ul class="inner-ul">
+                            <li><a href="/vendor"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
+                                <li><a href="/vendor/signup"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+                        </ul>
+                        {{/if}}
+                    </li>
+                   
+                    <li>
+                        <!-- First Tier Drop Down -->
+                        {{#if user}}
+                        <label for="drop-2" class="toggle">{{user.Name}} <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                        <a href="#">{{user.Name}} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <input type="checkbox" id="drop-2" />
+                        <ul class="inner-ul">
+                            <li><a class="scroll" href="/"><i class="fa-solid fa-user"></i> Account</a></li>
+                            <li><a href="/orders" class="scroll"><i class="fa-solid fa-clock-rotate-left"></i> Order history</a></li>
+                            <li><a href="/logout" class="scroll"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
+                        </ul>
+                        {{else}}
+                        <label for="drop-2" class="toggle">Account <span class="fa fa-angle-down" aria-hidden="true"></span> </label>
+                        <a href="#">Account <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <input type="checkbox" id="drop-2" />
+                        <ul class="inner-ul">
+                            <li><a class="scroll" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
+                            <li><a href="/signin" class="scroll"><i class="fa-solid fa-user-plus"></i> Sign up</a></li>
+                          
+                        </ul>
+                        {{/if}}
+                    </li>
+                    <li><a href="#" class="scroll">About</a></li>
+                    <li><a href="#" class="scroll">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</header>
+    </header>
+
+    <style>
+        
+ .container-fluid{
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
+    }
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+/*-- header --*/
+
+/* header */
+
+/* CSS Document */
+
+header {
+    z-index: 9;
+    width: 100%;
+  margin-top: 8rem;
+    min-width: 375px;
+}
+.logo-span{
+    font-size: 39px;
+}
+
+.toggle,
+[id^=drop] {
+    display: none;
+}
+
+/* Giving a background-color to the nav container. */
+
+nav {
+    margin: 0;
+    padding: 0;
+}
+
+
+#logo a {
+    float: left;
+    display: initial;
+    margin: 0;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 0;
+    font-size: 0.8em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+    font-family: 'Oswald', sans-serif;
+
+}
+
+
+
+/* Since we'll have the "ul li" "float:left"
+ * we need to add a clear after the container. */
+
+nav:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Removing padding, margin and "list-style" from the "ul",
+ * and adding "position:reltive" */
+
+nav ul {
+    float: right;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+}
+
+
+
+/* Positioning the navigation items inline */
+
+nav ul li {
+    margin: 0px 0.3em;
+    display: inline-block;
+    float: left;
+}
+
+/* Styling the links */
+
+nav ul.menu li a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 2px;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 0.5em 1.5em;
+    background: transparent;
+    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+nav ul li ul li:hover {
+    background: #c20d00;
+
+}
+
+
+/* Background color change on Hover */
+
+.menu li.active a {
+    color: #ffc80a;
+}
+
+/* Hide Dropdowns by Default
+ * and giving it a position of absolute */
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    /* has to be the same number as the "line-height" of "nav a" */
+    top: 30px;
+    background: #fff;
+    padding: 10px;
+}
+
+/* Display Dropdowns on Hover */
+
+nav ul li:hover > ul {
+    display: inherit;
+}
+
+/* Fisrt Tier Dropdown */
+
+nav ul ul li {
+    width: 170px;
+    float: none;
+    display: list-item;
+    position: relative;
+    margin: 0;
+}
+
+nav ul.menu li ul li a {
+    color: #333;
+    padding: 5px 10px;
+    display: block;
+}
+
+nav ul.menu li ul li a:hover {
+    color: #ffc107;
+}
+
+/* Second, Third and more Tiers	
+ * We move the 2nd and 3rd etc tier dropdowns to the left
+ * by the amount of the width of the first tier.
+*/
+
+nav ul ul ul li {
+    position: relative;
+    top: -60px;
+    /* has to be the same number as the "width" of "nav ul ul li" */
+    left: 170px;
+}
+
+
+/* Change ' +' in order to change the Dropdown symbol */
+
+li > a:only-child:after {
+    content: '';
+}
+
+
+/* Media Queries
+--------------------------------------------- */
+
+
+@media all and (max-width:1073px) {
+
+    #logo {
+        display: block;
+        padding: 0;
+        text-align: center;
+        float: none;
+    }
+
+    nav {
+        margin: 0;
+    }
+
+    nav a {
+        color: #333;
+    }
+
+    /* Hide the navigation menu by default */
+    /* Also hide the  */
+    .toggle + a,
+    .menu {
+        display: none;
+    }
+
+    /* Stylinf the toggle lable */
+    .toggle {
+        display: block;
+        padding: 6px 15px;
+        font-size: 16px;
+        text-decoration: none;
+        border: none;
+        float: right;
+        margin-right: 0em;
+        background-color: #fff;
+        color: #1b1d1d;
+        text-transform: uppercase;
+        font-weight: 600;
+        cursor: pointer !important;
+    }
+
+    .menu .toggle {
+        float: none;
+        text-align: center;
+        margin: auto;
+        width: 30%;
+        padding: 5px;
+        font-weight: normal;
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+
+    .toggle:hover {
+        color: #333;
+        background-color: #fff;
+    }
+
+    /* Display Dropdown when clicked on Parent Lable */
+    [id^=drop]:checked + ul {
+        display: block;
+        background: #fff;
+        padding: 15px 0;
+        text-align: center;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    /* Change menu item's width to 100% */
+    nav ul li {
+        display: block;
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    nav ul ul .toggle,
+    nav ul ul a {
+        padding: 0 40px;
+    }
+
+    nav ul.menu li a {
+        color: #312f2f;
+    }
+
+    nav a:hover,
+    nav ul ul ul a {
+        background-color: transparent;
+    }
+
+    nav ul li ul li .toggle,
+    nav ul ul a,
+    nav ul ul ul a {
+        padding: 14px 20px;
+        color: #312f2f;
+        font-size: 15px;
+    }
+
+
+    nav ul li ul li .toggle,
+    nav ul ul a {
+        background-color: #fff;
+    }
+
+    nav ul ul li a {
+        font-size: 15px;
+    }
+
+    /* Hide Dropdowns by Default */
+    nav ul ul {
+        float: none;
+        position: static;
+        color: #ffffff;
+        /* has to be the same number as the "line-height" of "nav a" */
+    }
+
+    /* Hide menus on hover */
+    nav ul ul li:hover > ul,
+    nav ul li:hover > ul {
+        display: none;
+    }
+
+    /* Fisrt Tier Dropdown */
+    nav ul ul li {
+        display: block;
+        width: 100%;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    nav ul ul ul li {
+        position: static;
+        /* has to be the same number as the "width" of "nav ul ul li" */
+    }
+
+    .login-icon {
+        text-align: right;
+    }
+
+    .login-icon span {
+        margin-right: 1em;
+    }
+}
+
+@media all and (max-width:568px) {
+    [id^=drop]:checked + ul {
+        display: block;
+        background: #fff;
+        padding: 15px 0;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .menu .toggle {
+        float: none;
+        text-align: center;
+        margin: auto;
+        width: 70%;
+    }
+
+}
+
+.login-icon p {
+    color: #fff;
+}
+
+.login-icon span {
+
+    color: #fcd000;
+}
+
+/* Font decorations */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
+}
+a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+
+    </style>

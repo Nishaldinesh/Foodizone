@@ -1,34 +1,164 @@
-<body class="main-body ">
-    <div class="top-content">
-        <div class="mb-3">
-            <h2 class="text-white">Discover the best food and drinks in your area</h2>
-        </div>
-    <div class="search-bar">
+<div class="main-section">
+
+  <div class="main-content">
+    <div class="container-search">
+      <div class="title">
+        <h2 class="text-white"> Discover the best food and drinks in your area</h2>
+      </div>
+      <div class="search">
         <input class="search-bar" type="search" placeholder="Search here...">
+      </div>
     </div>
-    </div>
-      <div class="container" style="overflow-x:hidden; overflow-y:auto; width:100%; margin-top:31rem;">
-        <div class="category-button">
-         <a href="" class="btn btn-light">All</a>
-         <a href="" class="btn btn-light">Burgers</a>
-          <a href="" class="btn btn-light">Pizza</a>
-           <a href="" class="btn btn-light">Paratha</a>
-            <a href="" class="btn btn-light">Fries</a>
-             <a href="" class="btn btn-light">Shakes</a>
-             <a href="" class="btn btn-light">Biriyani</a>
-        </div>
-        {{#each vendors}}
-           <div class="card mt-5 float-left ml-5" style="width: 18rem;">
- <a href="/shop-images/{{this._id}}.jpg">
- <img class="card-img-top" style="height:17rem;" src="/shop-images/{{this._id}}.jpg" alt="Card image cap">
- </a>
-  <div class="card-body">
-    <h5 class="card-title">{{this.ShopName}}</h5>
-    <p>{{this.FoodCategory}}</p>
- <a href="/get-vendor-details/{{this._id}}" class="btn btn-success">View shop</a>
   </div>
-</div>
-{{/each}}
+  <div class="container list-container">
+    <div class="category-button">
+      <a href="" class="btn btn-warning">All</a>
+      <a href="" class="btn btn-light">Burgers</a>
+      <a href="" class="btn btn-warning">Pizza</a>
+      <a href="" class="btn btn-light">Paratha</a>
+      <a href="" class="btn btn-light">Fries</a>
+      <a href="" class="btn btn-light">Shakes</a>
+      <a href="" class="btn btn-light">Biriyani</a>
+    </div>
+    {{#each vendors}}
+    <div class="card mt-5 float-left ml-5" style="width: 18rem;">
+      <a href="/shop-images/{{this._id}}.jpg">
+        <img class="card-img-top" style="height:17rem;" src="/images/banner1.jpg" alt="Card image cap">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title">{{this.ShopName}}</h5>
+        <p>{{this.FoodCategory}}</p>
+        <a href="/get-vendor-details/{{this._id}}" class="btn btn-success">View shop</a>
+      </div>
+    </div>
+
+
+    {{/each}}
+    <footer>
+      <div class="container footer-section">
+        <div class="content">
+          <div id="logo">
+            <h1><a href="/"><span class="fa fa-align-center text-warning"></span><span
+                  class="text-white logo-span">Foodizone</span></a></h1>
+          </div>
+          <div class="copyrights">
+            <p class="text-white"><i class="fa-regular fa-copyright"></i> Foodizone 2022</p>
+          </div>
+          <div class="site-details">
+            <a href="" class="text-warning">Home</a> /
+            <a href="" class="text-warning">About us</a> /
+            <a href="" class="text-warning">Contact us</a> /
+            <a href="" class="text-warning">Feedback</a>
+          </div>
         </div>
-      
-</body>
+      </div>
+    </footer>
+  </div>
+
+</div>
+
+
+
+
+
+
+<style>
+  .main-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 375px;
+  }
+
+  .list-container {
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    max-width: 100%;
+    min-height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    justify-content: space-between;
+    min-width: 375px;
+  }
+
+  .container-search {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-bar {
+    min-width: 190px;
+    margin: 2em;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .main-display {
+    display: flex;
+    background-color: #fff;
+    overflow-y: scroll;
+    max-width: 2320px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    min-width: 375px;
+
+  }
+
+  .card {
+    min-width: 288px;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: url(../images/banner1.jpg) center no-repeat;
+    -webkit-background-size: cover;
+    position: relative;
+    min-height: 500px;
+    justify-content: center;
+    min-width: 375px;
+
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Footer designs */
+  .footer-section {
+    background-color: #1b1d1d;
+    max-width: 100%;
+    display: flex;
+    min-height: 14rem;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .logo {
+    margin: 0 18em;
+  }
+
+  .content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* media queries*/
+  @media (max-width:737px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+  }
+</style>

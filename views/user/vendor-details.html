@@ -1,0 +1,326 @@
+<div class="container">
+    <div class="container container-top">
+        <div class="image">
+            <img class="shop-image" src="/public/images/banner1.jpg" alt="">
+        </div>
+        <div class="shop-details">
+            <h2>Shop Name</h2>
+        </div>
+    </div>
+    <div class="container container-display">
+
+    </div>
+    <div class="container container-cart"></div>
+</div>
+
+<style>
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    .container-top{
+        min-height: 200px;
+        background-color: #171a29;
+        display: flex;
+        justify-content: space-between;
+    }
+    .shop-image{
+        max-width: 272px;
+    margin: 3em 19rem;
+    }
+   
+
+</style>
+
+<header class="ven-header">
+    <div class="img-div">
+       <img src="/shop-images/{{vendorDetails._id}}.jpg" alt="" class="shop-img">
+    </div>
+    <div class="contents float-right">
+       <h2 class="text-white">{{vendorDetails.ShopName}}</h2>
+       <p class="text-white text-sm">{{vendorDetails.FoodCategory}}</p>
+       <p class="text-white text-sm">{{vendorDetails.City}}</p>
+    </div>
+ </header>
+ <section class="h-200 h-custom">
+    <div class="container py-5 product-container h-200">
+       <div class="row d-flex justify-content-center align-items-center h-200 product-details">
+          <div class="col">
+             <div class="card">
+                <div class="card-body p-4">
+ 
+                   <div class="row">
+ 
+                      <div class="col-lg-7">
+                         <h5 class="mb-3"><a href="#!" class="text-body"><i
+                                  class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                         <hr>
+ 
+                         {{#each vendorProducts}}
+                         <div class="card mb-3 products-card">
+                            <div class="card-body products-body">
+                               <div class="d-flex justify-content-between">
+                                  <div class="d-flex flex-row align-items-center">
+                                     <div>
+                                        <img src="/product-images/{{this._id}}.jpg" class="img-fluid rounded-3"
+                                           alt="Shopping item">
+                                     </div>
+                                     <div class="ms-3">
+                                        <h5>{{this.ProductName}}</h5>
+                                        <p class="small mb-0">{{this.Category}}</p>
+                                     </div>
+                                  </div>
+                                  <div class="d-flex flex-row align-items-center">
+                                     <div class="mr-3" style="position: relative; margin-left: -9rem;">
+                                        <button class="btn btn-white text-secondary">-</button> 1 <button
+                                           class="btn btn-white text-success">+ </button>
+                                     </div>
+                                     <div style="width: 80px;">
+                                        <h5 class="mb-0">₹ {{this.Price}}</h5>
+                                     </div>
+                                     <button onclick="addToCart('{{this._id}}','{{this.vendorId}}')"
+                                        class="btn text-warning cart-btn"><i class="fa-solid fa-cart-plus"></i></button>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         {{/each}}
+                      </div>
+ 
+ 
+                   </div>
+ 
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-4 float-right cart-sec">
+       <div class="card mb-4 cart-card">
+          <div class="card-header py-3">
+             <h5 class="mb-0">Cart</h5>
+          </div>
+          <div class="card-body scroll-card">
+             <ul class="list-group list-group-flush">
+                 {{#each cartItems}}
+               
+                <div class="pb-3">
+ 
+                   <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                      
+                      <div class="ms-3 name">
+                         <h5 class="text-sm">{{this.product.ProductName}}</h5>
+ 
+                      </div>
+ 
+ 
+                      <div class="btn-div align-items-center text-center">
+                         <button class="btn btn-white text-secondary fnt-btn"
+                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                         <span id="{{this.product._id}}">{{this.quantity}}</span>
+                         <button class="btn btn-white text-success fnt-btn"
+                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                      </div>
+                      <span>{{this.total}}</span>
+                   </li>
+                </div>
+               
+                 {{/each}}
+ 
+             </ul>
+             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div class="pt-5">
+                   <strong>Total amount</strong>
+                 
+                </div>
+                <span class="pt-5">₹ <strong id="total"> {{totalAmount}}</strong></span>
+             </li>
+ {{#if cartVendorId}}
+             <a href="/checkout/{{cartVendorId}}" class="btn btn-success checkout-btn">Go to checkout</a>
+             {{/if}}
+          </div>
+ 
+       </div>
+    </div>
+ 
+ 
+ </section>
+ 
+ <style>
+    .ven-header {
+       background-color: #282c3f;
+       height: 230px;
+       margin-bottom: 27rem;
+    }
+    .user-header{
+       margin-bottom: 48.063rem;
+    }
+ 
+    .text-lg {
+       font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+    }
+ 
+    .contents {
+       padding-left: 44rem;
+       margin-top: -11rem;
+       position: absolute;
+    }
+ 
+    .shop-img {
+       padding-left: 25rem;
+       padding-top: 5rem;
+       height: 15rem;
+       margin-top: -3rem;
+       width: 41rem;
+    }
+ 
+    .product-container {
+       margin-top: 23rem;
+    }
+ 
+    .products-card {
+       width: 42rem;
+    }
+ 
+    .h-200 {
+       background-color: #ffff;
+       height: 34rem;
+       margin-bottom: 26rem;
+    }
+ 
+    .container {
+     background-color: #fff;
+     border-radius: 10px;
+     position: relative;
+     overflow: hidden;
+     width: 768px;
+     max-width: 100%;
+     min-height: 480px;
+ }
+    .card {
+       box-shadow: none;
+    }
+ 
+    .btn {
+       font-size: xx-large;
+       box-shadow: none;
+    }
+ 
+    .product-details {
+       overflow-y: scroll;
+    }
+ 
+    .cart-sec {
+       margin-right: -19rem;
+       margin-top: -58rem;
+    }
+ 
+    .cart-card {
+       width: 25rem;
+    }
+ 
+    .checkout-btn {
+       font-size: large;
+    }
+ 
+    .cart-btn {
+       font-size: small;
+       box-shadow: none;
+    }
+ 
+    .products-body {
+       height: auto;
+    }
+ 
+    .img-fluid {
+       height: 4rem;
+       width: 4rem;
+    }
+ 
+    .scroll-card {
+       overflow-y: auto;
+       height: 16rem;
+    }
+ 
+    .list-group-item {
+       max-height: 5rem;
+ 
+    }
+ 
+    .fnt-btn {
+       font-size: inherit;
+    }
+ 
+    .name {
+       max-width: 6rem;
+    }
+ 
+    .btn-div {
+       margin-right: 4px;
+ 
+       height: 3rem;
+ 
+       position: absolute;
+       /* margin-top: 3px; */
+       margin-left: 9rem;
+       margin-bottom: 29px;
+       height: 3rem;
+    }
+ </style>
+ <script>
+ 
+    function addToCart(proId, vendorId) {
+       $.ajax({
+          url: '/add-to-cart',
+          data: {
+             proId: proId,
+             vendorId: vendorId
+          },
+          method: 'post',
+          success: (response) => {
+            
+             if (response.status) {
+                 location.reload()
+                let count = $('#cart-count').html()
+                count = parseInt(count) + 1
+                $("#cart-count").html(count)
+             } else if (response.VendorExist_status) {
+                alert("Cart contains items from another restaurant!! Please remove current cart items");
+             }else{
+                location.reload()
+             }
+          }
+       })
+    }
+  
+ 
+ </script>
+ 
+ <script>
+    function changeQuantity(cartId, proId,userId, count) {
+       let quantity = parseInt(document.getElementById(proId).innerHTML)
+       count = parseInt(count)
+       $.ajax({
+          url: '/change-product-quantity',
+          data: {
+             user:userId,
+             cart: cartId,
+             product: proId,
+             count: count,
+             quantity: quantity
+          },
+          method: 'post',
+          success: (response) => {
+             if (response.removeProduct) {
+                alert("Item removed from cart")
+                location.reload()
+             } else {
+                console.log(response);
+                document.getElementById(proId).innerHTML = quantity + count
+                document.getElementById('total').innerHTML=response.total
+ 
+             }
+          }
+       })
+    }
+ </script>

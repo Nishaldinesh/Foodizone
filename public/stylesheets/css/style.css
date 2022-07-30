@@ -33,6 +33,7 @@ body {
 }
 .top-content{
     position: absolute;
+    margin-bottom: 16rem
 }
 
 body a {
@@ -92,335 +93,6 @@ ul {
 
 /* CSS Document */
 
-header {
-    position: absolute;
-    z-index: 9;
-    width: 100%;
-}
-
-.toggle,
-[id^=drop] {
-    display: none;
-}
-
-/* Giving a background-color to the nav container. */
-
-nav {
-    margin: 0;
-    padding: 0;
-}
-
-
-#logo a {
-    float: left;
-    display: initial;
-    margin: 0;
-    letter-spacing: 1px;
-    color: #fff;
-    padding: 0;
-    font-size: 0.8em;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
-    font-family: 'Oswald', sans-serif;
-
-}
-
-#logo a span {
-    color: #ffc80a;
-}
-
-
-/* Since we'll have the "ul li" "float:left"
- * we need to add a clear after the container. */
-
-nav:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Removing padding, margin and "list-style" from the "ul",
- * and adding "position:reltive" */
-
-nav ul {
-    float: right;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    position: relative;
-}
-
-/* Positioning the navigation items inline */
-
-nav ul li {
-    margin: 0px 0.3em;
-    display: inline-block;
-    float: left;
-}
-
-/* Styling the links */
-
-nav ul.menu li a {
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 0.85em;
-    letter-spacing: 2px;
-    padding-left: 0;
-    padding-right: 0;
-    padding: 0.5em 1.5em;
-    background: transparent;
-    font-weight: 400;
-    font-family: 'Oswald', sans-serif;
-}
-
-
-nav ul li ul li:hover {
-    background: #c20d00;
-
-}
-
-
-/* Background color change on Hover */
-
-.menu li.active a {
-    color: #ffc80a;
-}
-
-/* Hide Dropdowns by Default
- * and giving it a position of absolute */
-
-nav ul ul {
-    display: none;
-    position: absolute;
-    /* has to be the same number as the "line-height" of "nav a" */
-    top: 30px;
-    background: #fff;
-    padding: 10px;
-}
-
-/* Display Dropdowns on Hover */
-
-nav ul li:hover > ul {
-    display: inherit;
-}
-
-/* Fisrt Tier Dropdown */
-
-nav ul ul li {
-    width: 170px;
-    float: none;
-    display: list-item;
-    position: relative;
-    margin: 0;
-}
-
-nav ul.menu li ul li a {
-    color: #333;
-    padding: 5px 10px;
-    display: block;
-}
-
-nav ul.menu li ul li a:hover {
-    color: #ffc107;
-}
-
-/* Second, Third and more Tiers	
- * We move the 2nd and 3rd etc tier dropdowns to the left
- * by the amount of the width of the first tier.
-*/
-
-nav ul ul ul li {
-    position: relative;
-    top: -60px;
-    /* has to be the same number as the "width" of "nav ul ul li" */
-    left: 170px;
-}
-
-
-/* Change ' +' in order to change the Dropdown symbol */
-
-li > a:only-child:after {
-    content: '';
-}
-
-
-/* Media Queries
---------------------------------------------- */
-
-@media all and (max-width:991px) {
-
-    #logo {
-        display: block;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-        float: none;
-    }
-
-    nav {
-        margin: 0;
-    }
-
-    nav a {
-        color: #333;
-    }
-
-    /* Hide the navigation menu by default */
-    /* Also hide the  */
-    .toggle + a,
-    .menu {
-        display: none;
-    }
-
-    /* Stylinf the toggle lable */
-    .toggle {
-        display: block;
-        padding: 6px 15px;
-        font-size: 16px;
-        text-decoration: none;
-        border: none;
-        float: right;
-        margin-right: 0em;
-        background-color: #fff;
-        color: #1b1d1d;
-        text-transform: uppercase;
-        font-weight: 600;
-        cursor: pointer !important;
-    }
-
-    .menu .toggle {
-        float: none;
-        text-align: center;
-        margin: auto;
-        width: 30%;
-        padding: 5px;
-        font-weight: normal;
-        font-size: 15px;
-        letter-spacing: 1px;
-    }
-
-    .toggle:hover {
-        color: #333;
-        background-color: #fff;
-    }
-
-    /* Display Dropdown when clicked on Parent Lable */
-    [id^=drop]:checked + ul {
-        display: block;
-        background: #fff;
-        padding: 15px 0;
-        text-align: center;
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    /* Change menu item's width to 100% */
-    nav ul li {
-        display: block;
-        width: 100%;
-        padding: 5px 0;
-    }
-
-    nav ul ul .toggle,
-    nav ul ul a {
-        padding: 0 40px;
-    }
-
-    nav ul.menu li a {
-        color: #312f2f;
-    }
-
-    nav a:hover,
-    nav ul ul ul a {
-        background-color: transparent;
-    }
-
-    nav ul li ul li .toggle,
-    nav ul ul a,
-    nav ul ul ul a {
-        padding: 14px 20px;
-        color: #312f2f;
-        font-size: 15px;
-    }
-
-
-    nav ul li ul li .toggle,
-    nav ul ul a {
-        background-color: #fff;
-    }
-
-    nav ul ul li a {
-        font-size: 15px;
-    }
-
-    /* Hide Dropdowns by Default */
-    nav ul ul {
-        float: none;
-        position: static;
-        color: #ffffff;
-        /* has to be the same number as the "line-height" of "nav a" */
-    }
-
-    /* Hide menus on hover */
-    nav ul ul li:hover > ul,
-    nav ul li:hover > ul {
-        display: none;
-    }
-
-    /* Fisrt Tier Dropdown */
-    nav ul ul li {
-        display: block;
-        width: 100%;
-        padding: 0;
-    }
-
-    nav ul li {
-        margin: 0;
-    }
-
-    nav ul ul ul li {
-        position: static;
-        /* has to be the same number as the "width" of "nav ul ul li" */
-    }
-
-    .login-icon {
-        text-align: right;
-    }
-
-    .login-icon span {
-        margin-right: 1em;
-    }
-}
-
-@media all and (max-width:568px) {
-    [id^=drop]:checked + ul {
-        display: block;
-        background: #fff;
-        padding: 15px 0;
-        text-align: center;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .menu .toggle {
-        float: none;
-        text-align: center;
-        margin: auto;
-        width: 70%;
-    }
-
-}
-
-.login-icon p {
-    color: #fff;
-}
-
-.login-icon span {
-
-    color: #fcd000;
-}
 
 /*-- //header --*/
 
@@ -434,15 +106,10 @@ li > a:only-child:after {
     -ms-background-size: cover;
     background-size: cover;
     position: relative;
-    height: 50rem;
+    height: 100%;
 }
 .vendor-nav{
     margin-top: 5rem;
-}
-.search-bar{
-    width: 35rem;
-    margin-bottom: 7rem;
-    border-radius: 18px;
 }
 
 .layer {
@@ -1594,7 +1261,6 @@ body {
 	background: #f6f5f7;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
@@ -1677,17 +1343,7 @@ input {
 	width: 100%;
 }
 
-.container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
-	min-height: 480px;
-}
+
 
 .form-container {
 	position: absolute;
@@ -1702,8 +1358,7 @@ input {
 	z-index: 2;
 }
 .user-header{
-    position: fixed;
-    margin-bottom: 42.063rem;
+    margin-bottom: 63.063rem;
     background:linear-gradient(to right, #FF4B2B, #FF416C)
 }
 
@@ -1817,18 +1472,6 @@ input {
 	margin: 0 5px;
 	height: 40px;
 	width: 40px;
-}
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
 }
 
 footer p {
