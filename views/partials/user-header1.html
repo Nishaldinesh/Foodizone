@@ -1,0 +1,70 @@
+<header class="user-header">
+  <nav class="navbar navbar-expand-lg"></nav>
+  <div class="container-fluid px-lg-5">
+      <!-- nav -->
+      <nav class="py-4 d-lg-flex">
+          <div id="logo">
+              <h1> <a href="#"><span class="fa fa-align-center" aria-hidden="true"></span>Foodizone</a></h1>
+          </div>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <ul class="menu mt-2 ml-auto">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="#" class="scroll">About</a></li>
+              <li>
+
+                  <a href="#" class="scroll">Add restaurant <span class="fa fa-angle-down"></span></a>
+                  <input type="checbox" id="drop" />
+                  {{#if vendor}}
+                  <ul class="inner-ul">
+                      <li> <a class="scroll" href="/vendor/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
+
+                  </ul>
+                  {{else}}
+                  <ul class="inner-ul">
+                      <li> <a class="scroll" href="/vendor"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a></li>
+                      <li> <a class="scroll" href="/vendor/signup"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+
+                  </ul>
+                  {{/if}}
+              </li>
+
+              <li>
+                  <!-- First Tier Drop Down -->
+                  <label for="drop-2" class="toggle">Dropdown <span class="fa fa-angle-down"
+                          aria-hidden="true"></span> </label>
+                  {{#if user}}
+                  <a href="#">Hi,{{user.Name}}<span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                  <input type="checkbox" id="drop-2" />
+                  <ul class="inner-ul">
+                      <li> <a class="scroll" href="/"><i class="fa-solid fa-user"></i> Account</a></li>
+                      <li> <a class="scroll" href="/orders"><i class="fa-solid fa-clock-rotate-left"></i> Order history</a>
+                      </li>
+                      <li> <a class="scroll" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                      </li>
+                  </ul>
+                  {{else}}
+                  <a href="#">Account<span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                  <input type="checkbox" id="drop-3" />
+                  <ul class="inner-ul">
+                      <li> <a class="scroll" href="/signin"><i class="fa-solid fa-right-to-bracket"></i> Sign in</a>
+                      </li>
+                      <li> <a class="scroll" href="/signin"><i class="fa-solid fa-user-plus"></i> Sign up</a></li>
+                  </ul>
+
+                  {{/if}}
+
+              </li>
+              <li><a href="#" class="scroll">Contact</a></li>
+              <li><a href="/cart" class="scroll"><i class="fa-solid fa-cart-shopping fa-2x"></i><span id="cart-count" class="badge badge-success">{{cartCount}}</span></a></li>
+
+
+          </ul>
+
+      </nav>
+      <!-- //nav -->
+  </div>
+  </nav>
+</header>
+

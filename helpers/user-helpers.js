@@ -196,8 +196,8 @@ module.exports ={
              details.quantity= parseInt(details.quantity)
              details.count= parseInt(details.count)
             return new Promise((resolve, reject) => {
-                if(details.count == -1 && details.quantity == 1){
-                    db.get().collection(collection.CART_COLLECTION).updateOne({_id:objectId(details.cart)},
+             if(details.count == -1 && details.quantity == 1){
+                    db.get().collection(collection.CART_COLLECTION).updateOne({user:objectId(details.user)},
                     {
                         $pull: {products:{item: objectId(details.product)}}
                     }).then((response)=>{
@@ -206,7 +206,7 @@ module.exports ={
                 }else{
                     console.log("Worked")
                     db.get().collection(collection.CART_COLLECTION)
-                    .updateOne({_id:objectId(details.cart), 'products.item':objectId(details.product)},
+                    .updateOne({user:objectId(details.user), 'products.item':objectId(details.product)},
                     {
                         $inc: {'products.$.quantity':details.count}
                     }).then((response)=>{
