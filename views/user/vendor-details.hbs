@@ -49,9 +49,10 @@
                   <div class="btn-div">
 
                      <button class="btn btn-white text-secondary fnt-btn"
-                        onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                        onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</button>
                      <span id="{{this.product._id}}">{{this.quantity}}</span>
-                     <button class="btn btn-white text-success fnt-btn">+</button>
+                     <button class="btn btn-white text-success fnt-btn"
+                        onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</button>
                   </div>
                </div>
 
@@ -60,296 +61,341 @@
          </div>
          <div class="checkout">
             <div class="total">
-               <p>Total</p>
-               <p>₹ 60</p>
+               <p class="total-amount">Total</p>
+               <p class="total-amount">₹ <span id="total">{{totalAmount}}</span></p>
             </div>
             <a href="" class="btn btn-success">Checkout</a>
          </div>
       </div>
    </div>
+   <footer>
+      <div class="container footer-section">
+         <div class="footer-contains">
+            <div id="logo">
+               <h1><a href="/"><span class="fa fa-align-center text-warning"></span><span
+                        class="text-white logo-span">Foodizone</span></a></h1>
+            </div>
+            <div class="copyrights">
+               <p class="text-white"><i class="fa-regular fa-copyright"></i> Foodizone 2022</p>
+            </div>
+            <div class="site-details">
+               <a href="" class="text-warning">Home</a> /
+               <a href="" class="text-warning">About us</a> /
+               <a href="" class="text-warning">Contact us</a> /
+               <a href="" class="text-warning">Feedback</a>
+            </div>
+         </div>
+      </div>
+   </footer>
+</div>
 
-   <style>
-      /* Code changes */
-      body {
-         display: flex;
+<style>
+   /* Code changes */
+   body {
+     margin: 0;
+    padding: 0;
+    height: 100%;
+    font-weight: 300;
+    color: #282c3f;
+   }
+
+   header {
+      margin-top: 1rem;
+   }
+   .container-fluid{
+      min-width: 1054px;
+   }
+
+   .btn-success {
+      width: 100%;
+      border-radius: unset;
+   }
+
+   .btn-white {
+      border-radius: unset;
+      height: 100%;
+      color: #3e4152;
+      padding-top: 8px;
+      box-shadow: none;
+   }
+
+   span {
+      padding: 7px;
+   }
+
+
+   /* New designs */
+   .section {
+      width: 100%;
+      height: 52rem;
+   }
+
+   .container-main {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      height: 50rem;
+      width: 100%
+   }
+
+   .container-top {
+      min-height: 256px;
+      background-color: #171a29;
+      display: flex;
+      max-width: 100%;
+      justify-content: center;
+      min-width: 1054px;
+   }
+
+   .contents {
+      display: flex;
+      margin: 3em 21em;
+      width: 100%;
+      align-items: center;
+   }
+
+   .shop-image {
+      max-width: 206px;
+      min-width: 87px;
+      max-height: 206px;
+   }
+
+   .shop-details {
+      min-width: 137px;
+   }
+
+
+   .image {
+      display: flex;
+      align-items: center;
+      margin: 0 1em;
+   }
+
+   .container-center {
+      display: flex;
+      min-width: 1054px;
+   }
+
+   .menu-content {
+      width: 60%;
+      height: fit-content;
+      border-left: solid 1px lightgray;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      height: 600px;
+      overflow-y: auto;
+   }
+
+   .product {
+      width: 100%;
+   }
+
+   .inner-product {
+      display: flex;
+      width: 80%;
+      border-bottom: solid 1px lightgrey;
+      margin: 0 auto;
+      justify-content: space-between;
+      min-height: 195px;
+   }
+
+   .details {
+      margin: 1em;
+   }
+
+   .image-div {
+      min-width: 218px;
+      max-height: 135px;
+      max-width: 218px;
+   }
+
+   .product-image {
+      margin: 1em;
+      max-width: 190px;
+      min-width: 87px;
+      width: 100%;
+      height: 100%;
+   }
+
+   .cart {
+      border-left: solid 2px #171a29;
+      width: 27%;
+      display: flex;
+      flex-direction: column;
+      margin: 5em auto;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 322px;
+      max-height: 600px;
+   }
+
+   .cart-header {
+      max-height: 62px;
+   }
+
+   .cart-details {
+      width: 96%;
+      overflow-y: auto;
+      max-height: 600px;
+      margin: 0em;
+   }
+
+   .product-details {
+      width: 96%;
+      align-items: center;
+      justify-content: space-between;
+      display: flex;
+   }
+
+   .checkout {
+      width: 96%;
+      align-items: center;
+   }
+
+   .btn-div {
+      width: 136px;
+      height: 33px;
+      border: solid 1px lightgreen;
+      display: flex;
+      background-color: #fff;
+   }
+
+   .quantity {
+      padding: 0.5em;
+   }
+
+   .quantity-image {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .total {
+      height: 3rem;
+      display: flex;
+      justify-content: space-between;
+      width: 94%;
+   }
+
+   /* Footer designs */
+   .footer-section {
+      background-color: #1b1d1d;
+      max-width: 100%;
+      display: flex;
+      min-height: 14rem;
+      align-items: center;
+      width: 100%;
+      min-width: 1054px;
+
+   }
+
+   .logo {
+      margin: 0 18em;
+   }
+
+   .footer-contains {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+   }
+
+   /* media queries*/
+   @media (max-width:737px) {
+      .footer-contains {
          flex-direction: column;
-         justify-content: space-between;
-         align-items: center;
-         height: 100%;
-         min-height: 60rem;
-         min-width: 1054px;
-      }
-
-      header {
-         margin-top: 1rem;
-      }
-
-      .container-fluid {
-         min-width: 1054px;
-      }
-
-      .btn-success {
-         width: 100%;
-         border-radius: unset;
-      }
-
-      .btn-white {
-         border-radius: unset;
-         height: 100%;
-         color: #3e4152;
-         padding-top: 8px;
-         box-shadow: none;
-      }
-
-      span {
-         padding: 7px;
-      }
-
-
-      /* New designs */
-      .section {
-         width: 100%;
-         height: 52rem;
-      }
-
-      .container-main {
-         display: flex;
-         flex-direction: column;
-         max-width: 100%;
-         height: 50rem;
-         width: 100%
-      }
-
-      .container-top {
-         min-width: 1054px;
-         min-height: 256px;
-         background-color: #171a29;
-         display: flex;
-         max-width: 100%;
-         justify-content: center;
-      }
-
-      .contents {
-         display: flex;
-         margin: 3em 21em;
-         width: 100%;
          align-items: center;
       }
 
-      .shop-image {
-         max-width: 206px;
-         min-width: 87px;
-         max-height: 206px;
-      }
+   }
 
-      .shop-details {
-         min-width: 137px;
-      }
+   /*Font styles */
+   h2 {
+      font-weight: 300;
+      font-size: 32px;
+      max-width: 538px;
+      color: #fff;
+   }
 
-      .top-contents {
-         min-width: 968px;
-      }
+   .product-name {
+      font-size: 1.22rem;
+      font-weight: inherit;
+      color: #3e4152;
+      word-break: break-word;
+      justify-content: flex-start;
+      display: flex;
+   }
 
-      .image {
-         display: flex;
-         align-items: center;
-         margin: 0 1em;
-      }
+   .cart-name {
+      font-size: 14px;
+      font-weight: 600;
+      font-family: monospace;
 
-      .container-center {
-         border: solid 1px magenta;
-         display: flex;
-         min-width: 960px;
-      }
+   }
 
-      .menu-content {
-         width: 60%;
-         height: fit-content;
-         border-left: solid 1px lightgray;
-         margin: 0 auto;
-         display: flex;
-         flex-direction: column;
-         min-width: 546px;
-         height: 600px;
-         overflow-y: auto;
-      }
+   .cart-title {
+      width: 30%;
+      font-size: 32px;
+      font-weight: 600;
+      padding-bottom: 18px;
+   }
+   .total-amount{
+      font-weight: 800;
+   }
+</style>
 
-      .product {
-         width: 100%;
-      }
+<script>
+   function addToCart(proId, vendorId) {
+      $.ajax({
+         url: '/add-to-cart',
+         data: {
+            proId: proId,
+            vendorId: vendorId
+         },
+         method: 'post',
+         success: (response) => {
 
-      .inner-product {
-         display: flex;
-         width: 80%;
-         border-bottom: solid 1px lightgrey;
-         margin: 0 auto;
-         justify-content: space-between;
-         min-height: 195px;
-      }
-
-      .details {
-         margin: 1em;
-      }
-
-      .image-div {
-         min-width: 218px;
-         max-height: 135px;
-         max-width: 218px;
-      }
-
-      .product-image {
-         margin: 1em;
-         max-width: 190px;
-         min-width: 87px;
-         width: 100%;
-         height: 100%;
-      }
-
-      .cart {
-        border-left: solid 2px #171a29;
-         width: 27%;
-         display: flex;
-         flex-direction: column;
-         margin: 5em auto;
-         justify-content: space-evenly;
-         align-items: center;
-         min-width: 317px;
-         height: 322px;
-         max-height: 600px;
-      }
-
-      .cart-header {
-         max-height: 62px;
-      }
-
-      .cart-details {
-         width: 96%;
-         overflow-y: auto;
-         max-height: 600px;
-         margin: 0em;
-      }
-
-      .product-details {
-         width: 96%;
-         align-items: center;
-         justify-content: space-between;
-         display: flex;
-      }
-
-      .checkout {
-         width: 96%;
-         align-items: center;
-      }
-
-      .btn-div {
-         width: 136px;
-         height: 33px;
-         border: solid 1px lightgreen;
-         display: flex;
-         background-color: #fff;
-      }
-
-      .quantity {
-         padding: 0.5em;
-      }
-
-      .quantity-image {
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-      }
-
-      .total {
-         height: 3rem;
-         display: flex;
-         justify-content: space-between;
-         width: 94%;
-      }
-
-      /*Font styles */
-      h2 {
-         font-weight: 300;
-         font-size: 32px;
-         max-width: 538px;
-         color: #fff;
-      }
-
-      .product-name {
-         font-size: 1.22rem;
-         font-weight: inherit;
-         color: #3e4152;
-         word-break: break-word;
-         justify-content: flex-start;
-         display: flex;
-      }
-
-      .cart-name {
-         font-size: 14px;
-         font-weight: 600;
-         font-family: monospace;
-
-      }
-
-      .cart-title {
-         width: 30%;
-         font-size: 32px;
-         font-weight: 600;
-         padding-bottom: 18px;
-      }
-   </style>
-
-   <script>
-      function addToCart(proId, vendorId) {
-         $.ajax({
-            url: '/add-to-cart',
-            data: {
-               proId: proId,
-               vendorId: vendorId
-            },
-            method: 'post',
-            success: (response) => {
-
-               if (response.status) {
-                  location.reload()
-                  let count = $('#cart-count').html()
-                  count = parseInt(count) + 1
-                  $("#cart-count").html(count)
-               } else if (response.VendorExist_status) {
-                  alert("Cart contains items from another restaurant!! Please remove current cart items");
-               } else {
-                  location.reload()
-               }
+            if (response.status) {
+               location.reload()
+               let count = $('#cart-count').html()
+               count = parseInt(count) + 1
+               $("#cart-count").html(count)
+            } else if (response.VendorExist_status) {
+               alert("Cart contains items from another restaurant!! Please remove current cart items");
+            } else {
+               location.reload()
             }
-         })
-      }
+         }
+      })
+   }
 
-   </script>
+</script>
 
-   <script>
-      function changeQuantity(proId, vendorId, userId, count) {
-         let quantity = parseInt(document.getElementById(proId).innerHTML)
-         count = parseInt(count)
-         $.ajax({
-            url: '/change-product-quantity',
-            data: {
-               user: userId,
-               vendor: vendorId,
-               product: proId,
-               count: count,
-               quantity: quantity
-            },
-            method: 'post',
-            success: (response) => {
-               if (response.removeProduct) {
-                  alert("Item removed from cart")
-                  location.reload()
-               } else {
-                  console.log(response);
-                  document.getElementById(proId).innerHTML = quantity + count
-                  document.getElementById('total').innerHTML = response.total
+<script>
+   function changeQuantity(cartId, proId, userId, count) {
+      let quantity = parseInt(document.getElementById(proId).innerHTML)
+      count = parseInt(count)
+      $.ajax({
+         url: '/change-product-quantity',
+         data: {
+            user: userId,
+            cart: cartId,
+            product: proId,
+            count: count,
+            quantity: quantity
+         },
+         method: 'post',
+         success: (response) => {
+            if (response.removeProduct) {
+               alert("Item removed from cart")
+               location.reload()
+            } else {
+               console.log(response);
+               document.getElementById(proId).innerHTML = quantity + count
+               document.getElementById('total').innerHTML = response.total
 
-               }
             }
-         })
-      }
-   </script>
+         }
+      })
+   }
+</script>

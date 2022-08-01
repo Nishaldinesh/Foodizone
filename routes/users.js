@@ -114,23 +114,18 @@ router.get('/get-vendor-details/:id', verifyUserLogin, async (req, res, next) =>
     cartVendorId = cartItems[0].vendor
   }
 console.log(vendorProducts);
-
-  let user = req.session.user._id
-  res.render('user/vendor-details', { user_status: true, vendorDetails, vendorProducts, cartCount, cartItems, user, total, cartVendorId, totalAmount })
+let user=req.session.user
+  let userId = req.session.user._id
+  res.render('user/vendor-details', { user_status: true, vendorDetails, vendorProducts, cartCount, cartItems, userId,user, total, cartVendorId, totalAmount })
 });
 router.post('/change-product-quantity', (req, res, next) => {
   console.log("call")
   console.log(req.body);
-  if(req.body.count== 1 && req.body.quantity==0){
-    console.log("Hai");
-    userHelpers.addToCart(req.body.product,req.body.vendor,req.body.user)
-  }else{
   userHelpers.changeProductQuantity(req.body).then(async (response) => {
     response.total = await userHelpers.getTotalAmount(req.session.user._id)
     console.log(response.total);
     res.json(response)
   })
-}
 });
 router.get('/checkout/:id', verifyUserLogin, async (req, res, next) => {
   let cartItems = await userHelpers.getCartItems(req.session.user._id)
