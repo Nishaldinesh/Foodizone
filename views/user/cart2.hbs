@@ -1,0 +1,215 @@
+<div class="col-lg-8 col-md-6 mb-md-0 mb-4 mt-5 mr-5 pr-5" style="margin-left: -26rem; height: 35rem;">
+{{#if cartEmpty}}
+ <div class="cart-empty">
+<img class="cart-empty-img" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0" alt="">
+    </div>
+    <div>
+      <div class="empty-text">Your cart is empty</div>
+     <div class="empty-text-2">You can go to home page to view more restaurants</div>
+    </div>
+    <div>
+      <a href="/" class="btn btn-block btn-warning home-btn">See restaurants near you</a>
+    </div>
+    {{else}}
+    <div class="card">
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-lg-6 col-7">
+                    <h6>Products</h6>
+                    <a href="/vendor/add-products" class="btn btn-warning">Add products</a>
+
+                </div>
+
+                <div class="col-lg-6 col-5 my-auto text-end">
+                    <div class="dropdown float-lg-end pe-4">
+                        <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-secondary"></i>
+                        </a>
+                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                            </li>
+                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                    action</a></li>
+                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                    else here</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0 pb-2" >
+            <div class="table-responsive bg-white" >
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+                                Product name</th>
+                            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Category</th>
+                                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Shop name</th>
+                                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                Shop location</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Price</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Image</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                         <td>
+                                   
+                             <h6 class="mb-0 text-sm text-center">{{this.product.ProductName}}</h6>
+                                    
+                             
+                            </td>
+                            <td>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.Category}}</h6>
+                
+                              
+                            </td>
+                             <td>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.ShopName}}</h6>
+                
+                              
+                            </td>
+                             <td>
+                             <h6 class="mb-0 text-sm text-center">{{this.product.ShopLocation}}</h6>
+                
+                              
+                            </td>
+                            <td>
+                                <h6 class="mb-0 text-sm text-center">{{this.product.Price}}</h6>
+                            </td>
+                             <td class="text-center">
+                               <img style="width: 50px; height: 50px;" src="/product-images/{{this.product._id}}.jpg" alt="">
+                            </td>
+                             <td class="text-sm text-center mb-0">
+                                <button onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)" class="btn btn-danger">-</button> 
+                                 <span id="{{this.product._id}}">{{this.quantity}} </span> 
+                                <button onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)" class="btn btn-success">+</button>
+                            </td>
+                           
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+   
+</div>
+<div>
+    
+</div>
+ <div class="float-right price-div">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>₹<span id="productTotal"> {{totalAmount}}</span></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span class="text-success">FREE</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including VAT)</p>
+                  </strong>
+                </div>
+                <span>₹ <strong class="text-success" id="total">{{totalAmount}}</strong></span>
+              </li>
+            </ul>
+            {{#if cartVendorId}}
+            <a href="/checkout/{{cartVendorId}}" type="button" class="btn btn-success btn-lg btn-block text-white">
+              Go to checkout
+            </a>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ {{/if}}
+<style>
+    .card{
+        box-shadow: none;
+    }
+    .card-body{
+         height: 17rem;
+    background: #fff;
+    }
+    .price-div{
+         margin-left: 74rem;
+    margin-top: -24rem;
+    width: 22rem;
+    }
+    .cart-empty-img{
+       margin-left: 40rem;
+    height: 20rem;
+    margin-top: 8rem;
+    }
+    .empty-text{
+     font-size: 20px;
+    font-weight: 600;
+    color: #535665;
+    padding-left: 47rem;
+    padding-top: 2rem;
+    }
+    .empty-text-2{
+     margin-top: 8px;
+    color: #7e808c;
+    padding-left: 41rem;
+    }
+    .home-btn{
+      width: 16rem;
+    margin-left: 45rem;
+    background-color:#FF4B2B ;
+    }
+</style>
+<script>
+   function changeQuantity(cartId, proId,userId,count) {
+      let quantity = parseInt(document.getElementById(proId).innerHTML)
+      count = parseInt(count)
+      $.ajax({
+         url: '/change-product-quantity',
+         data: {
+            user:userId,
+            cart: cartId,
+            product: proId,
+            count: count,
+            quantity: quantity
+         },
+         method: 'post',
+         success: (response) => {
+            if (response.removeProduct) {
+               alert("Item removed from cart")
+               location.reload()
+            } else {
+               console.log(response);
+               document.getElementById(proId).innerHTML = quantity + count
+               document.getElementById('total').innerHTML=response.total
+               document.getElementById('productTotal').innerHTML=response.total
+
+
+            }
+         }
+      })
+   }
+</script>
+

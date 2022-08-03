@@ -6,8 +6,8 @@
          </div>
          <div class="shop-details">
             <h2>{{vendorDetails.ShopName}}</h2>
-            <p>{{vendorDetails.FoodCategory}}</p>
-            <p>{{vendorDetails.City}}</p>
+            <p class="text-secondary">{{vendorDetails.FoodCategory}}</p>
+            <p class="text-secondary">{{vendorDetails.City}}</p>
          </div>
       </div>
    </div>
@@ -40,12 +40,12 @@
          <div class="cart-details">
 
             <div class="cart-header">
-               <h2 class="text-dark cart-title">Cart</h2>
+               <h2 class="text-dark">Cart</h2>
             </div>
             {{#each cartItems}}
             <div class="setup">
                <div class="product-details">
-                  <p class="cart-name">{{this.product.ProductName}}</p>
+                  <p>{{this.product.ProductName}}</p>
                   <div class="btn-div">
 
                      <button class="btn btn-white text-secondary fnt-btn"
@@ -61,12 +61,13 @@
          </div>
          <div class="checkout">
             <div class="total">
-               <p class="total-amount">Total</p>
-               <p class="total-amount">₹ <span id="total">{{totalAmount}}</span></p>
+               <p>Total</p>
+               <p>₹ <span id="total">{{totalAmount}}</span></p>
             </div>
             <a href="" class="btn btn-success">Checkout</a>
          </div>
       </div>
+      
    </div>
    <footer>
       <div class="container footer-section">
@@ -112,10 +113,7 @@
    }
 
    .btn-white {
-      border-radius: unset;
       height: 100%;
-      color: #3e4152;
-      padding-top: 8px;
       box-shadow: none;
    }
 
@@ -254,7 +252,6 @@
    }
 
    .btn-div {
-      width: 136px;
       height: 33px;
       border: solid 1px lightgreen;
       display: flex;
@@ -287,6 +284,7 @@
       align-items: center;
       width: 100%;
       min-width: 1054px;
+      margin: 2em auto;
 
    }
 
@@ -317,7 +315,7 @@
       color: #fff;
    }
 
-   .product-name {
+   .details h2 {
       font-size: 1.22rem;
       font-weight: inherit;
       color: #3e4152;
@@ -326,20 +324,20 @@
       display: flex;
    }
 
-   .cart-name {
+   .cart-items p {
       font-size: 14px;
       font-weight: 600;
       font-family: monospace;
 
    }
 
-   .cart-title {
+   .cart-header h2 {
       width: 30%;
       font-size: 32px;
       font-weight: 600;
       padding-bottom: 18px;
    }
-   .total-amount{
+   .total p{
       font-weight: 800;
    }
 </style>

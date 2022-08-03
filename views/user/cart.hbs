@@ -1,215 +1,574 @@
-<div class="col-lg-8 col-md-6 mb-md-0 mb-4 mt-5 mr-5 pr-5" style="margin-left: -26rem; height: 35rem;">
-{{#if cartEmpty}}
- <div class="cart-empty">
-<img class="cart-empty-img" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0" alt="">
-    </div>
-    <div>
-      <div class="empty-text">Your cart is empty</div>
-     <div class="empty-text-2">You can go to home page to view more restaurants</div>
-    </div>
-    <div>
-      <a href="/" class="btn btn-block btn-warning home-btn">See restaurants near you</a>
-    </div>
-    {{else}}
-    <div class="card">
-        <div class="card-header pb-0">
-            <div class="row">
-                <div class="col-lg-6 col-7">
-                    <h6>Products</h6>
-                    <a href="/vendor/add-products" class="btn btn-warning">Add products</a>
+<script>
+  /////////////////////////
+  /* CHANGE QUANTITY AJAX*/
+  ////////////////////////////
 
-                </div>
+  function changeQuantity(cartId, proId, userId, count) {
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count = parseInt(count)
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.removeProduct) {
+          alert("Item removed from cart")
+          location.reload()
+        } else {
+          console.log(response);
+          document.getElementById(proId).innerHTML = quantity + count
+          document.getElementById('total').innerHTML = response.total
+        }
+      }
+    })
+  }
+</script>
 
-                <div class="col-lg-6 col-5 my-auto text-end">
-                    <div class="dropdown float-lg-end pe-4">
-                        <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-ellipsis-v text-secondary"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                            </li>
-                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                    action</a></li>
-                            <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
-                                    else here</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-body px-0 pb-2" >
-            <div class="table-responsive bg-white" >
-                <table class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
-                                Product name</th>
-                            <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Category</th>
-                                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Shop name</th>
-                                  <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Shop location</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Price</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Image</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each products}}
-                        <tr>
-                         <td>
-                                   
-                             <h6 class="mb-0 text-sm text-center">{{this.product.ProductName}}</h6>
-                                    
-                             
-                            </td>
-                            <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.product.Category}}</h6>
-                
-                              
-                            </td>
-                             <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.product.ShopName}}</h6>
-                
-                              
-                            </td>
-                             <td>
-                             <h6 class="mb-0 text-sm text-center">{{this.product.ShopLocation}}</h6>
-                
-                              
-                            </td>
-                            <td>
-                                <h6 class="mb-0 text-sm text-center">{{this.product.Price}}</h6>
-                            </td>
-                             <td class="text-center">
-                               <img style="width: 50px; height: 50px;" src="/product-images/{{this.product._id}}.jpg" alt="">
-                            </td>
-                             <td class="text-sm text-center mb-0">
-                                <button onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)" class="btn btn-danger">-</button> 
-                                 <span id="{{this.product._id}}">{{this.quantity}} </span> 
-                                <button onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)" class="btn btn-success">+</button>
-                            </td>
-                           
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-   
-   
-</div>
-<div>
-    
-</div>
- <div class="float-right price-div">
-        <div class="card mb-4">
-          <div class="card-header py-3">
-            <h5 class="mb-0">Summary</h5>
+
+<div class="main-section">
+  <div class="container">
+    <div class="section-left">
+      <div class="column top-column">
+        <div class="del-address">Delivery address</div>
+        <div class="address">
+          <div class="home-card bg-white">
+            <h5>Home</h5>
+            <p>1001 Veterans BlvdRedwood City, CA 94063</p>
+            <button id="button" class="btn text-dark">Edit</button>
           </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                Products
-                <span>₹<span id="productTotal"> {{totalAmount}}</span></span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                Shipping
-                <span class="text-success">FREE</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                <div>
-                  <strong>Total amount</strong>
-                  <strong>
-                    <p class="mb-0">(including VAT)</p>
-                  </strong>
+          <div class="home-card bg-white">
+            <h5>Work</h5>
+            <p>1001 Veterans BlvdRedwood City, CA 94063</p>
+            <button href="#" id="button" class="btn text-dark">Edit</button>
+          </div>
+        </div>
+      </div>
+      <div class="column bottom-column">
+        <form action="" enctype="multipart/form-data" id="checkout-form">
+          <div class="radio-with-Icon">
+            <p class="radioOption-Item">
+              <input type="radio" name="BannerTypes" id="BannerType1" value="true"
+                class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
+              <label for="BannerType1">
+                <i class="fa-brands fa-paypal fa-3x"></i>
+              </label>
+            </p>
+
+            <p class="radioOption-Item">
+              <input type="radio" name="BannerTypes" id="BannerType2" value="false"
+                class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
+              <label for="BannerType2">
+                <i class="fa-brands fa-amazon-pay fa-3x"></i>
+              </label>
+            </p>
+            <p class="radioOption-Item">
+              <input type="radio" name="BannerTypes" id="BannerType3" value="false"
+                class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
+              <label for="BannerType3">
+                <i class="fa-solid fa-truck-fast fa-3x"></i>
+              </label>
+            </p>
+          </div>
+          <a href="" type="submit" class="btn btn-success m-3">Pay <span>₹ 137</span></a>
+        </form>
+      </div>
+    </div>
+    <div class="section-right">
+      <div class="column column-right">
+        <div class="cart">
+
+          <div class="cart-top">
+            <div class="cart-header">
+              <h2 class="text-dark">Cart</h2>
+            </div>
+            <div class="shop-details">
+              <img src="/shop-images/{{cartVendorId}}.jpg" alt="">
+              <p>{{vendorDetails.ShopName}}</p>
+            </div>
+          </div>
+          <div class="cart-details">
+            {{#each cartItems}}
+            <div class="setup">
+              <div class="product-details">
+                <p>{{this.product.ProductName}}</p>
+                <div class="btn-div">
+
+                  <button class="btn btn-white text-secondary fnt-btn"
+                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',-1)">-</button>
+                  <span id="{{this.product._id}}">{{this.quantity}}</span>
+                  <button class="btn btn-white text-success fnt-btn"
+                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../userId}}',1)">+</button>
                 </div>
-                <span>₹ <strong class="text-success" id="total">{{totalAmount}}</strong></span>
-              </li>
-            </ul>
-            {{#if cartVendorId}}
-            <a href="/checkout/{{cartVendorId}}" type="button" class="btn btn-success btn-lg btn-block text-white">
-              Go to checkout
-            </a>
-            {{/if}}
+              </div>
+
+            </div>
+            {{/each}}
+          </div>
+          <div class="checkout">
+            <div class="total">
+              <p>Total</p>
+              <p>₹ <span id="total">{{totalAmount}}</span></p>
+            </div>
+            <a href="" class="btn btn-success">Checkout</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
- {{/if}}
+
+</div>
+
+<div class="bg-modal">
+  <div class="form-content">
+    <div class="close">+</div>
+    <div class="form-top">
+      <h5>Add delivery address</h5>
+    </div>
+    <form id="address-form">
+      <input class="blck bar" type="text" name="DeliveryArea" placeholder="Delivery area">
+      <input type="text" name="User" value="{{user}}" hidden> 
+      <input class="bar" type="text" name="CompleteAddress"
+        placeholder="Complete address eg. house number,street name,landmark">
+      <input class="bar" type="text" name="DeliveryInstructions"
+        placeholder="Delivery instructions eg. Opposite gold soulk mall">
+      <div class="radio-buttons">
+
+        <div class="button">
+          <input type="radio" id="a25" value="Home" name="AddressType" />
+          <label class="btn btn-default" for="a25">Home</label>
+        </div>
+        <div class="button">
+          <input type="radio" id="a50" name="AddressType" value="Work" />
+          <label class="btn btn-default" for="a50">Work</label>
+        </div>
+        <div class="button">
+          <input type="radio" id="a75" name="AddressType" value="Other" />
+          <label class="btn btn-default" for="a75">Other</label>
+        </div>
+      </div>
+      <button class="btn" type="submit">Add address</button>
+    </form>
+  </div>
+</div>
+
 <style>
-    .card{
-        box-shadow: none;
-    }
-    .card-body{
-         height: 17rem;
+  /* Design changes */
+  header {
+    margin-top: 1rem;
+    min-width: 1054px;
+  }
+
+  .container {
+    border: solid 1px magenta;
+    display: flex;
+    min-width: 1054px;
+  }
+
+  .main-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: #e9ecee;
+    min-width: 1054px;
+  }
+
+  .section-left {
+    width: 56%;
+  }
+
+  .top-column {
+    border: solid 1px magenta;
+    width: 100%;
+    margin: 2em;
+    min-height: 220px;
+    background-color: #fff;
+  }
+
+  .address {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em auto;
+  }
+
+  .home-card {
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    max-height: 155px;
+    min-width: 264px;
+  }
+
+  .main-section .top-column .btn {
+    width: 100%;
+    background: #e9ecee;
+    border-top: solid 1px black;
+    border-radius: unset;
+    text-transform: none;
+  }
+
+  .bottom-column {
+    border: solid 1px magenta;
+    width: 100%;
+    min-height: 200px;
+    margin: 2em;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
     background: #fff;
-    }
-    .price-div{
-         margin-left: 74rem;
-    margin-top: -24rem;
-    width: 22rem;
-    }
-    .cart-empty-img{
-       margin-left: 40rem;
-    height: 20rem;
-    margin-top: 8rem;
-    }
-    .empty-text{
-     font-size: 20px;
+  }
+
+  /* Radio button design*/
+
+  div.radio-with-Icon {
+    display: block;
+  }
+
+  div.radio-with-Icon p.radioOption-Item {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    margin: 25px 15px;
+    border: none;
+  }
+
+  div.radio-with-Icon p.radioOption-Item label {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #FF4B2B;
+    color: #FF4B2B;
+    cursor: pointer;
+    opacity: .8;
+    transition: none;
+    font-size: 13px;
+    padding-top: 25px;
+    text-align: center;
+    margin: 0 !important;
+  }
+
+  div.radio-with-Icon p.radioOption-Item label:hover,
+  div.radio-with-Icon p.radioOption-Item label:focus,
+  div.radio-with-Icon p.radioOption-Item label:active {
+    opacity: .5;
+    background-color: #de1831;
+    color: #fff;
+    margin: 0 !important;
+  }
+
+  div.radio-with-Icon p.radioOption-Item label::after,
+  div.radio-with-Icon p.radioOption-Item label:after,
+  div.radio-with-Icon p.radioOption-Item label::before,
+  div.radio-with-Icon p.radioOption-Item label:before {
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+  }
+
+  div.radio-with-Icon p.radioOption-Item label i.fa {
+    display: block;
+    font-size: 50px;
+  }
+
+  div.radio-with-Icon p.radioOption-Item input[type="radio"] {
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:active~label {
+    opacity: 1;
+  }
+
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:checked~label {
+    opacity: 1;
+    border: none;
+    background-color: #de1831;
+    color: #fff;
+  }
+
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:hover,
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:focus,
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]:active {
+    margin: 0 !important;
+  }
+
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]+label:before,
+  div.radio-with-Icon p.radioOption-Item input[type="radio"]+label:after {
+    margin: 0 !important;
+  }
+
+  /*Cart design */
+  .section-right {
+    width: 49%;
+  }
+
+  .column-right {
+    width: 100%;
+  }
+
+  .cart {
+    border-left: solid 2px #171a29;
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin: 5em auto;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 322px;
+    max-height: 600px;
+  }
+
+  .cart-top {
+    width: 91%;
+  }
+
+  .cart-header {
+    max-height: 62px;
+  }
+
+  .shop-details {
+    max-height: 88px;
+    display: flex;
+  }
+
+  .cart-details {
+    width: 96%;
+    overflow-y: auto;
+    max-height: 600px;
+    margin-top: 1em;
+  }
+
+  .product-details {
+    width: 96%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  .checkout {
+    width: 96%;
+    align-items: center;
+  }
+
+  .btn-div {
+    height: 33px;
+    border: solid 1px lightgreen;
+    display: flex;
+    background-color: #fff;
+  }
+
+  .quantity {
+    padding: 0.5em;
+  }
+
+  .quantity-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .total {
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    width: 94%;
+  }
+
+  .cart img {
+    width: 56px;
+  }
+
+  /* Hidden form */
+
+  .bg-modal {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+  }
+
+  .form-content {
+    min-width: 508px;
+    height: 461px;
+    background-color: #fff;
+    justify-content: center;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .form-top {
+    border-bottom: solid 1px lightgray;
+    height: 49px;
+    width: 100%;
+  }
+
+  .bg-modal .form-content .bar {
+    width: 85%;
+    margin: 47px auto;
+    display: block;
+    border-radius: 3px;
+    border: solid 1px lightgray;
+    min-height: 33px;
+  }
+
+  .bg-modal .form-content .form-top h5 {
+    margin: 1em 40px;
+  }
+
+  .blck {
+    display: block;
+  }
+
+  .radio-buttons {
+    height: 42px;
+    width: 85%;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+  }
+
+  .button {
+    float: left;
+    margin: 0 5px 0 0;
+    width: 31.33%;
+    height: 40px;
+    position: relative;
+    border-left: solid 1px lightgray;
+    color: gray;
+  }
+
+  .button label,
+  .button input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .button input[type="radio"] {
+    opacity: 0.011;
+    z-index: 100;
+  }
+
+  .button input[type="radio"]:checked+label {
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    color: #fff;
+    height: 39px;
+    width: 138px;
+    border-radius: unset;
+  }
+
+  .button label {
+    cursor: pointer;
+    z-index: 90;
+    line-height: 1.8em;
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 42px;
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+
+  .bg-modal .form-content button {
+    margin: 14px 1em;
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    color: #fff;
+    width: 93%;
+  }
+
+  /* Font designs*/
+  .main-section .section-left .top-column .del-address {
+    font-size: 1.3rem;
     font-weight: 600;
-    color: #535665;
-    padding-left: 47rem;
-    padding-top: 2rem;
-    }
-    .empty-text-2{
-     margin-top: 8px;
-    color: #7e808c;
-    padding-left: 41rem;
-    }
-    .home-btn{
-      width: 16rem;
-    margin-left: 45rem;
-    background-color:#FF4B2B ;
-    }
+    color: #282c3f;
+    padding: 1em;
+  }
+
+  .main-section .section-left .top-column .address h5 {
+    padding: 10px;
+  }
+
+  .main-section .section-left .top-column .address p {
+    padding: 10px;
+    font-size: 12px;
+  }
 </style>
 <script>
-   function changeQuantity(cartId, proId,userId,count) {
-      let quantity = parseInt(document.getElementById(proId).innerHTML)
-      count = parseInt(count)
-      $.ajax({
-         url: '/change-product-quantity',
-         data: {
-            user:userId,
-            cart: cartId,
-            product: proId,
-            count: count,
-            quantity: quantity
-         },
-         method: 'post',
-         success: (response) => {
-            if (response.removeProduct) {
-               alert("Item removed from cart")
-               location.reload()
-            } else {
-               console.log(response);
-               document.getElementById(proId).innerHTML = quantity + count
-               document.getElementById('total').innerHTML=response.total
-               document.getElementById('productTotal').innerHTML=response.total
+
+  /////////////////////////
+  /* CHECKOUT FORM AJAX*/
+  ////////////////////////
 
 
-            }
-         }
-      })
-   }
+  $("#checkout-form").submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: '/place-order',
+      method: 'post',
+      data: $("#checkout-form").serialize(),
+      success: (response) => {
+        alert(response)
+        if (response.codSuccess) {
+          location.href = '/order-success'
+        } else {
+          alert("Razorpay")
+        }
+      }
+    })
+  });
+
+
+  ////////////////////////////
+  /* ADDRESS FORM AJAX */
+  /////////////////////////
+
+  $("#address-form").submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: '/add-address',
+      method: 'post',
+      data: $("#address-form").serialize(),
+      success: (response) => {
+        alert(response)
+      }
+    })
+  });
+
+  ////////////////////////////
+  /* HIDDEN ADDRESS FORM JS*/
+  ////////////////////////////
+  document.getElementById('button').addEventListener('click',
+    function () {
+      document.querySelector('.bg-modal').style.display = 'flex';
+    });
+
+  document.querySelector('.close').addEventListener('click',
+    function () {
+      document.querySelector('.bg-modal').style.display = 'none';
+    });
+
 </script>
-
