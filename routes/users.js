@@ -25,7 +25,7 @@ router.get('/', async function (req, res, next) {
   }
   console.log(cartCount);
   userHelpers.getAllVendors(user).then((vendors) => {
-    res.render('user/home-page', { user,user_status:true, vendors, cartCount });
+    res.render('user/home-page', { user, user_status: true, vendors, cartCount });
   })
 
 });
@@ -81,7 +81,6 @@ router.post('/add-to-cart', verifyUserLogin, (req, res, next) => {
 router.get('/cart', verifyUserLogin, async (req, res, next) => {
   let cartItems = await userHelpers.getCartItems(req.session.user._id)
   console.log(cartItems);
-
   // let total=await userHelpers.getProductTotal(req.session.user._id)
   let totalAmount = 0
   let cartVendorId = 0
@@ -92,9 +91,12 @@ router.get('/cart', verifyUserLogin, async (req, res, next) => {
   } else {
     cartEmpty = true
   }
-  let vendorDetails= await userHelpers.getVendorDetails(cartVendorId)
   let user = req.session.user._id
-  res.render('user/cart', { user_status: true,cartItems, user, totalAmount, cartVendorId, cartEmpty,vendorDetails })
+  let vendorDetails = await userHelpers.getVendorDetails(cartVendorId)
+  let homeAddress= await userHelpers.getHomeAddress(user)
+  let workAddress= await userHelpers.getWorkAddress(user)
+ 
+  res.render('user/cart', { user_status: true, cartItems, user, totalAmount, cartVendorId, cartEmpty, vendorDetails,homeAddress,workAddress })
   cartEmpty = false;
 });
 router.get('/get-vendor-details/:id', verifyUserLogin, async (req, res, next) => {
@@ -115,10 +117,10 @@ router.get('/get-vendor-details/:id', verifyUserLogin, async (req, res, next) =>
   if (cartItems.length > 0) {
     cartVendorId = cartItems[0].vendor
   }
-console.log(vendorProducts);
-let user=req.session.user
+  console.log(vendorProducts);
+  let user = req.session.user
   let userId = req.session.user._id
-  res.render('user/vendor-details', { user_status: true, vendorDetails, vendorProducts, cartCount, cartItems, userId,user, total, cartVendorId, totalAmount })
+  res.render('user/vendor-details', { user_status: true, vendorDetails, vendorProducts, cartCount, cartItems, userId, user, total, cartVendorId, totalAmount })
 });
 router.post('/change-product-quantity', (req, res, next) => {
   userHelpers.changeProductQuantity(req.body).then(async (response) => {
@@ -138,38 +140,45 @@ router.get('/checkout/:id', verifyUserLogin, async (req, res, next) => {
   if (cartItems.length > 0) {
     totalAmount = await userHelpers.getTotalAmount(req.session.user._id)
   }
-  res.render('user/checkout', { cartItems, vendorDetails, vendor, totalAmount ,user:req.session.user._id})
+  res.render('user/checkout', { cartItems, vendorDetails, vendor, totalAmount, user: req.session.user._id })
 });
 
-router.post('/add-address',(req,res,next)=>{
+router.post('/add-address', (req, res, next) => {
   console.log(req.body);
-  userHelpers.addAddress(req.body).then((response)=>{
+  userHelpers.addAddress(req.body).then((response) => {
     res.json(response)
   })
 })
 
 
-router.post('/place-order',async (req,res,next)=>{
+router.post('/place-order', async (req, res, next) => {
   console.log(req.body);
-  let products=await userHelpers.getCartProductList(req.body.userId);
-  let totalPrice=await getTotalAmount(req.body.userId)
-  userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
-    if(req.body['payment-method']==='COD'){
-      res.json({codSuccess:true})
-    }else if(req.body['payment-method']==='Razorpay'){
-      userHelpers.generateRazorPay(orderId, totalPrice).then((response)=>{
+  let products = await userHelpers.getCartProductList(req.body.UserId);
+  let totalPrice = await userHelpers.getTotalAmount(req.body.UserId)
+  if(req.body['AddressType']==='Home'){
+    console.log(("Working"));
+    var userAddress= await userHelpers.getHomeAddress(req.body.UserId)
+  }else if(req.body['AddressType']==='Work'){
+     var userAddress= await userHelpers.getWorkAddress(req.body.UserId)
+  }
+  console.log(userAddress);
+  userHelpers.placeOrder(req.body, products, totalPrice,userAddress).then((orderId) => {
+    if (req.body['Payment-method'] === 'COD') {
+      res.json({ codSuccess: true })
+    } else if (req.body['Payment-method'] === 'Razorpay') {
+      userHelpers.generateRazorPay(orderId, totalPrice).then((response) => {
         res.json(response)
       })
     }
   })
 });
-router.get('/order-success',(req,res,next)=>{
-  res.render('user/order-success' ,{user_status:true})
+router.get('/order-success', (req, res, next) => {
+  res.render('user/order-success', { user_status: true })
 });
-router.get('/orders',verifyUserLogin,async(req,res, next)=>{
-  let orders=await userHelpers.getUserOrders(req.session.user._id)
+router.get('/orders', verifyUserLogin, async (req, res, next) => {
+  let orders = await userHelpers.getUserOrders(req.session.user._id)
   console.log(orders);
-  res.render('user/view-orders',{user_status:true,orders})
+  res.render('user/view-orders', { user_status: true, orders })
 })
 
 module.exports = router;

@@ -1,83 +1,78 @@
-<script>
-  /////////////////////////
-  /* CHANGE QUANTITY AJAX*/
-  ////////////////////////////
-
-  function changeQuantity(cartId, proId, userId, count) {
-    let quantity = parseInt(document.getElementById(proId).innerHTML)
-    count = parseInt(count)
-    $.ajax({
-      url: '/change-product-quantity',
-      data: {
-        user: userId,
-        cart: cartId,
-        product: proId,
-        count: count,
-        quantity: quantity
-      },
-      method: 'post',
-      success: (response) => {
-        if (response.removeProduct) {
-          alert("Item removed from cart")
-          location.reload()
-        } else {
-          console.log(response);
-          document.getElementById(proId).innerHTML = quantity + count
-          document.getElementById('total').innerHTML = response.total
-        }
-      }
-    })
-  }
-</script>
-
-
+{{#if cartEmpty}}
+<div class="empty-sec">
+ <div class="cart-empty">
+<img class="cart-empty-img" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0" alt="">
+    </div>
+    <div class="text-container">
+      <div class="empty-text">Your cart is empty</div>
+     <div class="empty-text-2">You can go to home page to view more restaurants</div>
+    </div>
+    <div>
+      <a href="/" class="btn btn-block btn-warning home-btn">See restaurants near you</a>
+    </div>
+</div>
+    {{else}}
 <div class="main-section">
+  
   <div class="container">
     <div class="section-left">
-      <div class="column top-column">
-        <div class="del-address">Delivery address</div>
-        <div class="address">
-          <div class="home-card bg-white">
-            <h5>Home</h5>
-            <p>1001 Veterans BlvdRedwood City, CA 94063</p>
-            <button id="button" class="btn text-dark">Edit</button>
-          </div>
-          <div class="home-card bg-white">
-            <h5>Work</h5>
-            <p>1001 Veterans BlvdRedwood City, CA 94063</p>
-            <button href="#" id="button" class="btn text-dark">Edit</button>
+      <form action="" enctype="multipart/form-data" id="checkout-form">
+        <div class="column top-column">
+          <div class="del-address">Delivery address</div>
+
+          <div class="address">
+            <div class="home-card bg-white">
+              <div class="form-check pb-2">
+                <input class="form-check-input" type="radio" name="AddressType" value="Home" id="flexRadioDefault1">
+              </div>
+              <h5>{{homeAddress.AddressType}}</h5>
+              <p>{{homeAddress.CompleteAddress}} ,<span>{{homeAddress.DeliveryInstructions}}</span><span>
+                  ,{{homeAddress.DeliveryArea}}</span></p>
+              <button id="button" class="btn text-dark">Edit</button>
+            </div>
+            <div class="home-card bg-white">
+              <div class="form-check pb-2">
+                <input class="form-check-input" type="radio" name="AddressType" value="Work" id="flexRadioDefault2"
+                  checked>
+              </div>
+              <h5>{{workAddress.AddressType}}</h5>
+              <p>{{workAddress.CompleteAddress}},<span>{{workAddress.DeliveryInstructions}}</span><span>
+                  ,{{homeAddress.DeliveryArea}}</span></p>
+              <button href="#" id="button" class="btn text-dark">Edit</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="column bottom-column">
-        <form action="" enctype="multipart/form-data" id="checkout-form">
+        <div class="column bottom-column">
+          <input type="text" name="UserId" value="{{user}}" hidden>
           <div class="radio-with-Icon">
             <p class="radioOption-Item">
-              <input type="radio" name="BannerTypes" id="BannerType1" value="true"
+              <input type="radio" name="Payment-method" id="BannerType" value="Paypal"
                 class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
-              <label for="BannerType1">
-                <i class="fa-brands fa-paypal fa-3x"></i>
+              <label for="BannerType">
+                <img src="/images/site-images/paypal.png" alt="">
               </label>
             </p>
 
             <p class="radioOption-Item">
-              <input type="radio" name="BannerTypes" id="BannerType2" value="false"
+              <input type="radio" name="Payment-method" id="BannerType2" value="Razorpay"
                 class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
               <label for="BannerType2">
-                <i class="fa-brands fa-amazon-pay fa-3x"></i>
+                 <img src="/images/site-images/razorpay2.png" alt="">
               </label>
             </p>
             <p class="radioOption-Item">
-              <input type="radio" name="BannerTypes" id="BannerType3" value="false"
+              <input type="radio" name="Payment-method" id="BannerType3" value="COD"
                 class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
               <label for="BannerType3">
-                <i class="fa-solid fa-truck-fast fa-3x"></i>
+               <img src="/images/site-images/cod.png" alt="">
               </label>
             </p>
           </div>
-          <a href="" type="submit" class="btn btn-success m-3">Pay <span>₹ 137</span></a>
-        </form>
-      </div>
+          <button type="submit" class="btn btn-success m-3">Pay <span>₹</span> <span
+              id="cart-total">{{totalAmount}}</span></button>
+
+        </div>
+      </form>
     </div>
     <div class="section-right">
       <div class="column column-right">
@@ -121,8 +116,26 @@
       </div>
     </div>
   </div>
-
 </div>
+<footer>
+  <div class="container footer-section">
+    <div class="content">
+      <div id="logo">
+        <h1><a href="/"><span class="fa fa-align-center text-warning"></span><span
+              class="text-white logo-span">Foodizone</span></a></h1>
+      </div>
+      <div class="copyrights">
+        <p class="text-white"><i class="fa-regular fa-copyright"></i> Foodizone 2022</p>
+      </div>
+      <div class="site-details">
+        <a href="" class="text-warning">Home</a> /
+        <a href="" class="text-warning">About us</a> /
+        <a href="" class="text-warning">Contact us</a> /
+        <a href="" class="text-warning">Feedback</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <div class="bg-modal">
   <div class="form-content">
@@ -132,7 +145,7 @@
     </div>
     <form id="address-form">
       <input class="blck bar" type="text" name="DeliveryArea" placeholder="Delivery area">
-      <input type="text" name="User" value="{{user}}" hidden> 
+      <input type="text" name="User" value="{{user}}" hidden>
       <input class="bar" type="text" name="CompleteAddress"
         placeholder="Complete address eg. house number,street name,landmark">
       <input class="bar" type="text" name="DeliveryInstructions"
@@ -155,6 +168,7 @@
       <button class="btn" type="submit">Add address</button>
     </form>
   </div>
+  {{/if}}
 </div>
 
 <style>
@@ -165,9 +179,8 @@
   }
 
   .container {
-    border: solid 1px magenta;
     display: flex;
-    min-width: 1054px;
+    min-width: 1130px;
   }
 
   .main-section {
@@ -183,11 +196,10 @@
   }
 
   .top-column {
-    border: solid 1px magenta;
-    width: 100%;
     margin: 2em;
-    min-height: 220px;
     background-color: #fff;
+    height: 292px;
+    min-width: 678px;
   }
 
   .address {
@@ -200,8 +212,10 @@
   .home-card {
     border: solid 1px lightgray;
     border-radius: 5px;
-    max-height: 155px;
-    min-width: 264px;
+    max-height: 183px;
+    min-width: 311px;
+    max-width: 311px;
+    margin: 0 auto;
   }
 
   .main-section .top-column .btn {
@@ -213,7 +227,6 @@
   }
 
   .bottom-column {
-    border: solid 1px magenta;
     width: 100%;
     min-height: 200px;
     margin: 2em;
@@ -225,6 +238,10 @@
   }
 
   /* Radio button design*/
+  .form-check-input {
+    padding-bottom: 7px;
+    margin-top: 0;
+  }
 
   div.radio-with-Icon {
     display: block;
@@ -241,26 +258,26 @@
 
   div.radio-with-Icon p.radioOption-Item label {
     display: block;
-    height: 100%;
+    height: 90%;
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid #FF4B2B;
     color: #FF4B2B;
     cursor: pointer;
-    opacity: .8;
     transition: none;
     font-size: 13px;
-    padding-top: 25px;
     text-align: center;
     margin: 0 !important;
+  }
+  div.radio-with-Icon p.radioOption-Item img{
+    width: 86px;
   }
 
   div.radio-with-Icon p.radioOption-Item label:hover,
   div.radio-with-Icon p.radioOption-Item label:focus,
   div.radio-with-Icon p.radioOption-Item label:active {
     opacity: .5;
-    background-color: #de1831;
+    background-color: lightgray;
     color: #fff;
     margin: 0 !important;
   }
@@ -293,7 +310,7 @@
   div.radio-with-Icon p.radioOption-Item input[type="radio"]:checked~label {
     opacity: 1;
     border: none;
-    background-color: #de1831;
+    background-color: lightgray;
     color: #fff;
   }
 
@@ -389,6 +406,81 @@
     width: 56px;
   }
 
+  /* Footer designs */
+  .footer-section {
+    background-color: #1b1d1d;
+    max-width: 100%;
+    display: flex;
+    min-height: 14rem;
+    align-items: center;
+    width: 100%;
+    min-width: 1054px;
+
+  }
+
+  .logo {
+    margin: 0 18em;
+  }
+
+  .content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* media queries*/
+  @media (max-width:737px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+
+  }
+
+  /* CART EMPTY STYLES */
+
+  .empty-sec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 9em auto;
+  }
+  .cart-empty-img{
+    width: 407px;
+  }
+  .empty-text{
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #535665;
+    text-align: center;
+  }
+  .empty-text-2{
+    margin-top: 8px;
+    color: #7e808c;
+  }
+  .text-container{
+    margin: 2em auto;
+  }
+  .home-btn{
+    margin-top: 30px;
+    padding: 11px 20px;
+    text-transform: uppercase;
+    background-color: #fc8019;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    font-size: 15px;
+    text-align: center;
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    transition: transform .8s cubic-bezier(.2,1,.2,1);
+  }
+
+
   /* Hidden form */
 
   .bg-modal {
@@ -399,6 +491,7 @@
     background-color: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
+    min-width: 1054px;
     display: none;
 
   }
@@ -515,9 +608,40 @@
   .main-section .section-left .top-column .address p {
     padding: 10px;
     font-size: 12px;
+    min-height: 56px;
   }
 </style>
 <script>
+  /////////////////////////
+  /* CHANGE QUANTITY AJAX*/
+  ////////////////////////////
+
+  function changeQuantity(cartId, proId, userId, count) {
+    let quantity = parseInt(document.getElementById(proId).innerHTML)
+    count = parseInt(count)
+    $.ajax({
+      url: '/change-product-quantity',
+      data: {
+        user: userId,
+        cart: cartId,
+        product: proId,
+        count: count,
+        quantity: quantity
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.removeProduct) {
+          alert("Item removed from cart")
+          location.reload()
+        } else {
+          console.log(response);
+          document.getElementById(proId).innerHTML = quantity + count
+          document.getElementById('total').innerHTML = response.total
+          document.getElementById('cart-total').innerHTML = response.total
+        }
+      }
+    })
+  }
 
   /////////////////////////
   /* CHECKOUT FORM AJAX*/

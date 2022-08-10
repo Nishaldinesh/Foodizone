@@ -146,6 +146,27 @@ module.exports = {
             console.log(err)
         }
     },
+    getHomeAddress: (userId) => {
+        try{
+            return new Promise(async(resolve, reject) => {
+                let homeAddress=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:objectId(userId), AddressType:'Home'} )
+                resolve(homeAddress)
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    getWorkAddress:(userId)=>{
+        try{
+            return new Promise(async(resolve, reject) => {
+                let workAddress=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:objectId(userId),AddressType:'Work'}) 
+                resolve(workAddress)
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+
     getCartCount: (userId) => {
         try {
             return new Promise(async (resolve, reject) => {
@@ -327,7 +348,6 @@ module.exports = {
         }
     },
     addAddress: (details) => {
-        console.log("Working");
         try {
             return new Promise(async (resolve, reject) => {
                 let addresssObj = {
@@ -337,20 +357,20 @@ module.exports = {
                     DeliveryInstructions: details.DeliveryInstructions,
                     AddressType: details.AddressType
                 }
-                let userAddress = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:objectId(details.User), AddressType:details.AddressType})
+                let userAddress = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ user: objectId(details.User), AddressType: details.AddressType })
 
                 if (userAddress) {
-                    db.get().collection(collection.ADDRESS_COLLECTION).updateOne({user:objectId(details.User), AddressType:details.AddressType},
-                    {
-                        $set:{
-                            DeliveryArea: details.DeliveryArea,
-                            CompleteAddress :details.CompleteAddress,
-                            DeliveryInstructions: details.DeliveryInstructions,
-                            AddressType: details.AddressType
-                        }
-                    }).then((response)=>{
-                        resolve(response)
-                    })
+                    db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ user: objectId(details.User), AddressType: details.AddressType },
+                        {
+                            $set: {
+                                DeliveryArea: details.DeliveryArea,
+                                CompleteAddress: details.CompleteAddress,
+                                DeliveryInstructions: details.DeliveryInstructions,
+                                AddressType: details.AddressType
+                            }
+                        }).then((response) => {
+                            resolve(response)
+                        })
                 } else {
                     db.get().collection(collection.ADDRESS_COLLECTION).insertOne(addresssObj).then((response) => {
                         resolve(response)
@@ -361,24 +381,22 @@ module.exports = {
             console.log(err);
         }
     },
-    placeOrder: (order, products, total) => {
+    placeOrder: (order,products, total,userAddress) => {
         try {
             return new Promise((resolve, reject) => {
-                console.log(order, products, total);
-                let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
+                console.log(products, total);
+                let status = order['Payment-method'] === 'COD' ? 'placed' : 'pending'
                 let orderObj = {
-                    userId: objectId(order.userId),
+                    userId: objectId(order.UserId),
                     products: products,
                     deliveryDetails: {
-                        name: order.Name,
-                        mobile: order.Mob,
-                        address: order.Address,
-                        pincode: order.Pincode,
-                        city: order.City,
-                        state: order.State,
+                        address: userAddress.AddressType,
+                        deliveryArea: userAddress.DeliveryArea,
+                        deliveryInstruction: userAddress.DeliveryInstructions,
+                        completeAddress: userAddress.CompleteAddress
                     },
                     orderDetails: {
-                        paymentMethod: order['payment-method'],
+                        paymentMethod: order['Payment-method'],
                         totalAmount: total,
                         status: status,
                         date: new Date(),
@@ -388,7 +406,7 @@ module.exports = {
 
                 }
                 db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
-                    db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(order.userId) })
+                    db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(order.UserId) })
                     console.log(response.insertedId);
                     resolve(response.insertedId)
                 })
