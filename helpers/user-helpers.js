@@ -1,7 +1,7 @@
 var db = require('../config/connection');
 var collection = require('../config/collection');
 var bcrypt = require('bcrypt');
-const { USER_COLLECTION } = require('../config/collection');
+const { USER_COLLECTION, VENDOR_COLLECTION } = require('../config/collection');
 const { response } = require('../app');
 const { resolve, reject } = require('promise');
 const { ObjectID, ObjectId } = require('bson');
@@ -146,21 +146,21 @@ module.exports = {
             console.log(err)
         }
     },
-    getHomeAddress: (userId) => {
+    getUserAddress: (userId) => {
         try{
             return new Promise(async(resolve, reject) => {
-                let homeAddress=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:objectId(userId), AddressType:'Home'} )
-                resolve(homeAddress)
+                let address=await db.get().collection(collection.ADDRESS_COLLECTION).find({user:objectId(userId)} ).toArray()
+                resolve(address)
             })
         }catch(err){
             console.log(err);
         }
     },
-    getWorkAddress:(userId)=>{
+    getPlacedAddress:(userId,addressType)=>{
         try{
             return new Promise(async(resolve, reject) => {
-                let workAddress=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:objectId(userId),AddressType:'Work'}) 
-                resolve(workAddress)
+                let address=await db.get().collection(collection.ADDRESS_COLLECTION).findOne({user:objectId(userId),addressType:addressType}) 
+                resolve(address)
             })
         }catch(err){
             console.log(err);
@@ -324,7 +324,6 @@ module.exports = {
                         }
                     }
                 ]).toArray()
-                console.log(total);
                 if (total.length > 0) {
                     resolve(total[0].total)
                 } else {
@@ -337,36 +336,36 @@ module.exports = {
             console.log(err);
         }
     },
-    getCartProductList: (userId) => {
+   getCartProductList: (userId) => {
         try {
             return new Promise(async (resolve, reject) => {
                 let cart = await db.get().collection(collection.CART_COLLECTION).findOne({ user: objectId(userId) })
-                resolve(cart.products)
+                resolve(cart)
             })
         } catch (err) {
-            console.log(err);
+             console.log(err);
         }
     },
     addAddress: (details) => {
         try {
             return new Promise(async (resolve, reject) => {
                 let addresssObj = {
-                    user: objectId(details.User),
-                    DeliveryArea: details.DeliveryArea,
-                    CompleteAddress: details.CompleteAddress,
-                    DeliveryInstructions: details.DeliveryInstructions,
-                    AddressType: details.AddressType
+                    user: objectId(details.user),
+                    deliveryArea: details.deliveryArea,
+                    completeAddress: details.completeAddress,
+                    deliveryInstructions: details.deliveryInstructions,
+                    addressType: details.addressType
                 }
-                let userAddress = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ user: objectId(details.User), AddressType: details.AddressType })
+                let userAddress = await db.get().collection(collection.ADDRESS_COLLECTION).findOne({ user: objectId(details.user), addressType: details.addressType })
 
                 if (userAddress) {
-                    db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ user: objectId(details.User), AddressType: details.AddressType },
+                    db.get().collection(collection.ADDRESS_COLLECTION).updateOne({ user: objectId(details.user), addressType: details.addressType },
                         {
                             $set: {
-                                DeliveryArea: details.DeliveryArea,
-                                CompleteAddress: details.CompleteAddress,
-                                DeliveryInstructions: details.DeliveryInstructions,
-                                AddressType: details.AddressType
+                                deliveryArea: details.deliveryArea,
+                                completeAddress: details.completeAddress,
+                                deliveryInstructions: details.deliveryInstructions,
+                                addressType: details.addressType
                             }
                         }).then((response) => {
                             resolve(response)
@@ -381,33 +380,45 @@ module.exports = {
             console.log(err);
         }
     },
-    placeOrder: (order,products, total,userAddress) => {
+    deleteAddress:(id)=>{
+        try{
+            return new Promise((resolve, reject) => {
+                db.get().collection(collection.ADDRESS_COLLECTION).deleteOne({_id:objectId(id)}).then((response)=>{
+                    resolve(response)
+                })
+              
+            })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    placeOrder: (order,products,vendorId, total,userAddress) => {
         try {
             return new Promise((resolve, reject) => {
                 console.log(products, total);
-                let status = order['Payment-method'] === 'COD' ? 'placed' : 'pending'
+                let status = order['payment-method'] === 'COD' ? 'Order confirmed' : 'Order pending'
                 let orderObj = {
-                    userId: objectId(order.UserId),
+                    userId: objectId(order.userId),
+                    vendor:objectId(vendorId),
                     products: products,
                     deliveryDetails: {
-                        address: userAddress.AddressType,
-                        deliveryArea: userAddress.DeliveryArea,
-                        deliveryInstruction: userAddress.DeliveryInstructions,
-                        completeAddress: userAddress.CompleteAddress
+                        address: userAddress.addressType,
+                        deliveryArea: userAddress.deliveryArea,
+                        deliveryInstruction: userAddress.deliveryInstructions,
+                        completeAddress: userAddress.completeAddress
                     },
-                    orderDetails: {
-                        paymentMethod: order['Payment-method'],
+                        paymentMethod: order['payment-method'],
                         totalAmount: total,
                         status: status,
                         date: new Date(),
-                    }
 
 
 
                 }
                 db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
-                    db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(order.UserId) })
-                    console.log(response.insertedId);
+                 if(order['payment-method']==='COD'){
+                    db.get().collection(collection.CART_COLLECTION).deleteOne({ user: objectId(order.userId) })
+                 }
                     resolve(response.insertedId)
                 })
             })
@@ -418,24 +429,62 @@ module.exports = {
     getUserOrders: (userId) => {
         try {
             return new Promise(async (resolve, reject) => {
-                console.log(userId);
                 let orders = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
                     {
                         $match: { userId: objectId(userId) }
                     },
                     {
-                        $unwind: '$products'
-                    },
-                    {
                         $project: {
-                            item: '$products.item',
-                            quantity: '$products.quantity',
                             deliveryDetails: '$deliveryDetails',
-                            orderDetails: '$orderDetails'
+                            vendorId: '$vendor',
+                            orderDetails:{
+                                status:'$status',
+                                paymentMethod: '$paymentMethod',
+                                date: '$date',
+                                totalAmount: '$totalAmount'
+                            }
                         }
                     },
                     {
-                        $lookup: {
+                        $lookup:{
+                            from: collection.VENDOR_COLLECTION,
+                            localField: 'vendorId',
+                            foreignField: '_id',
+                            as: 'vendorDetails'
+                        }
+                    },
+                    {
+                        $project: {
+                           deliveryDetails: 1, orderDetails: 1, vendorDetails:{$arrayElemAt:['$vendorDetails',0]}
+
+                        }
+                    }
+                ]).toArray()
+                resolve(orders)
+            })
+
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    getOrderProducts:(orderId)=>{
+        try{
+            return new Promise(async(resolve, reject) => {
+                let products=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                    {
+                        $match:{_id:objectId(orderId)}
+                    },
+                    {
+                        $unwind: '$products'
+                    },
+                    {
+                        $project:{
+                            item: '$products.item',
+                            quantity:'$products.quantity'
+                        }
+                    },
+                    {
+                        $lookup:{
                             from: collection.PRODUCT_COLLECTION,
                             localField: 'item',
                             foreignField: '_id',
@@ -443,18 +492,17 @@ module.exports = {
                         }
                     },
                     {
-                        $project: {
-                            item: 1, quantity: 1, vendor: 1, deliveryDetails: 1, orderDetails: 1, product: { $arrayElemAt: ['$product', 0] }
-
+                        $project:{
+                            item:1,
+                            quantity:1,
+                            product:{$arrayElemAt:['$product',0]}
                         }
                     }
                 ]).toArray()
-                console.log(orders);
-                resolve(orders)
+                resolve(products);
             })
-
-        } catch (err) {
-            console.log(err);
+        }catch(err){
+            console.log(err)
         }
     }
 }

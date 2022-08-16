@@ -1,70 +1,60 @@
 {{#if cartEmpty}}
 <div class="empty-sec">
- <div class="cart-empty">
-<img class="cart-empty-img" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0" alt="">
-    </div>
-    <div class="text-container">
-      <div class="empty-text">Your cart is empty</div>
-     <div class="empty-text-2">You can go to home page to view more restaurants</div>
-    </div>
-    <div>
-      <a href="/" class="btn btn-block btn-warning home-btn">See restaurants near you</a>
-    </div>
+  <div class="cart-empty">
+    <img class="cart-empty-img"
+      src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0" alt="">
+  </div>
+  <div class="text-container">
+    <div class="empty-text">Your cart is empty</div>
+    <div class="empty-text-2">You can go to home page to view more restaurants</div>
+  </div>
+  <div>
+    <a href="/" class="btn btn-block btn-warning home-btn">See restaurants near you</a>
+  </div>
 </div>
-    {{else}}
+{{else}}
 <div class="main-section">
-  
+
   <div class="container">
     <div class="section-left">
       <form action="" enctype="multipart/form-data" id="checkout-form">
         <div class="column top-column">
-          <div class="del-address">Delivery address</div>
+          <div class="del-address"><i class="fa-solid fa-map-location-dot"></i> Delivery address</div>
 
           <div class="address">
-            <div class="home-card bg-white">
+            {{#each userAddress}}
+            <div class="home-card bg-white col-md-6">
               <div class="form-check pb-2">
-                <input class="form-check-input" type="radio" name="AddressType" value="Home" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="addressType" value="{{this.addressType}}"
+                  id="flexRadioDefault1" checked>
               </div>
-              <h5>{{homeAddress.AddressType}}</h5>
-              <p>{{homeAddress.CompleteAddress}} ,<span>{{homeAddress.DeliveryInstructions}}</span><span>
-                  ,{{homeAddress.DeliveryArea}}</span></p>
-              <button id="button" class="btn text-dark">Edit</button>
+              <h5>{{this.addressType}}</h5>
+              <p>{{this.completeAddress}} ,<span>{{this.deliveryInstructions}}</span><span>
+                  ,{{this.deliveryArea}}</span></p>
+              <button type="button" onclick="viewAddressForm()" class="btn edit-btn text-warning">Edit</button>
+              <button type="button" onclick="deleteAddress('{{this._id}}')" class="btn edit-btn text-warning">Delete</button>
             </div>
-            <div class="home-card bg-white">
-              <div class="form-check pb-2">
-                <input class="form-check-input" type="radio" name="AddressType" value="Work" id="flexRadioDefault2"
-                  checked>
-              </div>
-              <h5>{{workAddress.AddressType}}</h5>
-              <p>{{workAddress.CompleteAddress}},<span>{{workAddress.DeliveryInstructions}}</span><span>
-                  ,{{homeAddress.DeliveryArea}}</span></p>
-              <button href="#" id="button" class="btn text-dark">Edit</button>
-            </div>
+            {{/each}}
+            <button onclick="viewAddressForm()" type="button" class="btn add-btn text-white">Add new address</button>
           </div>
         </div>
         <div class="column bottom-column">
-          <input type="text" name="UserId" value="{{user}}" hidden>
+          <h5><i class="fa-solid fa-wallet"></i> Payment method</h5>
+          <input type="text" name="userId" value="{{userId}}" hidden>
           <div class="radio-with-Icon">
             <p class="radioOption-Item">
-              <input type="radio" name="Payment-method" id="BannerType" value="Paypal"
+              <input type="radio" name="payment-method" id="BannerType" value="COD"
                 class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
               <label for="BannerType">
-                <img src="/images/site-images/paypal.png" alt="">
+                <img src="/images/site-images/cod.png" alt="">
               </label>
             </p>
 
             <p class="radioOption-Item">
-              <input type="radio" name="Payment-method" id="BannerType2" value="Razorpay"
+              <input type="radio" name="payment-method" id="BannerType2" value="Online"
                 class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
               <label for="BannerType2">
-                 <img src="/images/site-images/razorpay2.png" alt="">
-              </label>
-            </p>
-            <p class="radioOption-Item">
-              <input type="radio" name="Payment-method" id="BannerType3" value="COD"
-                class="ng-valid ng-dirty ng-touched ng-empty" aria-invalid="false" style="">
-              <label for="BannerType3">
-               <img src="/images/site-images/cod.png" alt="">
+                <img src="/images/site-images/onlinepay.png" alt="">
               </label>
             </p>
           </div>
@@ -144,24 +134,24 @@
       <h5>Add delivery address</h5>
     </div>
     <form id="address-form">
-      <input class="blck bar" type="text" name="DeliveryArea" placeholder="Delivery area">
-      <input type="text" name="User" value="{{user}}" hidden>
-      <input class="bar" type="text" name="CompleteAddress"
+      <input class="blck bar" type="text" name="deliveryArea" placeholder="Delivery area">
+      <input type="text" name="user" value="{{userId}}" hidden>
+      <input class="bar" type="text" name="completeAddress"
         placeholder="Complete address eg. house number,street name,landmark">
-      <input class="bar" type="text" name="DeliveryInstructions"
+      <input class="bar" type="text" name="deliveryInstructions"
         placeholder="Delivery instructions eg. Opposite gold soulk mall">
       <div class="radio-buttons">
 
         <div class="button">
-          <input type="radio" id="a25" value="Home" name="AddressType" />
+          <input type="radio" id="a25" value="Home" name="addressType" />
           <label class="btn btn-default" for="a25">Home</label>
         </div>
         <div class="button">
-          <input type="radio" id="a50" name="AddressType" value="Work" />
+          <input type="radio" id="a50" name="addressType" value="Work" />
           <label class="btn btn-default" for="a50">Work</label>
         </div>
         <div class="button">
-          <input type="radio" id="a75" name="AddressType" value="Other" />
+          <input type="radio" id="a75" name="addressType" value="Other" />
           <label class="btn btn-default" for="a75">Other</label>
         </div>
       </div>
@@ -169,6 +159,25 @@
     </form>
   </div>
   {{/if}}
+</div>
+
+<div class="success-section">
+  <div class="order-success">
+    <div class="close-2">+</div>
+    <div>
+      <span> <i class="fa-solid fa-square-check text-success fa-5x"></i></span>
+    </div>
+    <div class="text-lg">
+      Thank you for your order
+    </div>
+    <div class="text-sm">
+      Your details have been saved. Someone from our team will reach out to you soon
+    </div>
+    <div>
+      <a href="/profile" class="btn btn-success">View orders</a>
+    </div>
+
+  </div>
 </div>
 
 <style>
@@ -181,6 +190,7 @@
   .container {
     display: flex;
     min-width: 1130px;
+    justify-content: space-between;
   }
 
   .main-section {
@@ -198,15 +208,17 @@
   .top-column {
     margin: 2em;
     background-color: #fff;
-    height: 292px;
+    min-height: 292px;
     min-width: 678px;
+    border-radius: 4px;
   }
 
   .address {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     margin: 1em auto;
+    max-width: 678px;
+    flex-wrap: wrap;
+    display: flex;
   }
 
   .home-card {
@@ -215,26 +227,35 @@
     max-height: 183px;
     min-width: 311px;
     max-width: 311px;
-    margin: 0 auto;
+    margin: 10px;
   }
 
-  .main-section .top-column .btn {
-    width: 100%;
-    background: #e9ecee;
-    border-top: solid 1px black;
+  .main-section .top-column .edit-btn {
     border-radius: unset;
     text-transform: none;
+    background: unset;
+    margin-bottom: 9px;
+  }
+
+  .main-section .top-column .add-btn {
+    width: 100%;
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
   }
 
   .bottom-column {
     width: 100%;
+    min-width: 678px;
     min-height: 200px;
     margin: 2em;
-    align-items: center;
     justify-content: space-around;
     display: flex;
     flex-direction: column;
     background: #fff;
+    border-radius: 4px;
+  }
+
+  .bottom-column h5 {
+    margin: 1em;
   }
 
   /* Radio button design*/
@@ -269,7 +290,8 @@
     text-align: center;
     margin: 0 !important;
   }
-  div.radio-with-Icon p.radioOption-Item img{
+
+  div.radio-with-Icon p.radioOption-Item img {
     width: 86px;
   }
 
@@ -327,7 +349,15 @@
 
   /*Cart design */
   .section-right {
-    width: 49%;
+    width: 32%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    max-height: 443px;
+    padding: 1em;
+    margin: 3em 1em;
+    border-radius: 4px;
   }
 
   .column-right {
@@ -336,7 +366,6 @@
 
   .cart {
     border-left: solid 2px #171a29;
-    width: 49%;
     display: flex;
     flex-direction: column;
     margin: 5em auto;
@@ -439,31 +468,36 @@
 
   /* CART EMPTY STYLES */
 
-  .empty-sec{
+  .empty-sec {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     margin: 9em auto;
   }
-  .cart-empty-img{
+
+  .cart-empty-img {
     width: 407px;
   }
-  .empty-text{
+
+  .empty-text {
     margin-top: 24px;
     font-size: 20px;
     font-weight: 600;
     color: #535665;
     text-align: center;
   }
-  .empty-text-2{
+
+  .empty-text-2 {
     margin-top: 8px;
     color: #7e808c;
   }
-  .text-container{
+
+  .text-container {
     margin: 2em auto;
   }
-  .home-btn{
+
+  .home-btn {
     margin-top: 30px;
     padding: 11px 20px;
     text-transform: uppercase;
@@ -477,7 +511,7 @@
     text-align: center;
     -ms-transform: translateY(0);
     transform: translateY(0);
-    transition: transform .8s cubic-bezier(.2,1,.2,1);
+    transition: transform .8s cubic-bezier(.2, 1, .2, 1);
   }
 
 
@@ -610,7 +644,45 @@
     font-size: 12px;
     min-height: 56px;
   }
+
+  /* ORDER SUCCESS PAGE DESIGNS */
+
+  .success-section {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
+
+  .order-success {
+    background: #fff;
+    color: black;
+    font-weight: 700;
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    height: 35%;
+    justify-content: center;
+    border-radius: 14px;
+    align-items: center;
+    position: relative;
+  }
+
+  .close-2 {
+    font-size: 38px;
+    position: absolute;
+    top: 0;
+    transform: rotate(45deg);
+    right: 12px;
+    cursor: pointer;
+  }
 </style>
+
 <script>
   /////////////////////////
   /* CHANGE QUANTITY AJAX*/
@@ -655,15 +727,73 @@
       method: 'post',
       data: $("#checkout-form").serialize(),
       success: (response) => {
-        alert(response)
         if (response.codSuccess) {
-          location.href = '/order-success'
-        } else {
-          alert("Razorpay")
+          document.querySelector('.success-section').style.display = 'flex';
+        } else if (response.razorpay_status) {
+          razorpayPayment(response)
+
+        }else if(response.err){
+          alert("Oops!! Something went wrong")
         }
       }
     })
   });
+
+  function razorpayPayment(order) {
+    var options = {
+      "key": "rzp_test_Kts2ch8LMAIJM8", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Acme Corp",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+
+        verifyPayment(response, order);
+      },
+      "prefill": {
+        "name": "Nishal Dinesh",
+        "email": "nishaldinesh3516j@gmail.com",
+        "contact": "7907137830"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    rzp1.on('payment.failed', function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
+  }
+
+  function verifyPayment(payment, order) {
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          document.querySelector('.success-section').style.display = 'flex';
+        } else {
+          alert("Payment failed")
+        }
+      }
+    })
+  }
 
 
   ////////////////////////////
@@ -673,7 +803,7 @@
   $("#address-form").submit((e) => {
     e.preventDefault()
     $.ajax({
-      url: '/add-address',
+      url: '/edit-address',
       method: 'post',
       data: $("#address-form").serialize(),
       success: (response) => {
@@ -685,14 +815,33 @@
   ////////////////////////////
   /* HIDDEN ADDRESS FORM JS*/
   ////////////////////////////
-  document.getElementById('button').addEventListener('click',
-    function () {
-      document.querySelector('.bg-modal').style.display = 'flex';
-    });
 
+  function viewAddressForm() {
+    document.querySelector('.bg-modal').style.display = 'flex';
+  }
   document.querySelector('.close').addEventListener('click',
     function () {
       document.querySelector('.bg-modal').style.display = 'none';
     });
+
+  document.querySelector('.close-2').addEventListener('click',
+    function () {
+      document.querySelector('.success-section').style.display = 'none';
+    })
+    /* DELETE ADDRESS*/
+
+    function deleteAddress(id){
+      console.log(id);
+      $.ajax({
+        url:'/delete-address',
+        data:{
+          id
+        },
+        method:'post',
+        success:(response)=>{
+          alert("Address deleted successfully")
+        }
+      })
+    }
 
 </script>

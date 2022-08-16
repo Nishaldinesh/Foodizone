@@ -1,0 +1,430 @@
+<div class="main-section">
+    <div class="container container-main">
+        <aside>
+            <div class="tabs order-tab" id="order-tab">
+                <span class="fa-solid fa-briefcase icons"></span><span class="text">Orders</span>
+            </div>
+            <div class="tabs address-tab" id="address-tab">
+                <span class="fa-solid fa-map-location-dot icons"></span><span class="text">Address</span>
+            </div>
+        </aside>
+        <div class="container container-orders">
+            <div class="contents">
+                {{#each orders}}
+                <div class="orders">
+                    <div class="top">
+                        <div class="inside-left">
+                            <div>
+                                <img src="/shop-images/{{this.vendorDetails._id}}.jpg" alt="">
+                            </div>
+                            <div>
+                                <h5>{{this.vendorDetails.ShopName}}</h5>
+                                <p>{{this.vendorDetails.City}}</p>
+                                <p>details order |<span>{{this.orderDetails.date}}</span></p>
+                            </div>
+                        </div>
+                        <div class="inside-right">
+                            <p>{{this.orderDetails.status}} <i class="fa-solid fa-circle-check"></i></p>
+                            <a href="/view-order-details/{{this._id}}" class="text-warning">View details</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="container container-address">
+            <h4>Manage addresses</h4>
+            <div class="address">
+                {{#each userAddress}}
+                <div class="home-card bg-white col-md-6">
+                    <h5>{{this.addressType}}</h5>
+                    <p>{{this.completeAddress}} ,<span>{{this.deliveryInstructions}}</span><span>
+                            ,{{this.deliveryArea}}</span></p>
+                    <button onclick="viewAddressForm()" class="btn edit-btn text-warning">Edit</button>
+                    <button onclick="viewAddressForm()" class="btn edit-btn text-warning">Delete</button>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="bg-modal">
+    <div class="form-content">
+        <div class="close">+</div>
+        <div class="form-top">
+            <h5>Add delivery address</h5>
+        </div>
+        <form id="address-form">
+            <input class="blck bar" type="text" name="deliveryArea" placeholder="Delivery area">
+            <input type="text" name="user" value="{{userId}}" hidden>
+            <input class="bar" type="text" name="completeAddress"
+                placeholder="Complete address eg. house number,street name,landmark">
+            <input class="bar" type="text" name="deliveryInstructions"
+                placeholder="Delivery instructions eg. Opposite gold soulk mall">
+            <div class="radio-buttons">
+
+                <div class="button">
+                    <input type="radio" id="a25" value="Home" name="addressType" />
+                    <label class="btn btn-default" for="a25">Home</label>
+                </div>
+                <div class="button">
+                    <input type="radio" id="a50" name="addressType" value="Work" />
+                    <label class="btn btn-default" for="a50">Work</label>
+                </div>
+                <div class="button">
+                    <input type="radio" id="a75" name="addressType" value="Other" />
+                    <label class="btn btn-default" for="a75">Other</label>
+                </div>
+            </div>
+            <button class="btn" type="submit">Add address</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    header {
+        min-width: 1404px;
+    }
+
+    .main-section {
+        width: 100%;
+        background: #37718e;
+        display: flex;
+        height: 52rem;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-width: 1404px;
+    }
+
+    .main-section .container-main {
+        height: 42rem;
+        display: flex;
+        align-items: center;
+        min-width: 1304px;
+        background: #fff;
+    }
+
+    .main-section .container-main aside {
+        height: 600px;
+        width: 244px;
+        margin: 0 2em;
+        display: flex;
+        flex-direction: column;
+        background: #edf1f7;
+        align-items: flex-end;
+        padding: 1em 0;
+    }
+
+    .order-tab {
+        background: #fff;
+    }
+
+    .main-section .container-main aside .tabs {
+        height: 61px;
+        width: 90%;
+        color: #282c3f;
+        font-weight: 600;
+        font-size: 18px;
+        position: relative;
+    }
+
+    .main-section .container-main aside .tabs .icons {
+        font-size: 19px;
+        top: 20px;
+        position: absolute;
+        left: 23px;
+    }
+
+    .main-section .container-main aside .tabs .text {
+        font-size: 19px;
+        top: 15px;
+        position: absolute;
+        left: 55px;
+        margin-left: 10px;
+    }
+
+    .main-section .container-main .container-orders {
+        width: 75%;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        max-height: 600px;
+        min-width: 75%;
+    }
+
+    .main-section .container-main .container-orders .contents {
+        min-height: 600px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 3em;
+    }
+
+    .main-section .container-main .container-orders .contents .orders {
+        min-height: 294px;
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        border: solid 1px lightgray;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top {
+        width: 100%;
+        height: 147px;
+        display: flex;
+        border-bottom-style: dotted;
+        border-color: lightgrey;
+        border-width: 1px;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top img {
+        width: 169px;
+        margin: 1em;
+        max-height: 100px;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top .inside-left {
+        width: 50%;
+        display: flex;
+        margin: 8px;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top .inside-right {
+        width: 50%;
+        display: flex;
+        color: gray;
+        margin: 8px;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 1em;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top .inside-right i {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: #0ad5b9c4;
+        font-size: x-large;
+        margin-left: 5px;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-weight: 400;
+    }
+
+    .main-section .container-main .container-orders .contents .orders .top .inside-right a {
+        font-weight: 600;
+        padding: 0 2em;
+    }
+
+    .top .inside-right a:hover {
+        text-decoration: underline;
+    }
+
+    /* ADDRESS DIV */
+
+    .container-address {
+        width: 75%;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        max-height: 600px;
+        min-width: 75%;
+        display: none;
+    }
+
+
+    .address {
+        width: 100%;
+        margin: 1em auto;
+        max-width: 913px;
+        flex-wrap: wrap;
+        display: flex;
+    }
+
+    .home-card {
+        border: solid 1px lightgray;
+        border-radius: 5px;
+        max-height: 183px;
+        min-width: 311px;
+        max-width: 413px;
+        margin: 10px;
+    }
+
+    .address .edit-btn {
+        border-radius: unset;
+        text-transform: none;
+        background: unset;
+        margin-bottom: 9px;
+    }
+
+    .address h5 {
+        padding: 10px;
+    }
+
+    .address p {
+        padding: 10px;
+        font-size: 12px;
+        min-height: 56px;
+    }
+
+    .container-address h4 {
+        margin: 1em;
+    }
+
+    /* ADDRESS FORM*/
+    .bg-modal {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        min-width: 1054px;
+        display: none;
+
+    }
+
+    .form-content {
+        min-width: 508px;
+        height: 461px;
+        background-color: #fff;
+        justify-content: center;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .form-top {
+        border-bottom: solid 1px lightgray;
+        height: 49px;
+        width: 100%;
+    }
+
+    .bg-modal .form-content .bar {
+        width: 85%;
+        margin: 47px auto;
+        display: block;
+        border-radius: 3px;
+        border: solid 1px lightgray;
+        min-height: 33px;
+    }
+
+    .bg-modal .form-content .form-top h5 {
+        margin: 1em 40px;
+    }
+
+    .blck {
+        display: block;
+    }
+
+    .radio-buttons {
+        height: 42px;
+        width: 85%;
+        justify-content: center;
+        position: relative;
+        margin: 0 auto;
+        border: solid 1px lightgray;
+        border-radius: 5px;
+    }
+
+    .button {
+        float: left;
+        margin: 0 5px 0 0;
+        width: 31.33%;
+        height: 40px;
+        position: relative;
+        border-left: solid 1px lightgray;
+        color: gray;
+    }
+
+    .button label,
+    .button input {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .button input[type="radio"] {
+        opacity: 0.011;
+        z-index: 100;
+    }
+
+    .button input[type="radio"]:checked+label {
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
+        color: #fff;
+        height: 39px;
+        width: 138px;
+        border-radius: unset;
+    }
+
+    .button label {
+        cursor: pointer;
+        z-index: 90;
+        line-height: 1.8em;
+    }
+
+    .close {
+        position: absolute;
+        top: 0;
+        right: 15px;
+        font-size: 42px;
+        transform: rotate(45deg);
+        cursor: pointer;
+    }
+
+    .bg-modal .form-content button {
+        margin: 14px 1em;
+        background: linear-gradient(to right, #FF4B2B, #FF416C);
+        color: #fff;
+        width: 93%;
+    }
+</style>
+
+<script>
+
+    /* ADDRESS FORM AJAX */
+
+    $("#address-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/edit-address',
+            method: 'post',
+            data: $("#address-form").serialize(),
+            success: (response) => {
+                alert(response)
+            }
+        })
+    });
+    /* ADDRESS FORM*/
+    function viewAddressForm() {
+        document.querySelector('.bg-modal').style.display = 'flex';
+    };
+
+    document.querySelector('.close').addEventListener('click',
+        function () {
+            document.querySelector('.bg-modal').style.display = 'none';
+        });
+    /* ORDER PAGE LIST */
+    document.getElementById('order-tab').addEventListener('click',
+        function () {
+            document.querySelector('.container-address').style.display = 'none';
+            document.querySelector('.address-tab').style.background = 'unset';
+            document.querySelector('.container-orders').style.display = 'flex';
+            document.querySelector('.order-tab').style.background = '#fff';
+        });
+    document.getElementById('address-tab').addEventListener('click',
+        function () {
+            document.querySelector('.container-orders').style.display = 'none';
+            document.querySelector('.order-tab').style.background = 'unset';
+            document.querySelector('.address-tab').style.background = '#fff';
+            document.querySelector('.container-address').style.display = 'flex';
+        })
+
+
+</script>

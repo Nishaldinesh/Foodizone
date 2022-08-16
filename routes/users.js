@@ -3,10 +3,12 @@ const { Db } = require('mongodb');
 const { response, render } = require('../app');
 const router = express.Router();
 var userHelpers = require('../helpers/user-helpers');
+var onlinePaymentHelpers =require('../helpers/online-payment');
 const vendorHelpers = require('../helpers/vendor-helpers');
 var productHelpers = require('../helpers/product-helpers');
 const { getTotalAmount } = require('../helpers/user-helpers');
 const { Router } = require('express');
+const { route } = require('./admin');
 
 const verifyUserLogin = (req, res, next) => {
   if (req.session.user) {
@@ -91,12 +93,14 @@ router.get('/cart', verifyUserLogin, async (req, res, next) => {
   } else {
     cartEmpty = true
   }
-  let user = req.session.user._id
+  let userId = req.session.user._id
+  let user = req.session.user
   let vendorDetails = await userHelpers.getVendorDetails(cartVendorId)
-  let homeAddress= await userHelpers.getHomeAddress(user)
-  let workAddress= await userHelpers.getWorkAddress(user)
- 
-  res.render('user/cart', { user_status: true, cartItems, user, totalAmount, cartVendorId, cartEmpty, vendorDetails,homeAddress,workAddress })
+  // let homeAddress = await userHelpers.getHomeAddress(userId)
+  // let workAddress = await userHelpers.getWorkAddress(userId)
+  let userAddress=await userHelpers.getUserAddress(userId)
+  console.log(userAddress);
+  res.render('user/cart', { user_status: true, cartItems, userId, user, totalAmount, cartVendorId, cartEmpty, vendorDetails,userAddress})
   cartEmpty = false;
 });
 router.get('/get-vendor-details/:id', verifyUserLogin, async (req, res, next) => {
@@ -129,23 +133,29 @@ router.post('/change-product-quantity', (req, res, next) => {
     res.json(response)
   })
 });
-router.get('/checkout/:id', verifyUserLogin, async (req, res, next) => {
-  let cartItems = await userHelpers.getCartItems(req.session.user._id)
-  console.log(req.params.id);
-  let vendorId = req.params.id
-  console.log(vendorId);
-  let vendorDetails = await userHelpers.getVendorDetails(vendorId)
-  let vendor = cartItems.vendor
-  let totalAmount = 0
-  if (cartItems.length > 0) {
-    totalAmount = await userHelpers.getTotalAmount(req.session.user._id)
-  }
-  res.render('user/checkout', { cartItems, vendorDetails, vendor, totalAmount, user: req.session.user._id })
-});
+// router.get('/checkout/:id', verifyUserLogin, async (req, res, next) => {
+//   let cartItems = await userHelpers.getCartItems(req.session.user._id)
+//   console.log(req.params.id);
+//   let vendorId = req.params.id
+//   console.log(vendorId);
+//   let vendorDetails = await userHelpers.getVendorDetails(vendorId)
+//   let vendor = cartItems.vendor
+//   let totalAmount = 0
+//   if (cartItems.length > 0) {
+//     totalAmount = await userHelpers.getTotalAmount(req.session.user._id)
+//   }
+//   res.render('user/checkout', { cartItems, vendorDetails, vendor, totalAmount, user: req.session.user._id })
+// });
 
-router.post('/add-address', (req, res, next) => {
+router.post('/edit-address', (req, res, next) => {
   console.log(req.body);
   userHelpers.addAddress(req.body).then((response) => {
+    res.json(response)
+  })
+});
+router.post('/delete-address',(req,res,next)=>{
+  console.log(req.body);
+  userHelpers.deleteAddress(req.body).then((response)=>{
     res.json(response)
   })
 })
@@ -153,32 +163,59 @@ router.post('/add-address', (req, res, next) => {
 
 router.post('/place-order', async (req, res, next) => {
   console.log(req.body);
-  let products = await userHelpers.getCartProductList(req.body.UserId);
-  let totalPrice = await userHelpers.getTotalAmount(req.body.UserId)
-  if(req.body['AddressType']==='Home'){
-    console.log(("Working"));
-    var userAddress= await userHelpers.getHomeAddress(req.body.UserId)
-  }else if(req.body['AddressType']==='Work'){
-     var userAddress= await userHelpers.getWorkAddress(req.body.UserId)
-  }
+  let cart = await userHelpers.getCartProductList(req.body.userId);
+  let cartVendorId = cart.vendor
+  let cartProducts = cart.products
+  let totalPrice = await userHelpers.getTotalAmount(req.body.userId)
+  let addressType= req.body['addressType'];
+  let userAddress=await userHelpers.getPlacedAddress(req.body.userId,addressType)
   console.log(userAddress);
-  userHelpers.placeOrder(req.body, products, totalPrice,userAddress).then((orderId) => {
-    if (req.body['Payment-method'] === 'COD') {
+  userHelpers.placeOrder(req.body, cartProducts, cartVendorId, totalPrice, userAddress).then((orderId) => {
+    if (req.body['payment-method'] === 'COD') {
       res.json({ codSuccess: true })
-    } else if (req.body['Payment-method'] === 'Razorpay') {
-      userHelpers.generateRazorPay(orderId, totalPrice).then((response) => {
+    } else if(req.body['payment-method'] === 'Online') {
+      onlinePaymentHelpers.generateRazorPay(orderId, totalPrice).then((response) => {
         res.json(response)
       })
     }
+  }).catch((err)=>{
+    console.log(err);
+    res.json({err:true})
   })
 });
 router.get('/order-success', (req, res, next) => {
   res.render('user/order-success', { user_status: true })
 });
-router.get('/orders', verifyUserLogin, async (req, res, next) => {
-  let orders = await userHelpers.getUserOrders(req.session.user._id)
-  console.log(orders);
-  res.render('user/view-orders', { user_status: true, orders })
+router.get('/profile', verifyUserLogin, async (req, res, next) => {
+  let userId = req.session.user._id
+  let user=req.session.user
+  let orders = await userHelpers.getUserOrders(userId)
+  console.log((orders));
+  let userAddress= await userHelpers.getUserAddress(userId)
+  // let orderProducts= await userHelpers.getOrderProducts(user)
+  res.render('user/view-profile', { user_status: true,userId,user, orders,userAddress})
+});
+router.get('/view-order-details/:id', async (req, res, next) => {
+  console.log(req.params.id)
+  let orderId=req.params.id
+ 
+  console.log(products);
+  res.render('user/view-order-products')
+});
+router.post('/verify-payment',(req,res,next)=>{
+  console.log(req.body);
+  onlinePaymentHelpers.verifyPayment(req.body).then(()=>{
+    onlinePaymentHelpers.changePaymentStatus(req.body['order[receipt]'],req.session.user._id).then(()=>{
+      console.log("Payment success");
+      res.json({status:true})
+    })
+   
+  }).catch((err)=>{
+    console.log(err);
+    res.json({status:false,errMsg:'Payment failed'})
+  })
+  
+
 })
 
 module.exports = router;

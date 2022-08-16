@@ -34,8 +34,8 @@
                         <a href="#">{{user.Name}} <span class="fa fa-angle-down" aria-hidden="true"></span></a>
                         <input type="checkbox" id="drop-2" />
                         <ul class="inner-ul">
-                            <li><a class="scroll" href="/"><i class="fa-solid fa-user"></i> Account</a></li>
-                            <li><a href="/orders" class="scroll"><i class="fa-solid fa-clock-rotate-left"></i> Order history</a></li>
+                            <li><a class="scroll" href="/profile"><i class="fa-solid fa-user"></i> Account</a></li>
+                            <li><a href="/profile" class="scroll"><i class="fa-solid fa-clock-rotate-left"></i> Order history</a></li>
                             <li><a href="/logout" class="scroll"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>
                         </ul>
                         {{else}}
@@ -59,6 +59,23 @@
     </header>
 
     <style>
+
+        /* SCROLLBAR DESIGN */
+         ::-webkit-scrollbar {
+      width: 5px;
+   }
+
+   ::-webkit-scrollbar-track {
+      border-radius: 16px;
+   }
+
+   ::-webkit-scrollbar-thumb {
+      border-radius: 16px;
+      background-color: lightgray;
+   }
+
+
+/* HEADER */
         
  .container-fluid{
         background: linear-gradient(to right, #FF4B2B, #FF416C);
@@ -68,12 +85,6 @@ ul {
     margin: 0;
     padding: 0;
 }
-
-/*-- header --*/
-
-/* header */
-
-/* CSS Document */
 
 header {
     z-index: 9;

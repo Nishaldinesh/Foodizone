@@ -21,16 +21,23 @@
       <a href="" class="btn btn-light">Biriyani</a>
     </div>
     {{#each vendors}}
-    <div class="card mt-5 float-left ml-5" style="width: 18rem;">
-      <a href="/shop-images/{{this._id}}.jpg">
-        <img class="card-img-top" style="height:17rem;" src="/shop-images/{{this._id}}.jpg" alt="Card image cap">
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">{{this.ShopName}}</h5>
-        <p>{{this.FoodCategory}}</p>
-        <a href="/get-vendor-details/{{this._id}}" class="btn btn-success">View shop</a>
+    <a class="a-card" href="/get-vendor-details/{{this._id}}">
+
+
+      <div class="card mt-5 float-left ml-5">
+
+        <img class="card-img-top" src="/shop-images/{{this._id}}.jpg" alt="Card image cap">
+
+        <div class="card-body">
+          <h5 class="card-title">{{this.ShopName}}</h5>
+          <p>{{this.FoodCategory}}</p>
+
+        </div>
       </div>
-    </div>
+
+
+    </a>
+
 
 
     {{/each}}
@@ -60,12 +67,11 @@
 
 
 
-
-
 <style>
-  header{
+  header {
     position: absolute;
   }
+
   .main-section {
     display: flex;
     flex-direction: column;
@@ -115,6 +121,29 @@
 
   .card {
     min-width: 288px;
+    width: 18rem;
+    padding: 1em 1em;
+    margin: 4em auto;
+    border: unset;
+  }
+
+
+  .a-card {
+    text-decoration: none;
+    color: black;
+  }
+  .card:hover{
+     box-shadow: 0px 0px 21px -4px rgb(0 0 0 / 18%);
+  }
+
+  .a-card :hover {
+    text-decoration: none;
+    color: black;
+  }
+
+  .card .card-img-top {
+    height: 170px;
+    border-radius: unset;
   }
 
   .main-content {
@@ -134,13 +163,14 @@
     margin: 0;
     padding: 0;
   }
+
   input {
-	background-color: #eee;
-	border: none;
-	padding: 12px 15px;
-	margin: 8px 0;
-	width: 100%;
-}
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+  }
 
   /* Footer designs */
   .footer-section {
