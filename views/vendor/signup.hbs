@@ -1,104 +1,185 @@
-<body class="main-body">
- 
-<section class="login-section">
-    <form action="/vendor/signup" method="post" class="signup-form" enctype="multipart/form-data">
-        <h1>Register with</h1>
-        <div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-            <span>or use your email for registration</span>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input class="email" type="email" id="inputEmail4" placeholder="Email" name="Email">
-            </div>
-            <div class="form-group col-md-6">
-                <input type="password" id="inputPassword4" placeholder="Password" name="Password">
-            </div>
-        </div>
-        <div class="form-group">
-            <input class="address" type="text" placeholder="Your shop's name" name="ShopName">
-        </div>
-        
-        <div class="form-group">
-            <input class="address" type="text" placeholder="Food categories..." name="FoodCategory">
-        </div>
-        <div class="form-group">
-            <input class="address" type="text" id="inputAddress" placeholder="Address" name="Address">
-        </div>
-        <div class="form-group">
-            <input class="address" type="file" id="image" placeholder="Add an image that feature your shop" name="Image">
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input class="city" type="text" id="inputCity" placeholder="City" name="City">
-            </div>
+<div class="main-section">
+    <div class="top-container">
 
-            <div class="form-group col-md-4">
-                <select class="state" id="inputState" name="State">
-                    <option selected>State</option>
-                      <option value="">State</option>
-                                <option value="Andaman and nicobar islands">Andaman and nicobar islands</option>
-                                <option value="Andra Pradesh">Andra Pradesh</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chandigarh">Chandigarh</option>
-                                <option value="Chattisgarh">Chhattisgarh</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Paradesh">Himachal Pradesh</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Ladakh">Ladakh</option>
-                                <option value="Lakshadeep">Lakshadeep</option>
-                                <option value="Madya Pradesh">Madya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Pudhucheery">Pudhucheery</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="West Bengal">West Bengal</option>
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <input class="zip" type="text" id="inputZip" placeholder="Zip" name="Zip">
-            </div>
+    </div>
+    <div class="container form-container">
+
+        <div class="form-holder">
+            <form action="">
+                <h4>Partner with us</h4>
+                <div class="res-details">
+                    <input type="text" class="inp-long" placeholder="Restaurant name">
+                    <input type="text" class="zip" placeholder="Zip(Primary location)">
+                    <input type="text" class="city" placeholder="City/Town">
+                </div>
+                <div class="res-details-2">
+                    <select name="" id="owner-type">
+                        <option value="">Restaurant owner</option>
+                    </select>
+                    <input type="text" class="city" placeholder="Phone number">
+                    <input type="text" class="inp-long" placeholder="Email">
+                </div>
+                <div class="res-details-3">
+                    <input type="url" class="inp-long" placeholder="Website link/Online listing link">
+                    <select name="" id="owner-type">
+                    <option value="">Number of outlets</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    </select>
+                    <input type="text" class="city" placeholder="Primary area of outlets">
+                    
+                </div>
+                <div class="res-details-4">
+                    <select name="" id="owner-type">
+                        <option value="">Type of cuisine</option>
+                        <option value="Caribbean">Caribbean</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Korean">Korean</option>
+                    </select>
+                    <select name="" id="owner-type" class="spc-input">
+                        <option value="">Do you currently support delivery</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <h5>Documents(Jpeg,PDF)</h5>
+                <div class="res-details-5">
+                    <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> Shop license
+                       <input type="file">
+                    </button>
+                      <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> FSSAI
+                       <input type="file">
+                    </button>
+                      <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> GSTIN/PAN
+                       <input type="file">
+                    </button>
+                </div>
+                <h5>Pictures</h5>
+                <div class="res-details-6">
+                       <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> Facade
+                       <input type="file">
+                    </button>
+                      <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> Kitchen
+                       <input type="file">
+                    </button>
+                      <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> Dining/Packaging
+                       <input type="file">
+                    </button>
+                     <button type="button" class="btn btn-warning">
+                       <i class="fa-solid fa-upload"></i> Locality
+                       <input type="file">
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-        </div>
-        <button type="submit">Sign up</button>
-        <a href="/vendor" class="text-primary">Already have an account?</a>
-    </form>
-</section>
-   
-</body>
+    </div>
+</div>
 
 <style>
-    .container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 768px;
-	max-width: 100%;
-	min-height: 480px;
-}
+    .main-section {
+        width: 100%;
+        height: 50rem;
+        background: #fff;
+        overflow-y: auto;
+    }
+
+    .top-container {
+        border: solid 1px magenta;
+        height: 80%;
+        width: 100%;
+    }
+
+    .form-container {
+        height: auto;
+        background-color: #fff;
+        border-radius: 10px;
+        position: relative;
+        max-width: 100%;
+        min-height: 500px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 100%;
+        min-width: 375px;
+        display: flex;
+        justify-content: center;
+        border: solid 1px magenta;
+    }
+
+    .form-holder {
+        border: solid 1px green;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        align-items: center;
+        margin: 1em auto;
+    }
+
+    .form-holder .res-details {
+        width: 842px;
+        margin: 2em auto;
+    }
+    .form-holder .res-details-4{
+        margin: 3em auto;
+    }
+     .form-holder .res-details-2{
+        margin: 2em auto;
+    width: 842px;
+    }
+     .form-holder .res-details-6{
+        margin: 1em auto;
+     }
+      .form-holder .res-details-5{
+        margin: 1em auto;
+     }
+    .form-holder .inp-long {
+        display: block;
+        width: 100%;
+        height: 41px;
+    }
+
+    .form-holder .res-details .zip {
+        width: 50%;
+        height: 41px;
+    }
+
+    .form-holder .city {
+       width: 50%;
+    height: 41px;
+    margin: 0 -5px;
+    }
+   
+    #owner-type{
+        width: 50%;
+    height: 41px;
+    }
+    .form-holder .spc-input{
+        margin: 0 -5px;
+    }
+    .form-holder  .btn-warning{
+        position: relative;
+        padding: 11px 16px;
+        font-size: 15px;
+        line-height: 1.5;
+        border-radius: 3px;
+        color: #fff;
+        background-color: #ffc100;
+        border: 0;
+        overflow: hidden;
+        width: 24%;
+    }
+    .btn-warning input[type="file"]{
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: scale(3);
+        opacity: 0;
+    }
 </style>
